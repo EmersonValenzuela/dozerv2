@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id('id_course'); // Unique course ID
+            $table->string('code_course', 10)->unique()->nullable(); // FK for certificate_types
             $table->unsignedBigInteger('certificate_type_id'); // FK for certificate_types
             $table->unsignedBigInteger('program_type_id'); // FK for program_types
             $table->string('course_or_event', 150); // Name of the course, event, or program

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
 
-        <p class="text-white px-5 fw-bold font-cat pt-3">Generar Certificado </p>
+        <p class="text-white px-5 fw-bold font-cat pt-3">CREAR CAPACITACIÓN </p>
         <div class="d-flex flex-row mb-3">
             <div class="p-2">
                 <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-5 fondo-cargacerti">

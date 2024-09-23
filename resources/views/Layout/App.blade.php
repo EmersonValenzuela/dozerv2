@@ -59,7 +59,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/libs/jquery-timepicker/jquery-timepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/libs/sweetalert2/sweetalert2.css') }}">
-    
+
     @yield('styles')
 
     <!-- Helpers -->
@@ -100,7 +100,7 @@
                     <li class="menu-item">
                         <a href="{{ route('certificate.create') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-certificate"></i>
-                            <div data-i18n="Certificados">Certificados</div>
+                            <div data-i18n="Crear Capacitación">Crear Capacitación</div>
                         </a>
                     </li>
                     <li class="menu-item">

@@ -11,6 +11,11 @@ class Course extends Model
     protected $table = 'courses';
     protected $primaryKey = 'id_course';
 
-    protected $fillable = ['certificate_type_id', 'program_type_id', 'course_or_event', 'image_one', 'image_two', 'dateFinish'];
+    protected $fillable = ['code_course', 'certificate_type_id', 'program_type_id', 'course_or_event', 'image_one', 'image_two', 'dateFinish'];
 
+    public function scopeSearch($query, $searchTerm)
+    {
+        return $query->where('course_or_event', 'LIKE', "%{$searchTerm}%")
+            ->orWhere('code_course', 'LIKE', "%{$searchTerm}%");
+    }
 }

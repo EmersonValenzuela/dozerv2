@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Certificates;
 use App\Models\Course;
+use App\Models\Students;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -56,6 +57,11 @@ class CertificateController extends Controller
         $img1Url = Storage::url($file1Path);
         $img2Url = Storage::url($file2Path);
 
+        $lastCourse = Course::latest('id_course')->first();
+        $nextId = $lastCourse ? $lastCourse->id_course + 1 : 1;
+        $codeCourse = 'C' . str_pad($nextId, 5, '0', STR_PAD_LEFT); // Ejemplo de código
+
+        // Crear el curso
         $course = new Course([
             'certificate_type_id' => $request->input('type'),
             'program_type_id' => $request->input('program'),
@@ -63,35 +69,37 @@ class CertificateController extends Controller
             'image_one' => $file1Path,
             'image_two' => $file2Path,
             'dateFinish' => now(),
+            'code_course' => $codeCourse, // Asignar el código al curso
         ]);
 
+        // Guardar el curso
         $course->save();
+
 
         $courseId = $course->id_course;
 
         $studentsData = json_decode($request->input('rows'), true);
 
         foreach ($studentsData as $student) {
-            $certificate = new Certificates([
+            $student = new Students([
                 'course_id' => $courseId,
                 'course_or_event' => $student['course'],
                 'full_name' => $student['names'],
                 'document_number' => $student['dni'],
                 'score' => $student['score'],
                 'email' => $student['email'],
-                'issued_date' => now(),
                 'status' => 'active',
             ]);
-            $certificate->save();
-            $id = $certificate->id_certificate;
+            $student->save();
+            $id = $student->id_student;
 
             $prefix = floor(($id - 1) / 1000) + 2;
             $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
-            $certificate->code = $code;
-            $certificate->save();
+            $student->code = $code;
+            $student->save();
         }
 
-        return response()->json(['success' => true, 'icon' => 'success', 'message' => 'Pdfs Generados', 'course' => $courseId]);
+        return response()->json(['success' => true, 'icon' => 'success', 'message' => 'Curso Generado', 'course' => $courseId]);
     }
 
     /**

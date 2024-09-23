@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ConstancyController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProgramController;
@@ -23,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function ($route) {
     Route::get('/', 'index')->name('home');
+    Route::get('/Lista/{category}', 'list');
+    Route::get('/Curso/{category}', 'course');
 });
 
 Route::controller(CertificateController::class)->group(function ($route) {
@@ -32,6 +35,7 @@ Route::controller(CertificateController::class)->group(function ($route) {
 
 Route::controller(EnrollmentController::class)->group(function ($route) {
     Route::get('/Generar_Matriculas', 'create')->name('enrollment.create');
+    Route::post('/insertEnrollments', 'store');
 });
 
 Route::controller(ConstancyController::class)->group(function ($route) {
@@ -48,4 +52,8 @@ Route::controller(WebinarController::class)->group(function ($route) {
 
 Route::controller(ProgramController::class)->group(function ($route) {
     Route::get('/get-programs/{certificateType}', 'getPrograms');
+});
+
+Route::controller(CourseController::class)->group(function ($route) {
+    Route::get('/scopeCoruse', 'search');
 });

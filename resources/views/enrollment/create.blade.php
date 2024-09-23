@@ -24,34 +24,15 @@
 
                 </div>
             </div>
-            <div class="p-2 flex-column d-flex justify-content-center">
-
+            <div class="p-2 flex-column d-flex justify-content-center" id="dataConstancy">
                 <div class="p-2 ">
-                    <div class="px-2">
-                        <label for="smallInput" class="form-label text-white ">Nombre de la Capacitacion</label>
-                        <input id="smallInput" class="form-control form-control-sm bg-input w-420" type="text"
-                            placeholder="">
-                    </div>
-                </div>
-
-
-
-
-                <div class="p-2 ">
-                    <div class="mb-3 px-2">
-                        <label for="defaultSelect" class="form-label text-white">Programa</label>
-                        <select id="defaultSelect" class="form-select">
-                            <option>Seleccionar</option>
-                            <option value="1">Curso</option>
-                            <option value="2">Especializacion</option>
-                            <option value="3">Diplomado</option>
+                    <div class=" mb-3 px-2">
+                        <select id="course" class="select2 form-select">
                         </select>
                     </div>
-
                 </div>
 
             </div>
-
         </div>
 
 
@@ -71,13 +52,7 @@
             </div>
             <div class="p-2">
                 <div class="p-2 d-flex align-items-end "><button type="button"
-                        class="btn btn-guardar  waves-effect waves-light fw-bold">Generar</button> </div>
-            </div>
-
-            <div class="p-2">
-                <div class="p-2 d-flex align-items-end ">
-                    <button type="button" class=" btn-import waves-effect waves-light ">Importar</button>
-                </div>
+                        class="btn btn-guardar  waves-effect waves-light fw-bold">Generar Constancias</button> </div>
             </div>
         </div>
 
@@ -175,7 +150,16 @@
 @endsection()
 
 @section('styles')
+    <style>
+        #dataConstancy {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            /* Ajustar el ancho máximo */
+        }
+    </style>
 @endsection()
 
 @section('scripts')
+    <script src="{{ asset('js/pages/enrollment.js') }}"></script>
 @endsection
