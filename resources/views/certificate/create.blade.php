@@ -41,15 +41,15 @@
 
                 <div class="p-2 ">
                     <div class="px-2">
-                        <label for="smallInput" class="form-label text-white ">Nombre de la Capacitacion</label>
-                        <input id="smallInput" class="form-control form-control-sm bg-input w-420" type="text"
+                        <label for="title" class="form-label text-white ">Nombre de la Capacitacion</label>
+                        <input id="title" class="form-control form-control-sm bg-input w-420" type="text"
                             placeholder="">
                     </div>
                 </div>
                 <div class="p-2 ">
                     <div class="mb-3 px-2">
-                        <label for="defaultSelect" class="form-label text-white">Tipo de Certificado</label>
-                        <select id="defaultSelect" class="select2 form-select" id="typeCertificate">
+                        <label for="typeCertificate" class="form-label text-white">Tipo de Certificado</label>
+                        <select id="typeCertificate" class="select2 form-select">
                             <option>Seleccionar</option>
                             <option value="1">DOZER</option>
                             <option value="2">CIP</option>
@@ -61,7 +61,7 @@
 
                 <div class="p-2 ">
                     <div class="mb-3 px-2">
-                        <label for="defaultSelect" class="form-label text-white">Programa</label>
+                        <label for="program" class="form-label text-white">Programa</label>
                         <select id="program" class="select2 form-select">
                         </select>
                     </div>
@@ -86,7 +86,7 @@
 
             <div class="p-2">
                 <div class="p-2 d-flex align-items-end "><button type="button"
-                        class="btn btn-guardar  waves-effect waves-light fw-bold">Generar</button> </div>
+                        class="btn btn-guardar  waves-effect waves-light fw-bold btn-generate">Generar</button> </div>
             </div>
 
             <div class="p-2">
@@ -106,6 +106,7 @@
                             <th></th>
                             <th class="text-white fw-bold">Código</th>
                             <th class="text-nowrap text-white fw-bold">DNI-CI</th>
+                            <th class="text-white fw-bold">Apellidos y Nombres</th>
                             <th class="text-nowrap text-white fw-bold">Capacitacion</th>
                             <th class="text-white fw-bold">Nota </th>
                             <th class="text-white fw-bold">Correo Electronico </th>

@@ -24,7 +24,7 @@ class certificate_programs extends Seeder
             ['id_certificate_type' => 2, 'id_program_type' => 2],
             ['id_certificate_type' => 2, 'id_program_type' => 3],
             // CAP
-            ['id_certificate_type' => 3, 'id_program_type' => 3],
+            ['id_certificate_type' => 3, 'id_program_type' => 2],
             ['id_certificate_type' => 3, 'id_program_type' => 3],
 
             //Constancia de matrícula

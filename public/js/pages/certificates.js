@@ -19,16 +19,27 @@
     }
 })(),
     $(function () {
-        let t,
+        var e,
+            t = $(".select2");
+        t.length &&
+            t.each(function () {
+                var e = $(this);
+                select2Focus(e),
+                    e.wrap('<div class="position-relative"></div>').select2({
+                        placeholder: "Select value",
+                        dropdownParent: e.parent(),
+                    });
+            });
+        let h,
             a,
             s,
             csrfToken = $('meta[name="csrf-token"]').attr("content");
         s = (
             isDarkStyle
-                ? ((t = config.colors_dark.borderColor),
+                ? ((h = config.colors_dark.borderColor),
                   (a = config.colors_dark.bodyBg),
                   config.colors_dark)
-                : ((t = config.colors.borderColor),
+                : ((h = config.colors.borderColor),
                   (a = config.colors.bodyBg),
                   config.colors)
         ).headingColor;
@@ -40,6 +51,7 @@
                     { data: "code" },
                     { data: "code" },
                     { data: "dni" },
+                    { data: "names" },
                     { data: "course" },
                     { data: "score" },
                     { data: "email" },
@@ -99,7 +111,7 @@
                         orderable: !1,
                         className: "text-center",
                         render: function (e, t, a, s) {
-                            return '<div><div class="dropdown"><a href="javascript:;" class="btn dropdown-toggle hide-arrow text-body p-0" data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a><div class="dropdown-menu dropdown-menu-end"><a href="javascript:;" class="dropdown-item">Editar</a><div class="dropdown-divider"></div><a href="javascript:;" class="dropdown-item delete-record text-danger">Eliminar</a></div></div></div>';
+                            return '<div class="align-items-center"><a href="javascript:;" data-bs-toggle="tooltip" class="text-body delete-record" data-bs-placement="top" aria-label="Delete Invoice" data-bs-original-title="Delete Invoice"><i class="mdi mdi-delete-outline mdi-20px mx-1"></i></a></div></div>';
                         },
                     },
                 ],
@@ -145,21 +157,22 @@
                 initComplete: function () {},
             })),
             $(".dataTables_length").addClass("mt-0 mt-md-3")),
-            $(".datatables-review tbody").on(
+            $(".datatables_certificates tbody").on(
                 "click",
                 ".delete-record",
                 function () {
-                    e.row($(this).parents("tr")).remove().draw();
+                    var table = $(".datatables_certificates").DataTable(); // Obtén la instancia de DataTable
+                    table.row($(this).closest("tr")).remove().draw(); // Elimina la fila correspondiente
                 }
+            );
+        setTimeout(() => {
+            $(".dataTables_filter .form-control").removeClass(
+                "form-control-sm"
             ),
-            setTimeout(() => {
-                $(".dataTables_filter .form-control").removeClass(
-                    "form-control-sm"
-                ),
-                    $(".dataTables_length .form-select").removeClass(
-                        "form-select-sm"
-                    );
-            }, 300);
+                $(".dataTables_length .form-select").removeClass(
+                    "form-select-sm"
+                );
+        }, 300);
         $("#btnImport").on("click", function () {
             document.getElementById("excelFile").click();
         });
@@ -194,8 +207,9 @@
 
                     rows.forEach((row) => {
                         let rowData = {
-                            code: row.cod_certificado,
+                            code: row.code,
                             dni: row.dni,
+                            names: row.nombres,
                             course: row.curso,
                             score: row.nota,
                             email: row.email,
@@ -210,6 +224,33 @@
 
         $("#referralLink").on("keyup", function () {
             e.search(this.value).draw();
+        });
+
+        $("#typeCertificate").on("change", function () {
+            blockUI();
+            $.ajax({
+                url: "get-programs/" + this.value,
+                method: "GET",
+                dataType: "json",
+            })
+                .done(function (response) {
+                    $("#program").empty();
+                    response.forEach((program) => {
+                        $("#program").append(
+                            '<option value="' +
+                                program.id_program_type +
+                                '">' +
+                                program.program_type.name +
+                                "</option>"
+                        );
+                    });
+                })
+                .fail(function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                })
+                .always(() => {
+                    $.unblockUI();
+                });
         });
 
         $(".btn-generate").on("click", function () {
@@ -241,12 +282,14 @@
             formData.append("file1", $("#upload")[0].files[0]);
             formData.append("file2", $("#upload2")[0].files[0]);
             formData.append("name", name);
+            formData.append("type", $("#typeCertificate").val());
+            formData.append("program", $("#program").val());
             formData.append("rows", JSON.stringify(rows));
 
             formData.append("_token", csrfToken);
 
             $.ajax({
-                url: "scopeData",
+                url: "insertCertificates",
                 method: "POST",
                 data: formData,
                 dataType: "json",
@@ -254,15 +297,17 @@
                 contentType: false,
             })
                 .done(function (response) {
+                    console.log(response);
+
                     Toast.fire({
                         icon: response.icon,
                         title: response.message,
                     });
 
                     Swal.fire({
-                        title: "<strong>PDFs Generados</strong>",
+                        title: "<strong>Curso Creado</strong>",
                         icon: "success",
-                        html: "Puedes ir al curso y enviar correo a alumnos o seguir generando PDFs",
+                        html: "Puedes ir al curso para generar los PDFs y enviar correos",
                         showCloseButton: true,
                         showCancelButton: true,
                         focusConfirm: false,
@@ -303,7 +348,7 @@
         function blockUI() {
             $.blockUI({
                 message:
-                    '<div class="d-flex justify-content-center"><p class="mt-1">GENERANDO PDFS &nbsp; </p> <div class="sk-wave m-0"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div> </div>',
+                    '<div class="d-flex justify-content-center"><p class="mt-1">CARGANDO &nbsp; </p> <div class="sk-wave m-0"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div> </div>',
                 css: {
                     backgroundColor: "transparent",
                     color: "#fff",
