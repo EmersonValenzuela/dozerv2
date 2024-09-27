@@ -35,15 +35,19 @@ Route::controller(CertificateController::class)->group(function ($route) {
 
 Route::controller(EnrollmentController::class)->group(function ($route) {
     Route::get('/Generar_Matriculas', 'create')->name('enrollment.create');
-    Route::post('/insertEnrollments', 'store');
+    Route::post('/scopeStudent', 'searchStudents');
+    Route::post('/generateEnrollments', 'store');
+    Route::get('/pdfEnrollment/{id}', 'show');
 });
 
 Route::controller(ConstancyController::class)->group(function ($route) {
     Route::get('/Generar_Constancia', 'create')->name('constancy.create');
+    Route::get('/pdfConstancy/{id}', 'show');
 });
 
 Route::controller(RecognitionController::class)->group(function ($route) {
     Route::get('/Generar_Reconocimiento', 'create')->name('recognition.create');
+    Route::get('/pdfRecognition/{id}', 'show');
 });
 
 Route::controller(WebinarController::class)->group(function ($route) {
@@ -56,5 +60,4 @@ Route::controller(ProgramController::class)->group(function ($route) {
 
 Route::controller(CourseController::class)->group(function ($route) {
     Route::get('/scopeCoruse', 'search');
-    Route::get('/scopeStudent', 'searchStudents');
 });

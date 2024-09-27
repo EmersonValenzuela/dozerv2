@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Students;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -15,4 +16,6 @@ class CourseController extends Controller
 
         return response()->json($results);
     }
+
+
 }

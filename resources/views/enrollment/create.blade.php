@@ -27,7 +27,7 @@
             <div class="p-2 flex-column d-flex justify-content-center" id="dataConstancy">
                 <div class="p-2 ">
                     <div class=" mb-3 px-2">
-                        <select id="course" class="select2 form-select">
+                        <select id="course" class=" form-select">
                         </select>
                     </div>
                 </div>
@@ -64,13 +64,14 @@
 
         <div class="style-course text-white align-items-start">
             <div class="card-datatable table-responsive">
-                <table class="datatables_certificates table">
+                <table class="datatables_enrollment table">
                     <thead class="text-white">
                         <tr>
                             <th></th>
                             <th class="text-white fw-bold">Código</th>
                             <th class="text-white fw-bold">Apellidos y Nombres</th>
                             <th class="text-nowrap text-white fw-bold">Capacitacion</th>
+                            <th></th>
                         </tr>
                     </thead>
                 </table>
@@ -90,22 +91,16 @@
                         <p>Solo mostrara los estudiantes que aun no tienen constancia de matricula</p>
                     </div>
                 </div>
-                <div class="col-12 mb-4 pb-2">
+                <div class="col-12 mb-4 pb-2 text-dark">
                     <div class="form-floating form-floating-outline">
-                        <div class="select2-dark">
-                            <select id="select2Dark" class="select2 form-select" multiple="">
-                                <option value="1" selected="">Option1</option>
-                                <option value="2" selected="">Option2</option>
-                                <option value="3">Option3</option>
-                                <option value="4">Option4</option>
-                            </select>
-                        </div>
-                        <label for="select2Dark">Dark</label>
+                        <select id="select2Multiple" class="select2 form-select" multiple="">
+                        </select>
+                        <label for="select2Multiple">Selecciona a los Integrantes</label>
                     </div>
                 </div>
                 <div class="d-flex align-items-start mt-4 align-items-sm-center">
                     <div class="d-flex justify-content-between flex-grow-1 align-items-center flex-wrap gap-2">
-                        <button class="btn btn-success">
+                        <button class="btn btn-success" id="addStudents">
                             Agregar a la tabla
                         </button>
                     </div>
@@ -125,12 +120,8 @@
             /* Ajustar el ancho máximo */
         }
     </style>
-
-    <link rel="stylesheet" href="{{ asset('vendor/libs/tagify/tagify.css') }}">
 @endsection()
 
 @section('scripts')
-    <script src="{{ asset('vendor/libs/tagify/tagify.js') }}"></script>
-    <script src="{{ asset('js/forms-tagify.js') }}"></script>
     <script src="{{ asset('js/pages/enrollment.js') }}"></script>
 @endsection
