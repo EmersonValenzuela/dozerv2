@@ -29,7 +29,7 @@ Route::controller(HomeController::class)->group(function ($route) {
 });
 
 Route::controller(CertificateController::class)->group(function ($route) {
-    Route::get('/Generar_Certificados', 'create')->name('certificate.create');
+    Route::get('/Crear_Curso', 'create')->name('certificate.create');
     Route::post('/insertCertificates', 'store');
 });
 
@@ -56,4 +56,5 @@ Route::controller(ProgramController::class)->group(function ($route) {
 
 Route::controller(CourseController::class)->group(function ($route) {
     Route::get('/scopeCoruse', 'search');
+    Route::get('/scopeStudent', 'searchStudents');
 });

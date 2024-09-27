@@ -8,7 +8,6 @@
             l.files[0] && (e.src = window.URL.createObjectURL(l.files[0]));
         };
     }
-
 })(),
     $(function () {
         $("#course").select2({
@@ -46,8 +45,16 @@
                 noResults: function () {
                     return "No se encontraron resultados";
                 },
+                inputTooShort: function () {
+                    return "Por favor, ingresa 2 o más caracteres";
+                },
             },
         });
+
+        $("#btnModal").on("click", function () {
+            $("#shareProject").modal("show");
+        });
+
 
         let csrfToken = $('meta[name="csrf-token"]').attr("content");
 
