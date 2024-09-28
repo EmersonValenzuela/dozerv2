@@ -36,7 +36,7 @@ class ConstancyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -67,6 +67,7 @@ class ConstancyController extends Controller
         $pdf->AddFont('Oswald-Regular', '', 'Oswald-VariableFont_wght.php');
         $pdf->AddFont('Oswald-Bold', '', 'Oswald-Bold.php');
         $pdf->AddFont('Oswald-Medium', '', 'Oswald-Medium.php');
+        $pdf->AddFont('Oswald-Light', '', 'Oswald-Light.php');
 
         $pdf->SetFont('Oswald-Regular', '', 11);
         $pdf->SetTextColor(117, 117, 117);
@@ -92,7 +93,7 @@ class ConstancyController extends Controller
 
         $anchoTexto = $pdf->GetStringWidth($date);
         $x = ($anchoPagina - $anchoTexto) / 2;
-        $pdf->SetFont('Oswald-Regular', '', 14);
+        $pdf->SetFont('Oswald-Light', '', 14);
         $pdf->SetTextColor(117, 117, 117);
         $pdf->SetXY($x, 86); // Ajustar la posición vertical según sea necesario
         $pdf->Cell($anchoTexto, 40, $date, 0, 1, 'C');
