@@ -33,6 +33,21 @@
                             .select2({
                                 placeholder: "Select value",
                                 dropdownParent: e.parent(),
+                                maximumSelectionLength: 12, // Límite de selección
+                                language: {
+                                    searching: function () {
+                                        return "Buscando...";
+                                    },
+                                    noResults: function () {
+                                        return "No se encontraron resultados";
+                                    },
+                                    inputTooShort: function () {
+                                        return "Por favor, ingresa 2 o más caracteres";
+                                    },
+                                    maximumSelected: function () {
+                                        return "Solo puedes seleccionar hasta 12 estudiantes.";
+                                    },
+                                },
                             });
                 }),
             c.length &&
@@ -140,7 +155,6 @@
             },
             placeholder: "BUSCA UNA CAPACITACIÓN (Nombre o Código)",
             minimumInputLength: 2,
-            maximumSelectionLength: 3, // Límite de selección
             language: {
                 searching: function () {
                     return "Buscando...";
@@ -152,7 +166,7 @@
                     return "Por favor, ingresa 2 o más caracteres";
                 },
                 maximumSelected: function () {
-                    return "Solo puedes seleccionar hasta 3 opciones."; // Mensaje al alcanzar el límite
+                    return "Solo puedes seleccionar hasta 3 opciones.";
                 },
             },
         });
@@ -219,30 +233,65 @@
             $("#shareProject").modal("show");
         });
 
-        $("#submitButton").on("click", function () {
-            const selectedIds = $("#course").val();
+        $(".btn-generate").on("click", function () {
+            blockUI();
+            const rows = d.rows().data().toArray(); // Obtiene todos los registros del DataTable
+            const ids = rows.map((row) => row.id);
+            let date = $("#date").val();
 
-            if (selectedIds.length > 0) {
-                fetch("/generateEnrollments", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": csrfToken,
-                    },
-                    body: JSON.stringify({
-                        course_ids: selectedIds,
-                    }),
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log("Respuesta del servidor:", data);
-                    })
-                    .catch((error) => {
-                        console.error("Error enviando los datos:", error);
-                    });
-            } else {
-                alert("Por favor, selecciona al menos una opción.");
+            if (!date.trim()) {
+                $.unblockUI();
+                Toast.fire({
+                    icon: "error",
+                    title: "Debes ingresar una fecha para el grupo de constancias",
+                });
+                return;
             }
+
+            if (rows.length === 0) {
+                $.unblockUI();
+                Toast.fire({
+                    icon: "error",
+                    title: "Debe existir al menos un registro en la tabla",
+                });
+                return;
+            }
+
+            let formData = new FormData();
+
+            formData.append("file1", $("#upload")[0].files[0]);
+            formData.append("date", date);
+            formData.append("course", $("#course").val());
+            formData.append("rows", JSON.stringify(ids));
+
+            formData.append("_token", csrfToken);
+
+            $.ajax({
+                url: "generateEnrollments",
+                method: "POST",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+            })
+                .done(function (response) {
+                    console.log(response);
+
+                    Toast.fire({
+                        icon: response.icon,
+                        title: response.message,
+                    });
+                })
+                .fail(function (xhr, status, error) {
+                    Toast.fire({
+                        icon: error.icon,
+                        title: error.message,
+                    });
+                    console.error(xhr.responseText);
+                })
+                .always(function () {
+                    $.unblockUI();
+                });
         });
 
         function blockUI() {

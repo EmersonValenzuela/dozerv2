@@ -25,13 +25,20 @@
                 </div>
             </div>
             <div class="p-2 flex-column d-flex justify-content-center" id="dataConstancy">
+
                 <div class="p-2 ">
                     <div class=" mb-3 px-2">
                         <select id="course" class=" form-select">
                         </select>
                     </div>
                 </div>
-
+                <div class="p-2 ">
+                    <div class="px-2">
+                        <label for="date" class="form-label text-white ">Fecha</label>
+                        <input id="date" class="form-control form-control-sm bg-input w-420" type="text"
+                            placeholder="">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -57,7 +64,7 @@
             </div>
             <div class="p-2">
                 <div class="p-2 d-flex align-items-end "><button type="button"
-                        class="btn btn-guardar  waves-effect waves-light fw-bold">Generar</button> </div>
+                        class="btn btn-guardar  waves-effect waves-light fw-bold btn-generate">Generar</button> </div>
             </div>
         </div>
 

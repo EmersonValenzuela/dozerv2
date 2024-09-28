@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Students;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 require(public_path('fpdf/fpdf.php'));
 
@@ -43,7 +44,87 @@ class EnrollmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        $directory = 'public/uploads/enrollments'; // Define el directorio donde se guardarán los archivos.
+
+        if (!Storage::disk('public')->exists('uploads/enrollments')) {
+            Storage::disk('public')->makeDirectory('uploads/enrollments');
+        }
+
+        $file1Path = $request->file('file1')->store('uploads/enrollments', 'public');
+
+        $imgUrl = Storage::url($file1Path);
+
+        $students = json_decode($request->input('rows'), true);
+
+        // Itera sobre los IDs de los estudiantes
+        foreach ($students as $id) {
+            $student = Students::find($id);
+
+            if ($student) {
+                // Modifica el atributo 'c_m'
+                $student->c_m = 1;
+
+                // Genera el PDF pasando los datos necesarios
+                $this->generatePdf($student->full_name, $student->course_or_event, $request->input('date'), $imgUrl, $student->code);
+
+                // Guarda los cambios en el estudiante
+                $student->save();
+            }
+        }
+
+        return response()->json([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Constancias generadas y estudiantes actualizados',
+        ]);
+    }
+
+
+
+    public function generatePdf($names, $course, $date, $img, $code)
+    {
+
+        $pdf = new \FPDF('L', 'mm', 'A4');
+        $pdf->AddPage();
+
+        $anchoPagina = $pdf->GetPageWidth();
+        $altoPagina = $pdf->GetPageHeight();
+
+        // Página 1: Imagen y texto
+        $pdf->Image(public_path($img), 0, 0, $anchoPagina, $altoPagina);
+
+        $pdf->AddFont('Oswald-Regular', '', 'Oswald-VariableFont_wght.php');
+        $pdf->AddFont('Oswald-Bold', '', 'Oswald-Bold.php');
+        $pdf->AddFont('Oswald-Medium', '', 'Oswald-Medium.php');
+        $pdf->AddFont('Oswald-Light', '', 'Oswald-Light.php');
+
+        // Configurar para centrar el texto
+        $pdf->SetFont('Oswald-Bold', '', 22);
+        $pdf->SetTextColor(0, 0, 0);
+
+        $anchoTexto = $pdf->GetStringWidth($names);
+        $x = ($anchoPagina - $anchoTexto) / 2;
+        $pdf->SetXY($x, 70); // Ajustar la posición vertical según sea necesario
+        $pdf->Cell($anchoTexto, 40, $names, '', 1, 'C', false);
+
+        $pdf->SetFont('Oswald-Medium', '', 21);
+        $pdf->SetTextColor(0, 0, 0);
+
+        $anchoTexto = $pdf->GetStringWidth($course);
+        $x = ($anchoPagina - $anchoTexto) / 2;
+        $pdf->SetXY($x, 98); // Ajustar la posición vertical según sea necesario
+        $pdf->Cell($anchoTexto, 40, utf8_decode($course), '', 1, 'C', false);
+
+        $pdf->SetFont('Oswald-Light', '', 13);
+        $pdf->SetTextColor(117, 117, 117);
+        $pdf->SetXY(180, 120.3);
+        $pdf->Cell(1, 35, $date, 0, 1, 'L');
+
+        $pdfFileName = $code . '.pdf';
+        $pdf->Output(public_path('pdfs/enrollments/') . $pdfFileName, 'F');
+    }
 
     /**
      * Display the specified resource.
@@ -70,6 +151,7 @@ class EnrollmentController extends Controller
         $pdf->AddFont('Oswald-Regular', '', 'Oswald-VariableFont_wght.php');
         $pdf->AddFont('Oswald-Bold', '', 'Oswald-Bold.php');
         $pdf->AddFont('Oswald-Medium', '', 'Oswald-Medium.php');
+        $pdf->AddFont('Oswald-Light', '', 'Oswald-Light.php');
 
 
 
@@ -90,9 +172,10 @@ class EnrollmentController extends Controller
         $pdf->SetXY($x, 98); // Ajustar la posición vertical según sea necesario
         $pdf->Cell($anchoTexto, 40, utf8_decode($course), '', 1, 'C', false);
 
-        $pdf->SetFont('Oswald-Regular', '', 12);
-        $pdf->SetTextColor(117, 117, 117);
-        $pdf->SetXY(180, 120.3);
+        $pdf->SetFont('Oswald-Light', '', 13);
+
+        $pdf->SetTextColor(140, 140, 140);
+        $pdf->SetXY(179.5, 120.2);
         $pdf->Cell(1, 35, $date, 0, 1, 'L');
 
         $pdf->Output();

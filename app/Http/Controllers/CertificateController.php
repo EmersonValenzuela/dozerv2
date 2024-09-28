@@ -38,20 +38,20 @@ class CertificateController extends Controller
      */
     public function store(Request $request)
     {
-        ini_set('max_execution_time', 600);
-        $name = $request->input('name');
 
         // Define the directory without 'public/'
         $directory = 'uploads/certificates';
 
-        // Check if the directory exists and create it if it doesn't
-        if (!Storage::exists($directory)) {
-            Storage::makeDirectory($directory);
+        $directory = 'uploads/enrollments';
+
+        // Verifica si el directorio existe y lo crea si no, dentro de 'public/'
+        if (!Storage::disk('public')->exists($directory)) {
+            Storage::disk('public')->makeDirectory($directory);
         }
 
         // Store the files
-        $file1Path = $request->file('file1')->store($directory);
-        $file2Path = $request->file('file2')->store($directory);
+        $file1Path = $request->file('file1')->store($directory, 'public');
+        $file2Path = $request->file('file2')->store($directory, 'public');
 
         // Get the URLs to access the files
         $img1Url = Storage::url($file1Path);
