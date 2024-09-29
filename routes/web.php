@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function ($route) {
     Route::get('/', 'index')->name('home');
-    Route::get('/Lista/{category}', 'list');
+    Route::get('/Lista/{category}', 'list')->name('home.list');
     Route::get('/Curso/{category}', 'course');
 });
 

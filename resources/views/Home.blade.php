@@ -15,7 +15,7 @@
                                     </h5>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <a href="content-dozer.html" class="btn-index waves-effect">
+                                    <a href="{{ route('home.list', 'dozer') }}" class="btn-index waves-effect">
                                         <span class="me-1"></span>Ver más
                                     </a>
                                 </div>
