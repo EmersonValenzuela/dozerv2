@@ -20,13 +20,26 @@ class HomeController extends Controller
 
         // Verifica si se encontró la categoría
         if ($certificateType) {
-            // Filtra los cursos usando el 'id_certificate_type'
-            $courses = Course::where('certificate_type_id', $certificateType->id_certificate_type)->get();
+            // Obtén los tipos de programas asociados al tipo de certificado
+            $programTypes = $certificateType->programTypes()->get();
 
-            return view('home.list')->with('courses', $courses);
+            // Filtra los cursos por el tipo de certificado y cuenta solo los estudiantes cuyo c_m sea true
+            $courses = Course::where('certificate_type_id', $certificateType->id_certificate_type)
+                ->withCount(['students' => function ($query) {
+                    $query->where('c_m', true);
+                }])
+                ->get();
+
+            return view('home.list')->with([
+                'courses' => $courses,
+                'programTypes' => $programTypes
+            ]);
         } else {
-            // Si no se encontró la categoría, puedes manejarlo mostrando un mensaje o redirigiendo
             return redirect()->back()->with('error', 'Categoría no encontrada.');
         }
+    }
+
+    public function course($course){
+        return $course;
     }
 }

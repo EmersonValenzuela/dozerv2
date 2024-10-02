@@ -13,6 +13,11 @@ class Course extends Model
 
     protected $fillable = ['code_course', 'certificate_type_id', 'program_type_id', 'course_or_event', 'image_one', 'image_two', 'dateFinish'];
 
+    public function students()
+    {
+        return $this->hasMany(Students::class, 'course_id', 'id_course');
+    }
+
     public function scopeSearch($query, $searchTerm)
     {
         return $query->where('course_or_event', 'LIKE', "%{$searchTerm}%")

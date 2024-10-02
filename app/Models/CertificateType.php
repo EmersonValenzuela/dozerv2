@@ -11,4 +11,9 @@ class CertificateType extends Model
     protected $primaryKey = 'id_certificate_type';
     protected $fillable = ['name'];
 
+    public function programTypes()
+    {
+        return $this->belongsToMany(ProgramType::class, 'certificate_programs', 'id_certificate_type', 'id_program_type');
+    }
+
 }

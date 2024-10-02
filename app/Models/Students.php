@@ -33,7 +33,21 @@ class Students extends Model
         return static::query()
             ->where('course_id', $course)
             ->where('c_m', 0)
-            ->select('code','full_name', 'id_student', 'code', 'course_or_event')
+            ->select('code', 'full_name', 'id_student', 'code', 'course_or_event')
             ->get();
+    }
+
+    /**
+     * Contar los estudiantes de un curso cuyo c_m sea true.
+     *
+     * @param int $courseId
+     * @return int
+     */
+    public function countStudentsWithCM($courseId)
+    {
+        // Contar los estudiantes cuyo c_m sea true (1) para un curso específico
+        return $this->where('course_id', $courseId)
+            ->where('c_m', 1)
+            ->count();
     }
 }

@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(HomeController::class)->group(function ($route) {
     Route::get('/', 'index')->name('home');
     Route::get('/Lista/{category}', 'list')->name('home.list');
-    Route::get('/Curso/{category}', 'course');
+    Route::get('/Curso/{course}', 'course')->name('home.course');
 });
 
 Route::controller(CertificateController::class)->group(function ($route) {
@@ -53,7 +53,6 @@ Route::controller(RecognitionController::class)->group(function ($route) {
 Route::controller(WebinarController::class)->group(function ($route) {
     Route::get('/Generar_Constancia_Webinar', 'create')->name('webinar.create');
     Route::get('/pdfWebinar/{id}', 'show');
-
 });
 
 Route::controller(ProgramController::class)->group(function ($route) {

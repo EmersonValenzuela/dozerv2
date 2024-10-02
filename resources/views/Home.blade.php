@@ -38,7 +38,7 @@
                                     <h5 class="mb-3 text-nowrap text-white">CIP</h5>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <a href="content-cip.html" class="btn-index waves-effect">
+                                    <a href="{{ route('home.list', 'cip') }}" class="btn-index waves-effect">
                                         <span class="me-1"></span>Ver más
                                     </a>
                                 </div>
@@ -61,7 +61,7 @@
                                     <h5 class="mb-3 text-nowrap text-white">CAP</h5>
                                 </div>
                                 <div class="d-flex align-items-center">
-                                    <a href="content-cap.html" class="btn-index waves-effect">
+                                    <a href="{{ route('home.list', 'cap') }}" class="btn-index waves-effect">
                                         <span class="me-1"></span>Ver más
                                     </a>
                                 </div>
