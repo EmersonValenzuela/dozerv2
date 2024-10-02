@@ -42,8 +42,6 @@ class CertificateController extends Controller
         // Define the directory without 'public/'
         $directory = 'uploads/certificates';
 
-        $directory = 'uploads/enrollments';
-
         // Verifica si el directorio existe y lo crea si no, dentro de 'public/'
         if (!Storage::disk('public')->exists($directory)) {
             Storage::disk('public')->makeDirectory($directory);

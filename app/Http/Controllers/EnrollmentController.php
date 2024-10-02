@@ -46,13 +46,13 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        $directory = 'public/uploads/enrollments'; // Define el directorio donde se guardarán los archivos.
+        $directory = 'uploads/enrollments'; // Define el directorio donde se guardarán los archivos.
 
-        if (!Storage::disk('public')->exists('uploads/enrollments')) {
-            Storage::disk('public')->makeDirectory('uploads/enrollments');
+        if (!Storage::disk('public')->exists($directory)) {
+            Storage::disk('public')->makeDirectory($directory);
         }
 
-        $file1Path = $request->file('file1')->store('uploads/enrollments', 'public');
+        $file1Path = $request->file('file1')->store($directory, 'public');
 
         $imgUrl = Storage::url($file1Path);
 
