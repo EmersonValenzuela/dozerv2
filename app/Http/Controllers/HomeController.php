@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CertificateType;
 use App\Models\Course;
+use App\Models\Students;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -39,9 +40,21 @@ class HomeController extends Controller
         }
     }
 
-    public function course($course)
+    public function course($data)
+    {
+        $course = Course::where('code_course', $data)->withCount(['students' => function ($query) {
+            $query->where('c_m', true);
+        }])
+            ->first();
+
+        return view('home.course', compact('course'));
+    }
+
+    public function students($data)
     {
 
-        return view('home.course');
+        $students = Students::getStudentByCourse($data);
+
+        return response()->json(['data' => $students]);
     }
 }

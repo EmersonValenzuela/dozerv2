@@ -50,4 +50,28 @@ class Students extends Model
             ->where('c_m', 1)
             ->count();
     }
+
+
+    public static function getStudentByCourse($courseId)
+    {
+        $students = self::where('course_id', $courseId)
+            ->get();
+
+        $data = [];
+        foreach ($students as $student) {
+            $data[] = [
+                'code' => $student->code,
+                'names' => $student->full_name,
+                'email' => $student->email,
+                'score' => $student->score,
+                'cm' => $student->c_m,
+                'cp' => $student->c_p,
+                'r_e' => $student->r_e,
+                'w_p' => $student->w_p,
+                'certificate' => $student->certificate,
+                'status' => $student->status,
+            ];
+        }
+        return $data;
+    }
 }
