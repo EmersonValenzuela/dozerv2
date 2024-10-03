@@ -70,7 +70,8 @@
                                                 </div>
                                             </div>
                                             <div class="ms-auto p-2 align-self-center btn-certi">
-                                                <a class="text-white" href="{{ route('home.course', $course->code_course) }}">Ver</a>
+                                                <a class="text-white"
+                                                    href="{{ route('home.course', $course->code_course) }}">Ver</a>
                                             </div>
                                         </div>
                                     </div>

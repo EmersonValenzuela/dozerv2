@@ -39,7 +39,9 @@ class HomeController extends Controller
         }
     }
 
-    public function course($course){
-        return $course;
+    public function course($course)
+    {
+
+        return view('home.course');
     }
 }
