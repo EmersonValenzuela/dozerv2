@@ -115,8 +115,8 @@
     </div>
 
     <div class="modal fade" id="exampleModal2" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div style="right: 150px;width: 150% !important;" class="modal-content">
+        <div class="modal-dialog modal-xl modal-simple">
+            <div class="modal-content">
                 <div class="modal-header text-center">
                     <h1 class="modal-title fs-5 text-white fw-bold " id="exampleModalLabel1">CARGA MASIVA</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -141,288 +141,25 @@
                     </div>
                     <div class="d-flex flex-row mb-3 justify-content-between">
                         <div class="px-2 w-100">
-                            <div class="table-responsive text-nowrap">
-                                <table class="table table-dark">
-                                    <thead>
+                            <div class="card-datatable table-responsive">
+                                <table class="datatables_certificates table">
+                                    <thead class="text-white">
                                         <tr>
-                                            <th>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">Código</font>
-                                                </font>
-                                            </th>
-                                            <th>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">DNI-CI</font>
-                                                </font>
-                                            </th>
-                                            <th>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">Nombres y Apellidos
-                                                    </font>
-                                                </font>
-                                            </th>
-                                            <th>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">Capacitacion</font>
-                                                </font>
-                                            </th>
-                                            <th>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">Nota</font>
-                                                </font>
-                                            </th>
-                                            <th>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">Email</font>
-                                                </font>
-                                            </th>
-                                            <th>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">Enlace</font>
-                                                </font>
-                                            </th>
+                                            <th></th>
+                                            <th class="text-white fw-bold">Código</th>
+                                            <th class="text-nowrap text-white fw-bold">DNI-CI</th>
+                                            <th class="text-white fw-bold">Apellidos y Nombres</th>
+                                            <th class="text-nowrap text-white fw-bold">Capacitacion</th>
+                                            <th class="text-white fw-bold">Nota </th>
+                                            <th class="text-white fw-bold">Correo Electronico </th>
+                                            <th class="text-white fw-bold">Acciones</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><i class="ri-suitcase-2-line ri-22px text-danger me-4"></i><span
-                                                    class="fw-medium">
-                                                    <font style="vertical-align: inherit;">
-                                                        <font style="vertical-align: inherit;">Proyecto Tours
-                                                        </font>
-                                                    </font>
-                                                </span></td>
-                                            <td>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">Albert Cook</font>
-                                                </font>
-                                            </td>
-                                            <td>
-                                                <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                                                        <img src="../../assets/img/avatars/5.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Sofía Wilkerson"
-                                                        data-bs-original-title="Sophia Wilkerson">
-                                                        <img src="../../assets/img/avatars/6.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Cristina Parker"
-                                                        data-bs-original-title="Christina Parker">
-                                                        <img src="../../assets/img/avatars/7.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td><span class="badge rounded-pill bg-label-primary me-1">
-                                                    <font style="vertical-align: inherit;">
-                                                        <font style="vertical-align: inherit;">Activo</font>
-                                                    </font>
-                                                </span></td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown"><i class="ri-more-2-line"></i></button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item waves-effect"
-                                                            href="javascript:void(0);"><i class="ri-pencil-line me-1"></i>
-                                                            Edit</a>
-                                                        <a class="dropdown-item waves-effect"
-                                                            href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-7-line me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="ri-basketball-fill ri-22px text-info me-4"></i><span
-                                                    class="fw-medium">
-                                                    <font style="vertical-align: inherit;">
-                                                        <font style="vertical-align: inherit;">Proyecto deportivo
-                                                        </font>
-                                                    </font>
-                                                </span></td>
-                                            <td>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">Cazador de Barry</font>
-                                                </font>
-                                            </td>
-                                            <td>
-                                                <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                                                        <img src="../../assets/img/avatars/5.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Sofía Wilkerson"
-                                                        data-bs-original-title="Sophia Wilkerson">
-                                                        <img src="../../assets/img/avatars/6.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Cristina Parker"
-                                                        data-bs-original-title="Christina Parker">
-                                                        <img src="../../assets/img/avatars/7.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td><span class="badge rounded-pill bg-label-success me-1">
-                                                    <font style="vertical-align: inherit;">
-                                                        <font style="vertical-align: inherit;">Terminado</font>
-                                                    </font>
-                                                </span></td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown"><i class="ri-more-2-line"></i></button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item waves-effect"
-                                                            href="javascript:void(0);"><i class="ri-pencil-line me-1"></i>
-                                                            Edit</a>
-                                                        <a class="dropdown-item waves-effect"
-                                                            href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-7-line me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="ri-leaf-fill ri-22px text-success me-4"></i><span
-                                                    class="fw-medium">
-                                                    <font style="vertical-align: inherit;">
-                                                        <font style="vertical-align: inherit;">Proyecto de
-                                                            invernadero
-                                                        </font>
-                                                    </font>
-                                                </span></td>
-                                            <td>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">Trevor Panadero</font>
-                                                </font>
-                                            </td>
-                                            <td>
-                                                <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                                                        <img src="../../assets/img/avatars/5.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Sofía Wilkerson"
-                                                        data-bs-original-title="Sophia Wilkerson">
-                                                        <img src="../../assets/img/avatars/6.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Cristina Parker"
-                                                        data-bs-original-title="Christina Parker">
-                                                        <img src="../../assets/img/avatars/7.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td><span class="badge rounded-pill bg-label-info me-1">
-                                                    <font style="vertical-align: inherit;">
-                                                        <font style="vertical-align: inherit;">Programado</font>
-                                                    </font>
-                                                </span></td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown"><i class="ri-more-2-line"></i></button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item waves-effect"
-                                                            href="javascript:void(0);"><i class="ri-pencil-line me-1"></i>
-                                                            Edit</a>
-                                                        <a class="dropdown-item waves-effect"
-                                                            href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-7-line me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><i class="ri-bank-fill ri-22px text-primary me-4"></i><span
-                                                    class="fw-medium">
-                                                    <font style="vertical-align: inherit;">
-                                                        <font style="vertical-align: inherit;">Proyecto bancario
-                                                        </font>
-                                                    </font>
-                                                </span></td>
-                                            <td>
-                                                <font style="vertical-align: inherit;">
-                                                    <font style="vertical-align: inherit;">Jerry Milton</font>
-                                                </font>
-                                            </td>
-                                            <td>
-                                                <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Lilian Fuller" data-bs-original-title="Lilian Fuller">
-                                                        <img src="../../assets/img/avatars/5.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Sofía Wilkerson"
-                                                        data-bs-original-title="Sophia Wilkerson">
-                                                        <img src="../../assets/img/avatars/6.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                        aria-label="Cristina Parker"
-                                                        data-bs-original-title="Christina Parker">
-                                                        <img src="../../assets/img/avatars/7.png" alt="Avatar"
-                                                            class="rounded-circle">
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td><span class="badge rounded-pill bg-label-warning me-1">
-                                                    <font style="vertical-align: inherit;">
-                                                        <font style="vertical-align: inherit;">Pendiente</font>
-                                                    </font>
-                                                </span></td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                                        data-bs-toggle="dropdown"><i class="ri-more-2-line"></i></button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item waves-effect"
-                                                            href="javascript:void(0);"><i class="ri-pencil-line me-1"></i>
-                                                            Edit</a>
-                                                        <a class="dropdown-item waves-effect"
-                                                            href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-7-line me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
-
                     </div>
-
-
                 </div>
-
             </div>
         </div>
     </div>
