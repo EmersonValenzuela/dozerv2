@@ -29,9 +29,6 @@
                 </button>
             </div>
 
-
-
-
             <div class="d-flexg-2 align-items-center pt-3 ">
                 <div class="d-flex flex-row px-5 pb-3">
                     <div class="input-wrapper  me-3">
@@ -135,14 +132,17 @@
                             </div>
                         </div>
                         <div class="px-2 w-50 d-flex flex-row justify-content-end">
-                            <button type="button" class="btn btn-cancelar " data-bs-dismiss="modal">IMPORTAR</button>
+                            <button type="button" class=" btn-import waves-effect waves-light "
+                                id="btnImport">Importar</button>
+                            <input type="file" id="excelFile" style="display: none;" accept=".xlsx, .xls">
+
                             <button type="button" class="btn btn-guardar ">GUARDAR</button>
                         </div>
                     </div>
                     <div class="d-flex flex-row mb-3 justify-content-between">
                         <div class="px-2 w-100">
                             <div class="card-datatable table-responsive">
-                                <table class="datatables_certificates table">
+                                <table class="datatables_add table">
                                     <thead class="text-white">
                                         <tr>
                                             <th></th>
