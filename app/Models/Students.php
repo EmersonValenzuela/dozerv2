@@ -37,6 +37,16 @@ class Students extends Model
             ->get();
     }
 
+    public static function studentConstancy($course)
+    {
+        return static::query()
+            ->where('course_id', $course)
+            ->where('c_m', 1)
+            ->where('c_p', 0)
+            ->select('code', 'full_name', 'id_student', 'code', 'course_or_event')
+            ->get();
+    }
+
     /**
      * Contar los estudiantes de un curso cuyo c_m sea true.
      *

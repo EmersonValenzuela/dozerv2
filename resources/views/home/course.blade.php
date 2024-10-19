@@ -172,5 +172,6 @@
     <script>
         const course_id = {{ $course->id_course }};
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="{{ asset('js/pages/course.js') }}"></script>
 @endsection

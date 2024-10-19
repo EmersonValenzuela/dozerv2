@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 initComplete: function () {},
             })),
             $(".dataTables_length").addClass("mt-0 mt-md-3")),
-            $(".datatables_certificates tbody").on(
+            $(".datatables_add tbody").on(
                 "click",
                 ".delete-record",
                 function () {

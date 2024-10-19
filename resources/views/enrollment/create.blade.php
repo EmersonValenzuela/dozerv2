@@ -42,11 +42,7 @@
             </div>
         </div>
 
-
-
         <!--Contenido-->
-
-
         <div class="d-flex mb-3">
             <div class="me-auto p-2">
                 <div class="d-flex flex-row px-5 pb-3">
@@ -88,7 +84,7 @@
 
 
     <!-- Share Project Modal -->
-    <div class="modal fade" id="shareProject" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="shareProject" tabindex="-1">
         <div class="modal-dialog modal-lg modal-simple modal-enable-otp modal-dialog-centered">
             <div class="modal-content p-3 p-md-5">
                 <div class="modal-body pt-3 pt-md-0">

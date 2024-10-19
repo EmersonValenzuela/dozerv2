@@ -23,16 +23,19 @@
 
                 </div>
             </div>
-            <div class="p-2 flex-column d-flex justify-content-center">
+            <div class="p-2 flex-column d-flex justify-content-center" id="dataConstancy">
+
                 <div class="p-2 ">
-                    <div class="mb-3 px-2">
-                        <label for="defaultSelect" class="form-label text-white">Programa</label>
-                        <select id="defaultSelect" class="form-select">
-                            <option>Seleccionar</option>
-                            <option value="1">Curso</option>
-                            <option value="2">Especializacion</option>
-                            <option value="3">Diplomado</option>
+                    <div class=" mb-3 px-2">
+                        <select id="course" class=" form-select">
                         </select>
+                    </div>
+                </div>
+                <div class="p-2 ">
+                    <div class="px-2">
+                        <label for="date" class="form-label text-white ">Fecha</label>
+                        <input id="date" class="form-control form-control-sm bg-input w-420" type="text"
+                            placeholder="">
                     </div>
                 </div>
             </div>
@@ -49,109 +52,78 @@
                 </div>
             </div>
             <div class="p-2">
+                <div class="p-2 d-flex align-items-end "><button id="btnModal" type="button"
+                        class="btn btn-guardar  waves-effect waves-light fw-bold"><i
+                            class="mdi mdi-plus-box-multiple-outline"></i> Agregar</button> </div>
+            </div>
+            <div class="p-2">
                 <div class="p-2 d-flex align-items-end "><button type="button"
-                        class="btn btn-guardar  waves-effect waves-light fw-bold">Importar</button></div>
+                        class="btn btn-guardar  waves-effect waves-light fw-bold btn-generate">Generar</button> </div>
             </div>
         </div>
 
 
-        <div class="  style-course text-white align-items-start">
-            <div class="table-responsive text-nowrap">
-                <table class="table ">
-                    <thead>
+        <div class="style-course text-white align-items-start">
+            <div class="card-datatable table-responsive">
+                <table class="datatables_enrollment table">
+                    <thead class="text-white">
                         <tr>
+                            <th></th>
                             <th class="text-white fw-bold">Código</th>
-                            <th class="text-white fw-bold">Nombre</th>
-                            <th class="text-white fw-bold">Capacitacion</th>
-                            <th class="text-white fw-bold">Descripcion</th>
-                            <th class="text-white fw-bold">Acciones</th>
-
+                            <th class="text-white fw-bold">Apellidos y Nombres</th>
+                            <th class="text-nowrap text-white fw-bold">Capacitacion</th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>123456k</td>
-                            <td><span class="fw-medium">Tours Project</span></td>
-                            <td>Albert Cook</td>
-                            <td>Realizado desde el 17 de marzo del 2024 al 20 de junio del 2024</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                        data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-pencil-outline me-1"></i> Edit</a>
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>fg5982</td>
-                            <td><span class="fw-medium">Tours Project</span></td>
-                            <td>Albert Cook</td>
-                            <td>Realizado desde el 17 de marzo del 2024 al 20 de junio del 2024</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                        data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-pencil-outline me-1"></i> Edit</a>
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1uf59687</td>
-                            <td><span class="fw-medium">Tours Project</span></td>
-                            <td>Albert Cook</td>
-                            <td>Realizado desde el 17 de marzo del 2024 al 20 de junio del 2024</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                        data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-pencil-outline me-1"></i> Edit</a>
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                    </tbody>
                 </table>
             </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_info" id="DataTables_Table_2_info" role="status" aria-live="polite">Showing
-                        0 to 0 of 0 entries</div>
+        </div>
+    </div>
+
+
+    <!-- Share Project Modal -->
+    <div class="modal fade" id="shareProject" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-simple modal-enable-otp modal-dialog-centered">
+            <div class="modal-content p-3 p-md-5">
+                <div class="modal-body pt-3 pt-md-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="text-center">
+                        <h3 class="mb-2">Estudiantes</h3>
+                        <p>Solo mostrara los estudiantes que aun no tienen constancia de matricula</p>
+                    </div>
                 </div>
-                <div class="col-sm-12 col-md-6 dataTables_pager">
-                    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_2_paginate">
-                        <ul class="pagination d-flex justify-content-end">
-                            <li class="paginate_button page-item previous disabled" id="DataTables_Table_2_previous">
-                                <a aria-controls="DataTables_Table_2" aria-disabled="true" role="link"
-                                    data-dt-idx="previous" tabindex="0" class="page-link bg-transparent">Previous</a>
-                            </li>
-                            <li class="paginate_button page-item next disabled" id="DataTables_Table_2_next"><a
-                                    aria-controls="DataTables_Table_2" aria-disabled="true" role="link"
-                                    data-dt-idx="next" tabindex="0" class="page-link bg-transparent">Next</a></li>
-                        </ul>
+                <div class="col-12 mb-4 pb-2 text-dark">
+                    <div class="form-floating form-floating-outline">
+                        <select id="select2Multiple" class="select2 form-select" multiple="">
+                        </select>
+                        <label for="select2Multiple">Selecciona a los Integrantes</label>
+                    </div>
+                </div>
+                <div class="d-flex align-items-start mt-4 align-items-sm-center">
+                    <div class="d-flex justify-content-between flex-grow-1 align-items-center flex-wrap gap-2">
+                        <button class="btn btn-success" id="addStudents">
+                            Agregar a la tabla
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!--/ Share Project Modal -->
 @endsection()
 
 @section('styles')
+<style>
+    #dataConstancy {
+        position: relative;
+        overflow: hidden;
+        max-width: 100%;
+        /* Ajustar el ancho máximo */
+    }
+</style>
 @endsection()
 
 @section('scripts')
+<script src="{{ asset('js/pages/constancy.js') }}"></script>
+
 @endsection

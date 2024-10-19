@@ -43,7 +43,9 @@ Route::controller(EnrollmentController::class)->group(function ($route) {
 
 Route::controller(ConstancyController::class)->group(function ($route) {
     Route::get('/Generar_Constancia', 'create')->name('constancy.create');
+    Route::post('/scopeStudentConstancy', 'searchStudents');
     Route::get('/pdfConstancy/{id}', 'show');
+    Route::post('/generateConstancy', 'store');
 });
 
 Route::controller(RecognitionController::class)->group(function ($route) {
