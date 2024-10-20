@@ -47,12 +47,15 @@ class RecognitionController extends Controller
      */
     public function show($id)
     {
-        $img1 = "img/examples/recognition.png";
+        $img1 = "img/examples/recognition2.png";
 
         $name = "Antonella Perez Rodriguez";
         $code = "0745147";
         $course = "Nombre del Curso modular";
         $date = "24 de abril del 2024";
+
+        $text = 'Logrando un promedio final de 19/20, el esfuerzo dedicación y compromiso alcanzado,';
+        $text2 = 'deseándole muchos éxitos en su carrera profesional, concedido el día 24 de abril del 2024';
 
         $pdf = new \FPDF('L', 'mm', 'A4');
         $pdf->AddPage();
@@ -70,7 +73,7 @@ class RecognitionController extends Controller
 
         $pdf->SetFont('Oswald-Regular', '', 11);
         $pdf->SetTextColor(117, 117, 117);
-        $pdf->SetXY(29.6, 31);
+        $pdf->SetXY(29.6, 32);
         $pdf->Cell(1, 35, $code, 0, 1, 'L');
 
         // Configurar para centrar el texto
@@ -79,7 +82,7 @@ class RecognitionController extends Controller
 
         $anchoTexto = $pdf->GetStringWidth($name);
         $x = ($anchoPagina - $anchoTexto) / 2;
-        $pdf->SetXY($x, 47); // Ajustar la posición vertical según sea necesario
+        $pdf->SetXY($x, 47);
         $pdf->Cell($anchoTexto, 40, $name, '', 1, 'C', false);
 
         $pdf->SetFont('Oswald-Medium', '', 18);
@@ -87,13 +90,23 @@ class RecognitionController extends Controller
 
         $anchoTexto = $pdf->GetStringWidth($course);
         $x = ($anchoPagina - $anchoTexto) / 2;
-        $pdf->SetXY($x, 74); // Ajustar la posición vertical según sea necesario
+        $pdf->SetXY($x, 74);
         $pdf->Cell($anchoTexto, 40, utf8_decode($course), '', 1, 'C', false);
 
-        $pdf->SetFont('Oswald-Light', '', 13);
-        $pdf->SetTextColor(117, 117, 117);
-        $pdf->SetXY(204.5, 95.1); // Ajustar la posición vertical según sea necesario
-        $pdf->Cell(1, 40, $date, 0, 1, 'C');
+        $pdf->SetFont('Oswald-Light', '', 14);
+        $pdf->SetTextColor(118, 117, 117);
+        $anchoTexto = $pdf->GetStringWidth($text);
+        $x = ($anchoPagina - $anchoTexto) / 2;
+        $pdf->SetXY($x, 89); 
+        $pdf->Cell($anchoTexto, 40, utf8_decode($text), 0, 1, 'C');
+
+        $pdf->SetFont('Oswald-Light', '', 14);
+        $pdf->SetTextColor(118, 117, 117);
+        $anchoTexto = $pdf->GetStringWidth($text2);
+        $x = ($anchoPagina - $anchoTexto) / 2;
+        $pdf->SetXY($x, 95); 
+        $pdf->Cell($anchoTexto, 40, utf8_decode($text2), 0, 1, 'C');
+
 
         $pdf->SetFont('Oswald-Regular', '', 12);
         $pdf->SetTextColor(117, 117, 117);
