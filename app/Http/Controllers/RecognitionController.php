@@ -73,7 +73,7 @@ class RecognitionController extends Controller
 
         $pdf->SetFont('Oswald-Regular', '', 11);
         $pdf->SetTextColor(117, 117, 117);
-        $pdf->SetXY(29.6, 32);
+        $pdf->SetXY(29.6, 33);
         $pdf->Cell(1, 35, $code, 0, 1, 'L');
 
         // Configurar para centrar el texto
@@ -94,14 +94,14 @@ class RecognitionController extends Controller
         $pdf->Cell($anchoTexto, 40, utf8_decode($course), '', 1, 'C', false);
 
         $pdf->SetFont('Oswald-Light', '', 14);
-        $pdf->SetTextColor(118, 117, 117);
+        $pdf->SetTextColor(127, 128, 128); // color #7f8080
         $anchoTexto = $pdf->GetStringWidth($text);
         $x = ($anchoPagina - $anchoTexto) / 2;
         $pdf->SetXY($x, 89); 
         $pdf->Cell($anchoTexto, 40, utf8_decode($text), 0, 1, 'C');
 
         $pdf->SetFont('Oswald-Light', '', 14);
-        $pdf->SetTextColor(118, 117, 117);
+        $pdf->SetTextColor(127, 128, 128); // color #7f8080
         $anchoTexto = $pdf->GetStringWidth($text2);
         $x = ($anchoPagina - $anchoTexto) / 2;
         $pdf->SetXY($x, 95); 
@@ -109,7 +109,7 @@ class RecognitionController extends Controller
 
 
         $pdf->SetFont('Oswald-Regular', '', 12);
-        $pdf->SetTextColor(117, 117, 117);
+        $pdf->SetTextColor(127, 128, 128); // color #7f8080
         $pdf->SetXY(211, 178.3);
         $pdf->Cell(1, 5, $code, 0, 1, 'L');
 
