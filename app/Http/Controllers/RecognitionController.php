@@ -54,8 +54,10 @@ class RecognitionController extends Controller
         $course = "Nombre del Curso modular";
         $date = "24 de abril del 2024";
 
-        $text = 'Logrando un promedio final de 19/20, el esfuerzo dedicación y compromiso alcanzado,';
-        $text2 = 'deseándole muchos éxitos en su carrera profesional, concedido el día 24 de abril del 2024';
+        $note = 19;
+
+        $text = 'Logrando un promedio final de ' . $note . '/20, el esfuerzo dedicación y compromiso alcanzado,';
+        $text2 = 'deseándole muchos éxitos en su carrera profesional, concedido el día ' . $date;
 
         $pdf = new \FPDF('L', 'mm', 'A4');
         $pdf->AddPage();
@@ -97,14 +99,14 @@ class RecognitionController extends Controller
         $pdf->SetTextColor(127, 128, 128); // color #7f8080
         $anchoTexto = $pdf->GetStringWidth($text);
         $x = ($anchoPagina - $anchoTexto) / 2;
-        $pdf->SetXY($x, 89); 
+        $pdf->SetXY($x, 89);
         $pdf->Cell($anchoTexto, 40, utf8_decode($text), 0, 1, 'C');
 
         $pdf->SetFont('Oswald-Light', '', 14);
         $pdf->SetTextColor(127, 128, 128); // color #7f8080
         $anchoTexto = $pdf->GetStringWidth($text2);
         $x = ($anchoPagina - $anchoTexto) / 2;
-        $pdf->SetXY($x, 95); 
+        $pdf->SetXY($x, 95);
         $pdf->Cell($anchoTexto, 40, utf8_decode($text2), 0, 1, 'C');
 
 
