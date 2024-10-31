@@ -174,7 +174,7 @@
         $("#course").on("change", function () {
             const courseId = $(this).val();
 
-            fetch("/scopeStudent", {
+            fetch("/scopeStudentConstancy", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -267,7 +267,7 @@
             formData.append("_token", csrfToken);
 
             $.ajax({
-                url: "generateEnrollments",
+                url: "generateRecognition",
                 method: "POST",
                 data: formData,
                 dataType: "json",

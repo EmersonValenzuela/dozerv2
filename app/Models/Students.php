@@ -42,7 +42,6 @@ class Students extends Model
         return static::query()
             ->where('course_id', $course)
             ->where('c_m', 1)
-            ->where('c_p', 0)
             ->select('code', 'full_name', 'id_student', 'code', 'course_or_event')
             ->get();
     }

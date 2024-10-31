@@ -124,7 +124,7 @@ class ConstancyController extends Controller
         $anchoTexto = $pdf->GetStringWidth($date);
         $x = ($anchoPagina - $anchoTexto) / 2;
         $pdf->SetFont('Oswald-Light', '', 14);
-        $pdf->SetTextColor(117, 117, 117);
+        $pdf->SetTextColor(127, 128, 128);
         $pdf->SetXY($x, 86); // Ajustar la posición vertical según sea necesario
         $pdf->Cell($anchoTexto, 40, utf8_decode($date), 0, 1, 'C');
 
@@ -192,7 +192,7 @@ class ConstancyController extends Controller
         $anchoTexto = $pdf->GetStringWidth($date);
         $x = ($anchoPagina - $anchoTexto) / 2;
         $pdf->SetFont('Oswald-Light', '', 14);
-        $pdf->SetTextColor(117, 117, 117);
+        $pdf->SetTextColor(127, 128, 128);
         $pdf->SetXY($x, 86); // Ajustar la posición vertical según sea necesario
         $pdf->Cell($anchoTexto, 40, $date, 0, 1, 'C');
 

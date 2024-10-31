@@ -51,6 +51,8 @@ Route::controller(ConstancyController::class)->group(function ($route) {
 Route::controller(RecognitionController::class)->group(function ($route) {
     Route::get('/Generar_Reconocimiento', 'create')->name('recognition.create');
     Route::get('/pdfRecognition/{id}', 'show');
+    Route::post('/generateRecognition', 'store');
+
 });
 
 Route::controller(WebinarController::class)->group(function ($route) {
