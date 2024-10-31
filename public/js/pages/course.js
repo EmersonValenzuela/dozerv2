@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     { data: "cm" },
                     { data: "cp" },
                     { data: "r_e" },
-                    { data: "w_p" },
                     { data: "certificate" },
                     { data: "" },
                 ],
@@ -69,17 +68,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
                                 return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>`;
                             } else {
                                 return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
-                            }
-                        },
-                    },
-                    {
-                        targets: 6,
-                        className: "text-center",
-                        render: function (e, t, a, s) {
-                            if (e) {
-                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>`;
-                            } else {
-                                return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
                             }
                         },
                     },

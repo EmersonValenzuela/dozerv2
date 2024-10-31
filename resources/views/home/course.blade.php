@@ -46,7 +46,7 @@
                             <tr>
                                 <th class="text-white fw-bold" rowspan="2">Estudiante</th>
                                 <th class="text-white fw-bold" rowspan="2">Correo</th>
-                                <th class="text-white fw-bold text-center" colspan="5">Documentos Adjuntos</th>
+                                <th class="text-white fw-bold text-center" colspan="4">Documentos Adjuntos</th>
                                 <th class="text-white fw-bold" rowspan="2">Acciones</th>
                             </tr>
                             <tr>
@@ -54,7 +54,6 @@
                                 <th class="text-white fw-bold text-center">C. Participación</th>
                                 <th class="text-white fw-bold text-center">R. Excelencia</th>
                                 <th class="text-white fw-bold text-center">C. Curso</th>
-                                <th class="text-white fw-bold text-center">P. Webinar</th>
                             </tr>
                         </thead>
                     </table>

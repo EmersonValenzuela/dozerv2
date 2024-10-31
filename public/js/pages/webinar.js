@@ -19,17 +19,7 @@
     }
 })(),
     $(function () {
-        var e,
-            t = $(".select2");
-        t.length &&
-            t.each(function () {
-                var e = $(this);
-                select2Focus(e),
-                    e.wrap('<div class="position-relative"></div>').select2({
-                        placeholder: "Select value",
-                        dropdownParent: e.parent(),
-                    });
-            });
+
         let h,
             a,
             s,
@@ -48,12 +38,10 @@
         o.length &&
             ((e = o.DataTable({
                 columns: [
-                    { data: "code" },
-                    { data: "code" },
+                    { data: "" },
                     { data: "dni" },
                     { data: "names" },
                     { data: "course" },
-                    { data: "score" },
                     { data: "email" },
                     { data: " " },
                 ],
@@ -226,32 +214,7 @@
             e.search(this.value).draw();
         });
 
-        $("#typeCertificate").on("change", function () {
-            blockUI();
-            $.ajax({
-                url: "get-programs/" + this.value,
-                method: "GET",
-                dataType: "json",
-            })
-                .done(function (response) {
-                    $("#program").empty();
-                    response.forEach((program) => {
-                        $("#program").append(
-                            '<option value="' +
-                                program.id_program_type +
-                                '">' +
-                                program.program_type.name +
-                                "</option>"
-                        );
-                    });
-                })
-                .fail(function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                })
-                .always(() => {
-                    $.unblockUI();
-                });
-        });
+
 
         $(".btn-generate").on("click", function () {
             blockUI();
@@ -280,7 +243,6 @@
             let formData = new FormData();
 
             formData.append("file1", $("#upload")[0].files[0]);
-            formData.append("file2", $("#upload2")[0].files[0]);
             formData.append("name", name);
             formData.append("type", $("#typeCertificate").val());
             formData.append("program", $("#program").val());

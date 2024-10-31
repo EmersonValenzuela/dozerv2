@@ -56,6 +56,7 @@ Route::controller(RecognitionController::class)->group(function ($route) {
 });
 
 Route::controller(WebinarController::class)->group(function ($route) {
+    Route::get('/Lista_Webinar', 'index')->name('webinar.index');
     Route::get('/Generar_Constancia_Webinar', 'create')->name('webinar.create');
     Route::get('/pdfWebinar/{id}', 'show');
 });

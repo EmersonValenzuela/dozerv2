@@ -25,33 +25,21 @@
                 </div>
             </div>
             <div class="p-2 flex-column d-flex justify-content-center">
-
                 <div class="p-2 ">
                     <div class="px-2">
-                        <label for="smallInput" class="form-label text-white ">Nombre de la Capacitacion</label>
-                        <input id="smallInput" class="form-control form-control-sm bg-input w-420" type="text"
+                        <label for="title" class="form-label text-white ">Nombre del Webinar</label>
+                        <input id="title" class="form-control form-control-sm bg-input w-420" type="text"
                             placeholder="">
                     </div>
                 </div>
-
-
-
-
                 <div class="p-2 ">
-                    <div class="mb-3 px-2">
-                        <label for="defaultSelect" class="form-label text-white">Programa</label>
-                        <select id="defaultSelect" class="form-select">
-                            <option>Seleccionar</option>
-                            <option value="1">Curso</option>
-                            <option value="2">Especializacion</option>
-                            <option value="3">Diplomado</option>
-                        </select>
+                    <div class="px-2">
+                        <label for="date" class="form-label text-white ">Fecha</label>
+                        <input id="date" class="form-control form-control-sm bg-input w-420" type="text"
+                            placeholder="">
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
         <div class="d-flex mb-3">
@@ -64,110 +52,36 @@
                     </div>
                 </div>
             </div>
+
             <div class="p-2">
                 <div class="p-2 d-flex align-items-end "><button type="button"
-                        class="btn btn-guardar  waves-effect waves-light fw-bold">Importar</button></div>
+                        class="btn btn-guardar  waves-effect waves-light fw-bold btn-generate">Generar</button> </div>
+            </div>
+
+            <div class="p-2">
+                <div class="p-2 d-flex align-items-end ">
+                    <button type="button" class=" btn-import waves-effect waves-light " id="btnImport">Importar</button>
+                </div>
             </div>
         </div>
 
+        <input type="file" id="excelFile" style="display: none;" accept=".xlsx, .xls">
 
-
-
-
-
-
-        <div class="  style-course text-white align-items-start">
-            <div class="table-responsive text-nowrap">
-                <table class="table ">
-                    <thead>
+        <div class="style-course text-white align-items-start">
+            <div class="card-datatable table-responsive">
+                <table class="datatables_certificates table">
+                    <thead class="text-white">
                         <tr>
-
-                            <th class="text-white fw-bold">Nombre</th>
-                            <th class="text-white fw-bold">Capacitacion</th>
-                            <th class="text-white fw-bold">Descripcion</th>
+                            <th></th>
+                            <th class="text-nowrap text-white fw-bold">DNI-CI</th>
+                            <th class="text-white fw-bold">Apellidos y Nombres</th>
+                            <th class="text-nowrap text-white fw-bold">Capacitacion</th>
+                            <th class="text-white fw-bold">Correo Electronico </th>
                             <th class="text-white fw-bold">Acciones</th>
-
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-
-                            <td><span class="fw-medium">Tours Project</span></td>
-                            <td>Albert Cook</td>
-                            <td>Realizado el 17 de marzo del 2024 con una duración de 120 min.</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                        data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-pencil-outline me-1"></i> Edit</a>
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td><span class="fw-medium">Tours Project</span></td>
-                            <td>Albert Cook</td>
-                            <td>Realizado el 17 de marzo del 2024 con una duración de 120 min.</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                        data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-pencil-outline me-1"></i> Edit</a>
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td><span class="fw-medium">Tours Project</span></td>
-                            <td>Albert Cook</td>
-                            <td>Realizado el 17 de marzo del 2024 con una duración de 120 min.</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                        data-bs-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-pencil-outline me-1"></i> Edit</a>
-                                        <a class="dropdown-item waves-effect" href="javascript:void(0);"><i
-                                                class="mdi mdi-trash-can-outline me-1"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-
-                    </tbody>
                 </table>
             </div>
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="dataTables_info" id="DataTables_Table_2_info" role="status" aria-live="polite">Showing
-                        0 to 0 of 0 entries</div>
-                </div>
-                <div class="col-sm-12 col-md-6 dataTables_pager">
-                    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_2_paginate">
-                        <ul class="pagination d-flex justify-content-end">
-                            <li class="paginate_button page-item previous disabled" id="DataTables_Table_2_previous">
-                                <a aria-controls="DataTables_Table_2" aria-disabled="true" role="link"
-                                    data-dt-idx="previous" tabindex="0" class="page-link bg-transparent">Previous</a>
-                            </li>
-                            <li class="paginate_button page-item next disabled" id="DataTables_Table_2_next"><a
-                                    aria-controls="DataTables_Table_2" aria-disabled="true" role="link"
-                                    data-dt-idx="next" tabindex="0" class="page-link bg-transparent">Next</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
     </div>
@@ -177,4 +91,6 @@
 @endsection()
 
 @section('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<script src="{{ asset('js/pages/webinar.js') }}"></script>
 @endsection

@@ -76,6 +76,31 @@
                 </div>
             </div>
         </div>
+        <div class="d-flex flex-row mb-3 d-flex justify-content-center">
+            <div class="p-2">
+                <div class="card style-course">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card-body">
+                                <div class="card-info">
+                                    <h5 class="mb-3 text-nowrap text-white">WEBINAR</h5>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <a href="{{ route('webinar.index') }}" class="btn-index waves-effect">
+                                        <span class="me-1"></span>Ver más
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 text-center d-flex align-items-center">
+                            <div class="card-body pb-0 pt-3">
+                                <img src="{{ asset('img/cap.png') }}" alt="Ratings" class="img-fluid" width="95" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection()
 
