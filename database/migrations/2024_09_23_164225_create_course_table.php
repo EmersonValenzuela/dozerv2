@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id('id_course'); // Unique course ID
             $table->string('code_course', 10)->unique()->nullable(); // FK for certificate_types
             $table->unsignedBigInteger('certificate_type_id'); // FK for certificate_types
-            $table->unsignedBigInteger('program_type_id'); // FK for program_types
+            $table->unsignedBigInteger('program_type_id')->n; // FK for program_types
             $table->string('course_or_event', 150); // Name of the course, event, or program
             $table->string('image_one'); // Path for the first background image
-            $table->string('image_two'); // Path for the second background image
+            $table->string('image_two')->nullable(); // Path for the second background image
             $table->date('dateFinish')->nullable(); // Optional finish date
             $table->timestamps(); // Timestamps for creation and updates
 

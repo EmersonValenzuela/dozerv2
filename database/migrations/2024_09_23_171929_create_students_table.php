@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('course_or_event', 200)->nullable(); // Name of the course, event, or program
             $table->string('full_name'); // Full name of the student
             $table->string('document_number'); // Full name of the student
-            $table->string('score');
+            $table->string('score')->nullable();
             $table->string('email'); // Email address of the student
             $table->boolean('c_m')->default(false); // Status of the certificate
             $table->boolean('c_p')->default(false); // Status of the certificate

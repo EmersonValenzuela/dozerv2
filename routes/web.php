@@ -52,12 +52,13 @@ Route::controller(RecognitionController::class)->group(function ($route) {
     Route::get('/Generar_Reconocimiento', 'create')->name('recognition.create');
     Route::get('/pdfRecognition/{id}', 'show');
     Route::post('/generateRecognition', 'store');
-
 });
 
 Route::controller(WebinarController::class)->group(function ($route) {
     Route::get('/Lista_Webinar', 'index')->name('webinar.index');
+    Route::get('/Webinar/{code}', 'webinar')->name('webinar.show');
     Route::get('/Generar_Constancia_Webinar', 'create')->name('webinar.create');
+    Route::post('/insertWebinar', 'store');
     Route::get('/pdfWebinar/{id}', 'show');
 });
 

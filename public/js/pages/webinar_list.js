@@ -1,46 +1,123 @@
 "use strict";
-!(function () {
-    let e = document.getElementById("uploadedAvatar");
-    const l = document.querySelector(".account-file-input");
-    if (e) {
-        const r = e.src;
-        l.onchange = () => {
-            l.files[0] && (e.src = window.URL.createObjectURL(l.files[0]));
-        };
-    }
-
-    let a = document.getElementById("uploadedAvatar2");
-    const b = document.querySelector(".account-file-input2");
-    if (a) {
-        const f = a.src;
-        b.onchange = () => {
-            b.files[0] && (a.src = window.URL.createObjectURL(b.files[0]));
-        };
-    }
-})(),
+let fv, offCanvasEl;
+document.addEventListener("DOMContentLoaded", function (e) {
+    console.log(course_id);
+}),
     $(function () {
-        let h,
-            a,
-            s,
-            csrfToken = $('meta[name="csrf-token"]').attr("content");
-        s = (
-            isDarkStyle
-                ? ((h = config.colors_dark.borderColor),
-                  (a = config.colors_dark.bodyBg),
-                  config.colors_dark)
-                : ((h = config.colors.borderColor),
-                  (a = config.colors.bodyBg),
-                  config.colors)
-        ).headingColor;
+        var l,
+            t,
+            a = $(".dt-students");
+
+        a.length &&
+            ((t = a.DataTable({
+                ajax: course_id + "/students_webinar",
+                columns: [
+                    { data: "id" },
+                    { data: "names" },
+                    { data: "email" },
+                    { data: "webinar" },
+                    { data: "" },
+                ],
+                columnDefs: [
+                    {
+                        targets: 0,
+                        visible: !1,
+                    },
+                    {
+                        targets: 0,
+                        render: function (e, t, a, s) {
+                            return `<div class="d-flex justify-content-start align-items-center user-name text-white"><div class="avatar-wrapper me-3"></div><div class="d-flex flex-column"><span class="text-heading fw-medium">${a.code}</span><small class="text-truncate">${e}</small></div></div>`;
+                        },
+                    },
+                    {
+                        targets: 2,
+                        className: "text-center",
+                        render: function (e, t, a, s) {
+                            if (e) {
+                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>`;
+                            } else {
+                                return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
+                            }
+                        },
+                    },
+                    {
+                        targets: 3,
+                        className: "text-center",
+                        render: function (e, t, a, s) {
+                            if (e) {
+                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>`;
+                            } else {
+                                return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
+                            }
+                        },
+                    },
+                    {
+                        targets: 4,
+                        className: "text-center",
+                        render: function (e, t, a, s) {
+                            if (e) {
+                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>`;
+                            } else {
+                                return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
+                            }
+                        },
+                    },
+                    {
+                        targets: 5,
+                        className: "text-center",
+                        render: function (e, t, a, s) {
+                            if (e) {
+                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>`;
+                            } else {
+                                return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
+                            }
+                        },
+                    },
+                    {
+                        targets: -1,
+                        title: "Acciones",
+                        orderable: !1,
+                        className: "text-center",
+                        render: function (e, t, a, s) {
+                            return `<button type="button" class="btn btn-icon btn-secondary"><span class="mdi mdi-email-arrow-right"></span></button>`;
+                        },
+                    },
+                ],
+                dom: '<"table-responsive"t><"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+                order: [[1, "asc"]],
+                paging: false,
+                info: false,
+                pageLength: -1,
+                language: {
+                    search: "",
+                    searchPlaceholder: "Buscar Alumno",
+                    sEmptyTable: "Ningún dato disponible en esta tabla",
+                },
+            })),
+            setTimeout(() => {
+                $(".dataTables_filter .form-control").removeClass(
+                    "form-control-sm"
+                ),
+                    $(".dataTables_length .form-select").removeClass(
+                        "form-select-sm"
+                    );
+            }, 300));
+
+        $("#referralLink").on("keyup", function () {
+            t.search(this.value).draw();
+        });
+
         var e,
-            o = $(".datatables_certificates");
+            o = $(".datatables_add");
         o.length &&
             ((e = o.DataTable({
                 columns: [
-                    { data: "" },
+                    { data: "code" },
+                    { data: "code" },
                     { data: "dni" },
                     { data: "names" },
                     { data: "course" },
+                    { data: "score" },
                     { data: "email" },
                     { data: " " },
                 ],
@@ -62,7 +139,7 @@
                         targets: 2,
                         render: function (a, t, x, s) {
                             return (
-                                '<a href="javascript:void(0);"><span>' +
+                                '<a href="app-ecommerce-order-details.html"><span>' +
                                 a +
                                 "</span></a>"
                             );
@@ -144,7 +221,7 @@
                 initComplete: function () {},
             })),
             $(".dataTables_length").addClass("mt-0 mt-md-3")),
-            $(".datatables_certificates tbody").on(
+            $(".datatables_add tbody").on(
                 "click",
                 ".delete-record",
                 function () {
@@ -152,17 +229,11 @@
                     table.row($(this).closest("tr")).remove().draw(); // Elimina la fila correspondiente
                 }
             );
-        setTimeout(() => {
-            $(".dataTables_filter .form-control").removeClass(
-                "form-control-sm"
-            ),
-                $(".dataTables_length .form-select").removeClass(
-                    "form-select-sm"
-                );
-        }, 300);
+
         $("#btnImport").on("click", function () {
             document.getElementById("excelFile").click();
         });
+
         document
             .getElementById("excelFile")
             .addEventListener("change", function (event) {
@@ -208,123 +279,4 @@
 
                 reader.readAsArrayBuffer(file);
             });
-
-        $("#referralLink").on("keyup", function () {
-            e.search(this.value).draw();
-        });
-
-        $(".btn-generate").on("click", function () {
-            blockUI();
-            const rows = e.rows().data().toArray();
-            let name = $("#title").val(),
-                csrfToken = $('meta[name="csrf-token"]').attr("content");
-
-            if (!name.trim()) {
-                $.unblockUI();
-                Toast.fire({
-                    icon: "error",
-                    title: "Debes ingresar un nombre para el webinar",
-                });
-                return;
-            }
-
-            if (rows.length === 0) {
-                $.unblockUI();
-                Toast.fire({
-                    icon: "error",
-                    title: "Debe existir al menos un registro en la tabla",
-                });
-                return;
-            }
-
-            let formData = new FormData();
-
-            formData.append("file1", $("#upload")[0].files[0]);
-            formData.append("name", name);
-            formData.append("date", date);
-            formData.append("rows", JSON.stringify(rows));
-
-            formData.append("_token", csrfToken);
-
-            $.ajax({
-                url: "insertWebinar",
-                method: "POST",
-                data: formData,
-                dataType: "json",
-                processData: false,
-                contentType: false,
-            })
-                .done(function (response) {
-                    console.log(response);
-
-                    Toast.fire({
-                        icon: response.icon,
-                        title: response.message,
-                    });
-
-                    Swal.fire({
-                        title: "<strong>Webinar Creado</strong>",
-                        icon: "success",
-                        html: "Puedes ir al curso para generar los PDFs y enviar correos",
-                        showCloseButton: true,
-                        showCancelButton: true,
-                        focusConfirm: false,
-                        confirmButtonText:
-                            '<i class="mdi mdi mdi-page-next me-2"></i> Ir al webinar',
-                        cancelButtonText:
-                            "<i class='mdi mdi mdi-plus-box me-2'></i> Seguir Aqui",
-                        customClass: {
-                            confirmButton:
-                                "btn btn-primary me-3 waves-effect waves-light",
-                            cancelButton:
-                                "btn btn-outline-warning waves-effect",
-                        },
-                        buttonsStyling: false,
-                        allowOutsideClick: false, // Evita que el modal se cierre al hacer clic fuera de él
-                        allowEscapeKey: false, // Evita que el modal se cierre al presionar la tecla Escape
-                        preConfirm: () => {
-                            window.location.href = "Webinar/" + response.course;
-                        },
-                    }).then((result) => {
-                        if (result.dismiss === Swal.DismissReason.cancel) {
-                            location.reload();
-                        }
-                    });
-                })
-                .fail(function (xhr, status, error) {
-                    Toast.fire({
-                        icon: error.icon,
-                        title: error.message,
-                    });
-                    console.error(xhr.responseText);
-                })
-                .always(function () {
-                    $.unblockUI();
-                });
-        });
-
-        function blockUI() {
-            $.blockUI({
-                message:
-                    '<div class="d-flex justify-content-center"><p class="mt-1">CARGANDO &nbsp; </p> <div class="sk-wave m-0"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div> </div>',
-                css: {
-                    backgroundColor: "transparent",
-                    color: "#fff",
-                    border: "0",
-                },
-                overlayCSS: { opacity: 0.5 },
-            });
-        }
-
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-            },
-        });
     });
