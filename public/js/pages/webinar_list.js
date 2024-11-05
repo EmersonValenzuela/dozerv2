@@ -10,25 +10,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         a.length &&
             ((t = a.DataTable({
-                ajax: course_id + "/students_webinar",
+                ajax: course_id + "/students",
                 columns: [
-                    { data: "id" },
                     { data: "names" },
                     { data: "email" },
-                    { data: "webinar" },
+                    { data: "w_p" },
                     { data: "" },
                 ],
                 columnDefs: [
-                    {
-                        targets: 0,
-                        visible: !1,
-                    },
-                    {
-                        targets: 0,
-                        render: function (e, t, a, s) {
-                            return `<div class="d-flex justify-content-start align-items-center user-name text-white"><div class="avatar-wrapper me-3"></div><div class="d-flex flex-column"><span class="text-heading fw-medium">${a.code}</span><small class="text-truncate">${e}</small></div></div>`;
-                        },
-                    },
                     {
                         targets: 2,
                         className: "text-center",
@@ -40,39 +29,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                             }
                         },
                     },
-                    {
-                        targets: 3,
-                        className: "text-center",
-                        render: function (e, t, a, s) {
-                            if (e) {
-                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>`;
-                            } else {
-                                return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
-                            }
-                        },
-                    },
-                    {
-                        targets: 4,
-                        className: "text-center",
-                        render: function (e, t, a, s) {
-                            if (e) {
-                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>`;
-                            } else {
-                                return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
-                            }
-                        },
-                    },
-                    {
-                        targets: 5,
-                        className: "text-center",
-                        render: function (e, t, a, s) {
-                            if (e) {
-                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>`;
-                            } else {
-                                return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
-                            }
-                        },
-                    },
+
                     {
                         targets: -1,
                         title: "Acciones",
@@ -108,16 +65,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
         });
 
         var e,
-            o = $(".datatables_add");
+            o = $(".datatables_certificates");
         o.length &&
             ((e = o.DataTable({
                 columns: [
-                    { data: "code" },
-                    { data: "code" },
+                    { data: "" },
                     { data: "dni" },
                     { data: "names" },
                     { data: "course" },
-                    { data: "score" },
                     { data: "email" },
                     { data: " " },
                 ],
@@ -139,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         targets: 2,
                         render: function (a, t, x, s) {
                             return (
-                                '<a href="app-ecommerce-order-details.html"><span>' +
+                                '<a href="javascript:void(0);"><span>' +
                                 a +
                                 "</span></a>"
                             );
@@ -221,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 initComplete: function () {},
             })),
             $(".dataTables_length").addClass("mt-0 mt-md-3")),
-            $(".datatables_add tbody").on(
+            $(".datatables_certificates tbody").on(
                 "click",
                 ".delete-record",
                 function () {

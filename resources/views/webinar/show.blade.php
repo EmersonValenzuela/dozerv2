@@ -44,13 +44,10 @@
                     <table class="dt-students table">
                         <thead class="text-white">
                             <tr>
-                                <th class="text-white fw-bold">
-                                    
-                                </th>
                                 <th class="text-white fw-bold">Estudiante</th>
                                 <th class="text-white fw-bold">Correo</th>
                                 <th class="text-white fw-bold">Webinar</th>
-                                <th class="text-white fw-bold">Acciones</th>
+                                <th class="text-white fw-bold"></th>
                             </tr>
 
                         </thead>
@@ -89,12 +86,8 @@
                         </div>
                     </div>
                     <div class="d-flex">
-                        <div class="p-2"><label for="smallInput" class="form-label ">Nota:</label>
-                            <input id="smallInput" class="form-control form-control-sm bg-input" type="text"
-                                placeholder="">
-                        </div>
-                        <div class="p-2 flex-grow-1"><label for="smallInput" class="form-label ">Nombre de la
-                                Capacitación:</label>
+
+                        <div class="p-2 flex-grow-1"><label for="smallInput" class="form-label ">Nombre del webinar:</label>
                             <input id="smallInput" class="form-control form-control-sm bg-input" type="text"
                                 placeholder="">
                         </div>
@@ -139,15 +132,13 @@
                     <div class="d-flex flex-row mb-3 justify-content-between">
                         <div class="px-2 w-100">
                             <div class="card-datatable table-responsive">
-                                <table class="datatables_add table">
+                                <table class="datatables_certificates table">
                                     <thead class="text-white">
                                         <tr>
                                             <th></th>
-                                            <th class="text-white fw-bold">Código</th>
                                             <th class="text-nowrap text-white fw-bold">DNI-CI</th>
                                             <th class="text-white fw-bold">Apellidos y Nombres</th>
-                                            <th class="text-nowrap text-white fw-bold">Capacitacion</th>
-                                            <th class="text-white fw-bold">Nota </th>
+                                            <th class="text-nowrap text-white fw-bold">Webinar</th>
                                             <th class="text-white fw-bold">Correo Electronico </th>
                                             <th class="text-white fw-bold">Acciones</th>
                                         </tr>
@@ -160,7 +151,7 @@
             </div>
         </div>
     </div>
-@endsection()   
+@endsection()
 
 @section('styles')
 @endsection()

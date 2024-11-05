@@ -83,4 +83,21 @@ class Students extends Model
         }
         return $data;
     }
+
+
+    public static function getStudentByWebinar($webinarId)
+    {
+        $students = self::where('course_id', $webinarId)
+            ->get();
+
+        $data = [];
+        foreach ($students as $student) {
+            $data[] = [
+                'names' => $student->full_name,
+                'email' => $student->email,
+                'w_p' => $student->w_p,
+            ];
+        }
+        return $data;
+    }
 }
