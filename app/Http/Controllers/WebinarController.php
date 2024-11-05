@@ -52,13 +52,6 @@ class WebinarController extends Controller
         return view('webinar.show', compact('course'));
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $directory = 'uploads/webinar'; // Define el directorio donde se guardarán los archivos.
@@ -162,12 +155,6 @@ class WebinarController extends Controller
         $pdf->Output(public_path('pdfs/webinar/' . $pdfFileName), 'F');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $img1 = "img/examples/webinar.png";
@@ -217,6 +204,51 @@ class WebinarController extends Controller
 
         // Guardar el archivo PDF en una carpeta específica dentro del proyecto
         $pdf->Output();
+    }
+
+    public function insertStudent(Request $request)
+    {
+        $student = new Students();
+        $student->course_id = $request->course_id;
+        $student->full_name = $request->names;
+        $student->document_number = $request->document;
+        $student->email = $request->email;
+        $student->course_or_event = $request->webinar;
+        $student->w_p = 1;
+        $student->save();
+
+        $id = $student->id_student;
+
+        $prefix = floor(($id - 1) / 1000) + 2;
+        $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
+        $student->code = $code;
+        $student->save();
+
+        $this->generatePdf($request->names, $request->webinar, $request->date_webinar, Storage::url($request->imgUrl), $code);
+        return response()->json([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Constancias generadas',
+        ]);
+    }
+
+    public function updateStudent(Request $request)
+    {
+        $student = students::find($request->student_id);
+        $student->full_name = $request->names;
+        $student->document_number = $request->document;
+        $student->email = $request->email;
+        $student->course_or_event = $request->webinar;
+        $student->w_p = 1;
+        $student->save();
+
+
+        $this->generatePdf($request->names, $request->webinar, $request->date_webinar, Storage::url($request->imgUrl), $request->code);
+        return response()->json([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Constancias generadas',
+        ]);
     }
 
 

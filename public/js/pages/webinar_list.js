@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     $(function () {
         var l,
             t,
-            a = $(".dt-students");
+            a = $(".dt-students"),
+            csrf_token = $('meta[name="csrf-token"]').attr("content");
 
         a.length &&
             ((t = a.DataTable({
@@ -41,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         render: function (e, t, a, s) {
                             return `<div class ="demo-inline-spacing">
                             <button type="button" class="btn btn-icon btn-outline-info waves-effect"><span class="mdi mdi-email-arrow-right"></span></button>
-                            <button type="button" class="btn btn-icon btn-outline-success waves-effect"><span class="mdi mdi-note-edit-outline"></span></button>
+                            <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>
                             </button>
                              <button type="button" class="btn btn-icon btn-outline-danger waves-effect">
                             <span class="tf-icons mdi mdi-trash-can-outline"></span>
@@ -72,6 +73,109 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         $("#referralLink").on("keyup", function () {
             t.search(this.value).draw();
+        });
+
+        t.on("click", ".datatable_edit", function () {
+            let row = $(this).closest("tr");
+            let rowData = $(this).closest("table").DataTable().row(row).data();
+
+            $("#modal_title").text("Modificar estudiante");
+
+            $("#student_id").val(rowData.id);
+            $("#names").val(rowData.names);
+            $("#document").val(rowData.document);
+            $("#email").val(rowData.email);
+            $("#webinar").val(rowData.course);
+            $("#code").val(rowData.code);
+
+            $("#modal_student").modal("show");
+        });
+
+        $(".modal_add").on("click", function () {
+            var table = $(".datatables_certificates").DataTable(),
+                row = table.row(this).data();
+            $("#modal_title").text("Agregar estudiante");
+            $("#modal_student").modal("show");
+        });
+
+        const f = document.getElementById("form_student"),
+            urlMap = {
+                "Agregar estudiante": "insertStudentWebinar",
+                "Modificar estudiante": "updateStudentWebinar",
+            };
+
+        f.onsubmit = function (event) {
+            event.preventDefault(); // Evita el envío automático del formulario
+
+            // Seleccionar los campos requeridos
+            const requiredFields = ["names", "document", "email", "webinar"];
+            let formIsValid = true;
+            let errorMessage = "";
+
+            // Iterar sobre cada campo y verificar si está vacío
+            requiredFields.forEach((fieldId) => {
+                const field = document.getElementById(fieldId);
+                if (field && field.value.trim() === "") {
+                    formIsValid = false;
+                    errorMessage =
+                        "Por favor, complete todos los campos requeridos.";
+                    field.classList.add("is-invalid"); // Agrega una clase para resaltar el campo vacío
+                } else if (field) {
+                    field.classList.remove("is-invalid"); // Remueve la clase si el campo está lleno
+                }
+            });
+
+            if (!formIsValid) {
+                // Mostrar mensaje de error general si algún campo está vacío
+                alert(errorMessage);
+                return;
+            }
+
+            // Si el formulario es válido, continuar con el envío
+            const action = $("#modal_title").text();
+            const url = urlMap[action];
+
+            if (url) {
+                console.log("URL para enviar:", url);
+                sendDataServe(url);
+            }
+        };
+
+        function sendDataServe(url) {
+            blockUI();
+
+            let formData = new FormData(f);
+            formData.append("_token", csrf_token);
+
+            fetch(url, {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Error en la solicitud");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    t.ajax.reload();
+                    Toast.fire({
+                        icon: data.icon,
+                        title: data.message,
+                    });
+                    resetForm();
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                })
+                .finally(() => {
+                    $.unblockUI();
+                });
+        }
+
+        $("#modal_student").on("hidden.bs.modal", function () {
+            f.reset();
+            fv.resetForm(true);
         });
 
         var e,
@@ -244,4 +348,28 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
                 reader.readAsArrayBuffer(file);
             });
+
+        function resetForm() {
+            f.reset();
+        }
+
+        function blockUI() {
+            $.blockUI({
+                message:
+                    '<div class="sk-wave mx-auto"><div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div> <div class="sk-rect sk-wave-rect"></div></div>',
+                css: { backgroundColor: "transparent", border: "0" },
+                overlayCSS: { opacity: 0.5 },
+            });
+        }
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            },
+        });
     });

@@ -17,7 +17,7 @@
 
 
                 <div class="ms-auto d-flex  mx-5 align-self-start align-self-center  style-btntwo">
-                    <button type="button" class="btn color-btntwo " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn color-btntwo modal_add">
                         Agregar Estudiantes
                     </button>
                 </div>
@@ -58,106 +58,119 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal_student" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h1 class="modal-title fs-5 text-white " id="exampleModalLabel">NUEVO ESTUDIANTE</h1>
+                    <h1 class="modal-title fs-5 text-white " id="modal_title">NUEVO ESTUDIANTE</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="d-flex flex-row mb-3 justify-content-between">
-                        <div class="px-2 w-100">
-                            <label for="smallInput" class="form-label ">Nombres y apellidos:</label>
-                            <input id="smallInput" class="form-control form-control-sm bg-input" type="text"
-                                placeholder="">
+                    <form id="form_student">
+                        <input type="hidden" name="course_id" id="course_id" value="{{ $course->id_course }}">
+                        <input type="hidden" name="imgUrl" id="imgUrl" value="{{ $course->image_one }}">
+                        <input type="hidden" name="student_id" id="student_id" value="">
+                        <input type="hidden" name="code" id="code" value="">
+                        <div class="d-flex flex-row mb-3 justify-content-between">
+                            <div class="px-2 w-100">
+                                <label for="smallInput" class="form-label ">Nombres y apellidos:</label>
+                                <input id="names" name="names" class="form-control form-control-sm bg-input"
+                                    type="text" placeholder="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="d-flex flex-row mb-3 justify-content-between">
-                        <div class="px-2 w-50">
-                            <label for="smallInput" class="form-label ">DNI:</label>
-                            <input id="smallInput" class="form-control form-control-sm bg-input" type="text"
-                                placeholder="">
+                        <div class="d-flex flex-row mb-3 justify-content-between">
+                            <div class="px-2 w-50">
+                                <label for="smallInput" class="form-label ">DNI:</label>
+                                <input id="document" name="document" class="form-control form-control-sm bg-input"
+                                    type="text" placeholder="">
+                            </div>
+                            <div class="px-2 w-50">
+                                <label for="smallInput" class="form-label ">Correo Electronico:</label>
+                                <input id="email" name="email" class="form-control form-control-sm bg-input"
+                                    type="text" placeholder="">
+                            </div>
                         </div>
-                        <div class="px-2 w-50">
-                            <label for="smallInput" class="form-label ">Correo Electronico:</label>
-                            <input id="smallInput" class="form-control form-control-sm bg-input" type="text"
-                                placeholder="">
+                        <div class="d-flex">
+                            <div class="p-2 flex-grow-1"><label for="smallInput" class="form-label ">Nombre del
+                                    webinar:</label>
+                                <input id="webinar" name="webinar" class="form-control form-control-sm bg-input"
+                                    type="text" placeholder="">
+                            </div>
                         </div>
-                    </div>
-                    <div class="d-flex">
-
-                        <div class="p-2 flex-grow-1"><label for="smallInput" class="form-label ">Nombre del webinar:</label>
-                            <input id="smallInput" class="form-control form-control-sm bg-input" type="text"
-                                placeholder="">
+                        <div class="d-flex">
+                            <div class="p-2 flex-grow-1">
+                                <label for="smallInput" class="form-label ">Fecha:</label>
+                                <input id="date_webinar" name="date_webinar"
+                                    class="form-control form-control-sm bg-input" type="text" placeholder="">
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar " data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-guardar ">Guardar</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-cancelar " data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-guardar ">Guardar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="modal fade" id="exampleModal2" tabindex="-2" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-simple">
-            <div class="modal-content">
-                <div class="modal-header text-center">
-                    <h1 class="modal-title fs-5 text-white fw-bold " id="exampleModalLabel1">CARGA MASIVA</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="d-flex flex-row mb-3 justify-content-between">
-                        <div class="px-2 w-50 d-flex align-items-center">
-                            <div class="row g-2 align-items-center ">
-                                <div class="input-wrapper  me-3">
-                                    <input type="search" id="referralLink" name="referralLink" class=" bg-input "
-                                        placeholder=" Buscar por Nombre o Código">
-                                    <span class="mdi mdi-magnify input-icon"></span>
+        <div class="modal fade" id="exampleModal2" tabindex="-2" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-simple">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h1 class="modal-title fs-5 text-white fw-bold " id="exampleModalLabel1">CARGA MASIVA</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-row mb-3 justify-content-between">
+                            <div class="px-2 w-50 d-flex align-items-center">
+                                <div class="row g-2 align-items-center ">
+                                    <div class="input-wrapper  me-3">
+                                        <input type="search" id="referralLink" name="referralLink" class=" bg-input "
+                                            placeholder=" Buscar por Nombre o Código">
+                                        <span class="mdi mdi-magnify input-icon"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 w-50 d-flex flex-row justify-content-end">
+                                <button type="button" class=" btn-import waves-effect waves-light "
+                                    id="btnImport">Importar</button>
+                                <input type="file" id="excelFile" style="display: none;" accept=".xlsx, .xls">
+                                <button type="button" class="btn btn-guardar ">GUARDAR</button>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row mb-3 justify-content-between">
+                            <div class="px-2 w-100">
+                                <div class="card-datatable table-responsive">
+                                    <table class="datatables_certificates table">
+                                        <thead class="text-white">
+                                            <tr>
+                                                <th></th>
+                                                <th class="text-nowrap text-white fw-bold">DNI-CI</th>
+                                                <th class="text-white fw-bold">Apellidos y Nombres</th>
+                                                <th class="text-nowrap text-white fw-bold">Webinar</th>
+                                                <th class="text-white fw-bold">Correo Electronico </th>
+                                                <th class="text-white fw-bold">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-                        <div class="px-2 w-50 d-flex flex-row justify-content-end">
-                            <button type="button" class=" btn-import waves-effect waves-light "
-                                id="btnImport">Importar</button>
-                            <input type="file" id="excelFile" style="display: none;" accept=".xlsx, .xls">
-                            <button type="button" class="btn btn-guardar ">GUARDAR</button>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-row mb-3 justify-content-between">
-                        <div class="px-2 w-100">
-                            <div class="card-datatable table-responsive">
-                                <table class="datatables_certificates table">
-                                    <thead class="text-white">
-                                        <tr>
-                                            <th></th>
-                                            <th class="text-nowrap text-white fw-bold">DNI-CI</th>
-                                            <th class="text-white fw-bold">Apellidos y Nombres</th>
-                                            <th class="text-nowrap text-white fw-bold">Webinar</th>
-                                            <th class="text-white fw-bold">Correo Electronico </th>
-                                            <th class="text-white fw-bold">Acciones</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection()
+    @endsection()
 
-@section('styles')
-@endsection()
+    @section('styles')
+    @endsection()
 
-@section('scripts')
-    <script>
-        const course_id = {{ $course->id_course }};
-        const basePdfUrl = "{{ asset('pdfs/webinar/') }}";
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-    <script src="{{ asset('js/pages/webinar_list.js') }}"></script>
-@endsection
+    @section('scripts')
+        <script>
+            const course_id = {{ $course->id_course }};
+            const basePdfUrl = "{{ asset('pdfs/webinar/') }}";
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+        <script src="{{ asset('js/pages/webinar_list.js') }}"></script>
+    @endsection
