@@ -93,6 +93,7 @@ class Students extends Model
         $data = [];
         foreach ($students as $student) {
             $data[] = [
+                'code' => $student->code,
                 'names' => $student->full_name,
                 'email' => $student->email,
                 'w_p' => $student->w_p,

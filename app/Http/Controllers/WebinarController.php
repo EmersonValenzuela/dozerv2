@@ -220,8 +220,9 @@ class WebinarController extends Controller
     }
 
 
-    public function students($data){
-        
+    public function students($data)
+    {
+
         $students = Students::getStudentByWebinar($data);
 
         return response()->json(['data' => $students]);

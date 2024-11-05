@@ -112,20 +112,17 @@
                     <div class="d-flex flex-row mb-3 justify-content-between">
                         <div class="px-2 w-50 d-flex align-items-center">
                             <div class="row g-2 align-items-center ">
-
                                 <div class="input-wrapper  me-3">
                                     <input type="search" id="referralLink" name="referralLink" class=" bg-input "
                                         placeholder=" Buscar por Nombre o Código">
                                     <span class="mdi mdi-magnify input-icon"></span>
                                 </div>
-
                             </div>
                         </div>
                         <div class="px-2 w-50 d-flex flex-row justify-content-end">
                             <button type="button" class=" btn-import waves-effect waves-light "
                                 id="btnImport">Importar</button>
                             <input type="file" id="excelFile" style="display: none;" accept=".xlsx, .xls">
-
                             <button type="button" class="btn btn-guardar ">GUARDAR</button>
                         </div>
                     </div>
@@ -159,6 +156,7 @@
 @section('scripts')
     <script>
         const course_id = {{ $course->id_course }};
+        const basePdfUrl = "{{ asset('pdfs/webinar/') }}";
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="{{ asset('js/pages/webinar_list.js') }}"></script>

@@ -23,20 +23,30 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         className: "text-center",
                         render: function (e, t, a, s) {
                             if (e) {
-                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>`;
+                                return `<a href="${basePdfUrl}/${a.code}.pdf" download class= "btn btn-icon btn-danger">
+                                            <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
+                                        </a>`;
                             } else {
-                                return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
+                                return `<button type="button" class="btn btn-icon btn-info" onclick="generarPDF()">
+                                            <span class="mdi mdi-file-sign text-white size-icon"></span>
+                                        </button>`;
                             }
                         },
                     },
-
                     {
                         targets: -1,
                         title: "Acciones",
                         orderable: !1,
                         className: "text-center",
                         render: function (e, t, a, s) {
-                            return `<button type="button" class="btn btn-icon btn-secondary"><span class="mdi mdi-email-arrow-right"></span></button>`;
+                            return `<div class ="demo-inline-spacing">
+                            <button type="button" class="btn btn-icon btn-outline-info waves-effect"><span class="mdi mdi-email-arrow-right"></span></button>
+                            <button type="button" class="btn btn-icon btn-outline-success waves-effect"><span class="mdi mdi-note-edit-outline"></span></button>
+                            </button>
+                             <button type="button" class="btn btn-icon btn-outline-danger waves-effect">
+                            <span class="tf-icons mdi mdi-trash-can-outline"></span>
+                            </button>
+                            </div>`;
                         },
                     },
                 ],
