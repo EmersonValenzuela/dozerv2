@@ -122,12 +122,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="p-2 flex-column d-flex justify-content-center">
+
+                        <label for="date" class="form-label text-white ">Fecha</label>
+                        <input id="date" class="form-control form-control-sm bg-input w-420" type="text"
+                            placeholder="">
+                    </div>
                     <div class="d-flex flex-row mb-3 justify-content-between">
                         <div class="px-2 w-50 d-flex align-items-center">
                             <div class="row g-2 align-items-center ">
                                 <div class="input-wrapper  me-3">
                                     <input type="search" id="referralImport" name="referralImport" class="bg-input "
-                                        placeholder=" Buscar por Nombre o Código" >
+                                        placeholder=" Buscar por Nombre o Código">
                                     <span class="mdi mdi-magnify input-icon"></span>
                                 </div>
                             </div>
@@ -136,7 +142,7 @@
                             <button type="button" class=" btn-import waves-effect waves-light "
                                 id="btnImport">Importar</button>
                             <input type="file" id="excelFile" style="display: none;" accept=".xlsx, .xls">
-                            <button type="button" class="btn btn-guardar ">GUARDAR</button>
+                            <button type="button" class="btn btn-guardar btn-generate">GUARDAR</button>
                         </div>
                     </div>
                     <div class="d-flex flex-row mb-3 justify-content-between">

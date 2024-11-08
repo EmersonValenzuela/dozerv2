@@ -63,6 +63,7 @@ Route::controller(WebinarController::class)->group(function ($route) {
     Route::get('/Webinar/{data}/students', 'students');
     Route::post('/Webinar/insertStudentWebinar', 'insertStudent');
     Route::post('/Webinar/updateStudentWebinar', 'updateStudent');
+    Route::post('/Webinar/importwebinar', 'import');
 });
 
 Route::controller(ProgramController::class)->group(function ($route) {

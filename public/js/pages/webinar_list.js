@@ -353,6 +353,69 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 reader.readAsArrayBuffer(file);
             });
 
+        $(".btn-generate").on("click", function () {
+            blockUI();
+
+            console.log(course_id);
+
+            const rows = e.rows().data().toArray();
+            let csrfToken = $('meta[name="csrf-token"]').attr("content"),
+                date = $("#date").val();
+
+            if (rows.length === 0) {
+                $.unblockUI();
+                Toast.fire({
+                    icon: "error",
+                    title: "Debe existir al menos un registro en la tabla",
+                });
+                return;
+            }
+
+            if (date.length === 0) {
+                $.unblockUI();
+                Toast.fire({
+                    icon: "error",
+                    title: "Debe ingresar una fecha",
+                });
+                return;
+            }
+
+            let formData = new FormData();
+
+            formData.append("id", course_id);
+            formData.append("date", date);
+            formData.append("rows", JSON.stringify(rows));
+
+            formData.append("_token", csrfToken);
+
+            $.ajax({
+                url: "/Webinar/importwebinar", // Asegúrate de que coincida exactamente con la URL de la ruta
+                method: "POST",
+                data: formData,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+            })
+                .done(function (response) {
+                    Toast.fire({
+                        icon: response.icon,
+                        title: response.message,
+                    });
+                    t.ajax.reload();
+                })
+                .fail(function (xhr, status, error) {
+                    Toast.fire({
+                        icon: error.icon,
+                        title: error.message,
+                    });
+
+                    console.error(xhr.responseText);
+                })
+                .always(function () {
+                    $.unblockUI();
+                });
+        });
+
         function resetForm() {
             f.reset();
         }

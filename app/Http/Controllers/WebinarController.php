@@ -110,6 +110,46 @@ class WebinarController extends Controller
         ]);
     }
 
+    public function import(Request $request)
+    {
+
+        $idCourse = $request->input('id');
+        $course = Course::find($idCourse);
+
+        $file = $course->image_one;
+        $imgUrl = Storage::url($file);
+
+        $studentsData = json_decode($request->input('rows'), true);
+
+        foreach ($studentsData as $student) {
+            $row = new Students([
+                'course_id' => $idCourse,
+                'course_or_event' => $student['course'],
+                'full_name' => $student['names'],
+                'document_number' => $student['dni'],
+                'email' => $student['email'],
+                'status' => 'active',
+            ]);
+
+
+            $row->save();
+            $id = $row->id_student;
+
+            $prefix = floor(($id - 1) / 1000) + 2;
+            $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
+            $row->code = $code;
+            $row->w_p = 1;
+            $row->save();
+
+            $this->generatePdf($row->full_name, $row->course_or_event, $request->input('date'), $imgUrl, $code);
+        }
+        return response()->json([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Alumnos ingresados',
+        ]);
+    }
+
     public function generatePdf($name, $course, $date, $img1, $code)
     {
 
