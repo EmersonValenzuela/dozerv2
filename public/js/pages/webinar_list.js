@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                             return `<div class ="demo-inline-spacing">
                             <button type="button" class="btn btn-icon btn-outline-info waves-effect"><span class="mdi mdi-email-arrow-right"></span></button>
                             <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>
-                            </button>
+
                              <button type="button" class="btn btn-icon btn-outline-danger waves-effect">
                             <span class="tf-icons mdi mdi-trash-can-outline"></span>
                             </button>

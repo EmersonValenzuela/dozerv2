@@ -107,6 +107,7 @@ class WebinarController extends Controller
             'success' => true,
             'icon' => 'success',
             'message' => 'Constancias generadas',
+            'course' => $codeCourse
         ]);
     }
 

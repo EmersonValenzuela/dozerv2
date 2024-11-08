@@ -26,7 +26,7 @@
                 var e = $(this);
                 select2Focus(e),
                     e.wrap('<div class="position-relative"></div>').select2({
-                        placeholder: "Select value",
+                        placeholder: "Seleccionar",
                         dropdownParent: e.parent(),
                     });
             });

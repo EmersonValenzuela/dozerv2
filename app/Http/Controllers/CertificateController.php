@@ -97,7 +97,7 @@ class CertificateController extends Controller
             $student->save();
         }
 
-        return response()->json(['success' => true, 'icon' => 'success', 'message' => 'Curso Generado', 'course' => $courseId]);
+        return response()->json(['success' => true, 'icon' => 'success', 'message' => 'Curso Generado', 'course' => $codeCourse]);
     }
 
     /**

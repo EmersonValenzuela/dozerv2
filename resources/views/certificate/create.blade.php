@@ -49,7 +49,7 @@
                 <div class="p-2 ">
                     <div class="mb-3 px-2">
                         <label for="typeCertificate" class="form-label text-white">Tipo de Certificado</label>
-                        <select id="typeCertificate" class="select2 form-select">
+                        <select id="typeCertificate" class="select2 form-select" aria-placeholder="Seleccionar certificado">
                             <option>Seleccionar</option>
                             <option value="1">DOZER</option>
                             <option value="2">CIP</option>
@@ -62,7 +62,7 @@
                 <div class="p-2 ">
                     <div class="mb-3 px-2">
                         <label for="program" class="form-label text-white">Programa</label>
-                        <select id="program" class="select2 form-select">
+                        <select id="program" class="select2 form-select" aria-placeholder="Seleccionar programa">
                         </select>
                     </div>
 
