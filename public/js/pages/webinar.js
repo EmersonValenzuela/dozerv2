@@ -217,7 +217,8 @@
             blockUI();
             const rows = e.rows().data().toArray();
             let name = $("#title").val(),
-                csrfToken = $('meta[name="csrf-token"]').attr("content");
+                csrfToken = $('meta[name="csrf-token"]').attr("content"),
+                date = $("#date").val();
 
             if (!name.trim()) {
                 $.unblockUI();
@@ -233,6 +234,15 @@
                 Toast.fire({
                     icon: "error",
                     title: "Debe existir al menos un registro en la tabla",
+                });
+                return;
+            }
+
+            if (date.length === 0) {
+                $.unblockUI();
+                Toast.fire({
+                    icon: "error",
+                    title: "Debe ingresar una fecha",
                 });
                 return;
             }

@@ -303,6 +303,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
             document.getElementById("excelFile").click();
         });
 
+        $("#referralImport").on("keyup", function () {
+            e.search(this.value).draw();
+        });
+
         document
             .getElementById("excelFile")
             .addEventListener("change", function (event) {

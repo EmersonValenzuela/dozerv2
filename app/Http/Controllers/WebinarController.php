@@ -101,7 +101,7 @@ class WebinarController extends Controller
             $student->w_p = 1;
             $student->save();
 
-            $this->generatePdf($student['names'], $student['course'], $request->input('date'), $imgUrl, $code);
+            $this->generatePdf($student->full_name, $student->course_or_event, $request->input('date'), $imgUrl, $code);
         }
         return response()->json([
             'success' => true,
@@ -228,7 +228,7 @@ class WebinarController extends Controller
         return response()->json([
             'success' => true,
             'icon' => 'success',
-            'message' => 'Constancias generadas',
+            'message' => 'Alumno creado',
         ]);
     }
 
@@ -247,7 +247,7 @@ class WebinarController extends Controller
         return response()->json([
             'success' => true,
             'icon' => 'success',
-            'message' => 'Constancias generadas',
+            'message' => 'Datos actualizados',
         ]);
     }
 
