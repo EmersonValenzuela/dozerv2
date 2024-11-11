@@ -147,7 +147,7 @@ class RecognitionController extends Controller
 
         $pdf->SetFont('Oswald-Regular', '', 12);
         $pdf->SetTextColor(127, 128, 128); // color #7f8080
-        $pdf->SetXY(211, 178.3);
+        $pdf->SetXY(82, 181.8);
         $pdf->Cell(1, 5, $code, 0, 1, 'L');
 
 
@@ -229,22 +229,32 @@ class RecognitionController extends Controller
 
         $pdf->SetFont('Oswald-Regular', '', 12);
         $pdf->SetTextColor(127, 128, 128); // color #7f8080
-        $pdf->SetXY(211, 178.3);
+        $pdf->SetXY(82, 181.8);
         $pdf->Cell(1, 5, $code, 0, 1, 'L');
 
         // Guardar el archivo PDF en una carpeta específica dentro del proyecto
         $pdf->Output();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function updateStudent(Request $request)
     {
-        //
+        $student = students::find($request->student_id);
+        $student->full_name = $request->names;
+        $student->document_number = $request->document;
+        $student->email = $request->email;
+        $student->score = $request->score;
+        $student->course_or_event = $request->course_name;
+        $student->r_e = 1;
+        $student->save();
+
+
+        $this->generatePdf($request->names, $request->course_name, $request->course_date, $request->imgUrl, $request->code, $request->score);
+
+        return response()->json([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Datos actualizados',
+        ]);
     }
 
     /**

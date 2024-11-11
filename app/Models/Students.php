@@ -75,6 +75,7 @@ class Students extends Model
                 'document' => $student->document_number,
                 'email' => $student->email,
                 'score' => $student->score,
+                'course' => $student->course_or_event,
                 'cm' => $student->c_m,
                 'cp' => $student->c_p,
                 'r_e' => $student->r_e,

@@ -211,15 +211,25 @@ class ConstancyController extends Controller
         $pdf->Output();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function updateStudent(Request $request)
     {
-        //
+        $student = students::find($request->student_id);
+        $student->full_name = $request->names;
+        $student->document_number = $request->document;
+        $student->email = $request->email;
+        $student->score = $request->score;
+        $student->course_or_event = $request->course_name;
+        $student->c_p = 1;
+        $student->save();
+
+
+        $this->generatePdf($request->names, $request->course_name, $request->course_date, $request->imgUrl, $request->code);
+
+        return response()->json([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Datos actualizados',
+        ]);
     }
 
     /**

@@ -39,6 +39,7 @@ Route::controller(EnrollmentController::class)->group(function ($route) {
     Route::post('/scopeStudent', 'searchStudents');
     Route::post('/generateEnrollments', 'store');
     Route::get('/pdfEnrollment/{id}', 'show');
+    Route::post('cmStudent', 'updateStudent');
 });
 
 Route::controller(ConstancyController::class)->group(function ($route) {
@@ -46,12 +47,14 @@ Route::controller(ConstancyController::class)->group(function ($route) {
     Route::post('/scopeStudentConstancy', 'searchStudents');
     Route::get('/pdfConstancy/{id}', 'show');
     Route::post('/generateConstancy', 'store');
+    Route::post('cpStudent', 'updateStudent');
 });
 
 Route::controller(RecognitionController::class)->group(function ($route) {
     Route::get('/Generar_Reconocimiento', 'create')->name('recognition.create');
     Route::get('/pdfRecognition/{id}', 'show');
     Route::post('/generateRecognition', 'store');
+    Route::post('reStudent', 'updateStudent');
 });
 
 Route::controller(WebinarController::class)->group(function ($route) {

@@ -74,6 +74,9 @@
                     <div class="modal-body">
                         <p class="pt-1" id="modal_subtitle"></p>
                         <div class="d-flex flex-row mb-3 justify-content-between">
+                            <input type="hidden" id="code" name="code">
+                            <input type="hidden" name="imgUrl" id="imgUrl">
+                            <input type="hidden" name="imgUrl2" id="imgUrl2">
                             <input type="hidden" id="certificate" name="certificate">
                             <input type="hidden" id="course_id" name="course_id">
                             <input type="hidden" id="student_id" name="student_id">
@@ -186,6 +189,16 @@
         const constancyUrl = "{{ asset('pdfs/constancy/') }}";
         const recognitionUrl = "{{ asset('pdfs/recognition/') }}";
         const certificateUrl = "{{ asset('pdfs/certificates/') }}";
+
+        //images background 
+        const img1 = "{{ $course->image_one }}";
+        const img2 = "{{ $course->image_two }}";
+        const img1cm = "{{ $course->image_cm }}";
+        const imgcp = "{{ $course->image_cp }}";
+        const imgre = "{{ $course->image_re }}";
+
+
+        const baseUrl = "{{ url('/') }}";
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="{{ asset('js/pages/course.js') }}"></script>
