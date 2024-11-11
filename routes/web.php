@@ -37,6 +37,8 @@ Route::controller(CertificateController::class)->group(function ($route) {
     Route::post('addStudent', 'insertStudent');
     Route::post('/scopeStudentCertificate', 'searchStudents');
     Route::post('/generateCertificates', 'generateCertificates');
+    Route::post('mStudent', 'updateStudent');
+    Route::post('/Certificate/import', 'import');
 });
 
 Route::controller(EnrollmentController::class)->group(function ($route) {

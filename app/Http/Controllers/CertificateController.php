@@ -311,19 +311,67 @@ class CertificateController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function updateStudent(Request $request)
     {
-        //
+        $student = students::find($request->student_id);
+        $student->full_name = $request->names;
+        $student->document_number = $request->document;
+        $student->email = $request->email;
+        $student->score = $request->score;
+        $student->course_or_event = $request->course_name;
+        $student->certificate = 1;
+        $student->save();
+
+        $this->generatePdf(Storage::url($request->imgUrl), Storage::url($request->imgUrl2), $student);
+
+        return response()->json([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Datos actualizados',
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function import(Request $request)
     {
-        //
+        $idCourse = $request->input('id');
+        $studentsData = json_decode($request->input('rows'), true);
+
+        foreach ($studentsData as $student) {
+            // Check if a student with the same DNI and course ID already exists
+            $existingStudent = Students::where('document_number', $student['dni'])
+                ->where('course_id', $idCourse)
+                ->first();
+
+            if ($existingStudent) {
+                // Skip this student if already exists
+                continue;
+            }
+
+            // Create a new student record if it doesn't exist
+            $row = new Students([
+                'course_id' => $idCourse,
+                'course_or_event' => $student['course'],
+                'full_name' => $student['names'],
+                'document_number' => $student['dni'],
+                'email' => $student['email'],
+                'status' => 'active',
+            ]);
+
+            $row->save();
+            $id = $row->id_student;
+
+            // Generate the code
+            $prefix = floor(($id - 1) / 1000) + 2;
+            $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
+            $row->code = $code;
+            $row->w_p = 1;
+            $row->save();
+        }
+
+        return response()->json([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Alumnos ingresados',
+        ]);
     }
 }

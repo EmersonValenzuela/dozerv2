@@ -70,7 +70,9 @@ $(function () {
                     className: "text-center",
                     render: function (e, t, a, s) {
                         if (e) {
-                            return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>  
+                            return `<a href="${certificateUrl}/${a.code}.pdf" download class= "btn btn-icon btn-danger">
+                                            <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
+                                        </a> 
                                 <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="m" data-name="Certificado de Matrícula"><span class="mdi mdi-note-edit-outline"></span></button>
                                 `;
                         } else {
@@ -117,7 +119,6 @@ $(function () {
         $("#modal_student").modal("show");
         $("#certificate").val("add");
         $("#course_id").val(course_id);
-
     });
 
     const images = {
@@ -419,6 +420,57 @@ $(function () {
             reader.readAsArrayBuffer(file);
         });
 
+    $(".btn-generate").on("click", function () {
+        blockUI();
+
+        console.log(course_id);
+
+        const rows = e.rows().data().toArray();
+        let csrfToken = $('meta[name="csrf-token"]').attr("content");
+
+        if (rows.length === 0) {
+            $.unblockUI();
+            Toast.fire({
+                icon: "error",
+                title: "Debe existir al menos un registro en la tabla",
+            });
+            return;
+        }
+
+        let formData = new FormData();
+
+        formData.append("id", course_id);
+        formData.append("rows", JSON.stringify(rows));
+
+        formData.append("_token", csrfToken);
+
+        $.ajax({
+            url: "/Certificate/import", // Asegúrate de que coincida exactamente con la URL de la ruta
+            method: "POST",
+            data: formData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+        })
+            .done(function (response) {
+                Toast.fire({
+                    icon: response.icon,
+                    title: response.message,
+                });
+                t.ajax.reload();
+            })
+            .fail(function (xhr, status, error) {
+                Toast.fire({
+                    icon: error.icon,
+                    title: error.message,
+                });
+
+                console.error(xhr.responseText);
+            })
+            .always(function () {
+                $.unblockUI();
+            });
+    });
     function blockUI() {
         $.blockUI({
             message:
