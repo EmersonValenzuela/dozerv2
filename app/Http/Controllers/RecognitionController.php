@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Students;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -57,6 +58,10 @@ class RecognitionController extends Controller
         $imgUrl = Storage::url($file1Path);
 
         $students = json_decode($request->input('rows'), true);
+
+        $course = Course::find($request->input('course'));
+        $course->image_re = $imgUrl;
+        $course->save();
 
         // Itera sobre los IDs de los estudiantes
         foreach ($students as $id) {

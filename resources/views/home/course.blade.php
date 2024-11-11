@@ -17,8 +17,8 @@
 
 
                 <div class="ms-auto d-flex  mx-5 align-self-start align-self-center  style-btntwo">
-                    <button type="button" class="btn color-btntwo " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Agregar Estudiantes
+                    <button type="button" class="btn color-btntwo " id="btnModalAdd">
+                        Agregar Estudiante
                     </button>
                 </div>
             </div>
@@ -63,11 +63,11 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal_student" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h1 class="modal-title fs-5 text-white " id="exampleModalLabel">NUEVO ESTUDIANTE</h1>
+                    <h1 class="modal-title fs-5 text-white " id="modal_title"></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -123,7 +123,7 @@
                             <div class="row g-2 align-items-center ">
 
                                 <div class="input-wrapper  me-3">
-                                    <input type="search" id="referralLink" name="referralLink" class=" bg-input "
+                                    <input type="search" id="referralImport" name="referralImport" class=" bg-input "
                                         placeholder=" Buscar por Nombre o Código">
                                     <span class="mdi mdi-magnify input-icon"></span>
                                 </div>
@@ -135,7 +135,7 @@
                                 id="btnImport">Importar</button>
                             <input type="file" id="excelFile" style="display: none;" accept=".xlsx, .xls">
 
-                            <button type="button" class="btn btn-guardar ">GUARDAR</button>
+                            <button type="button" class="btn btn-guardar btn-generate">GUARDAR</button>
                         </div>
                     </div>
                     <div class="d-flex flex-row mb-3 justify-content-between">

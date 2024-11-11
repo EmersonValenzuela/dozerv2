@@ -32,9 +32,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         className: "text-center",
                         render: function (e, t, a, s) {
                             if (e) {
-                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit_cm"><span class="mdi mdi-note-edit-outline"></span></button>`;
                             } else {
-                                return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit_cm"><span class="mdi mdi-note-edit-outline"></span></button>`;
                             }
                         },
                     },
@@ -105,6 +105,27 @@ document.addEventListener("DOMContentLoaded", function (e) {
             t.search(this.value).draw();
         });
 
+        $("#btnModalAdd").on("click", function () {
+            $("#modal_title").text("Agregar estudiante");
+            $("#modal_student").modal("show");
+        });
+
+        t.on("click", ".datatable_edit_cm", function () {
+            let row = $(this).closest("tr");
+            let rowData = $(this).closest("table").DataTable().row(row).data();
+
+            $("#modal_title").text("Modificar estudiante");
+
+            $("#student_id").val(rowData.id);
+            $("#names").val(rowData.names);
+            $("#document").val(rowData.document);
+            $("#email").val(rowData.email);
+            $("#webinar").val(rowData.course);
+            $("#code").val(rowData.code);
+
+            $("#modal_student").modal("show");
+        });
+
         var e,
             o = $(".datatables_add");
         o.length &&
@@ -119,7 +140,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     { data: "email" },
                     { data: " " },
                 ],
-
                 columnDefs: [
                     {
                         className: "control",

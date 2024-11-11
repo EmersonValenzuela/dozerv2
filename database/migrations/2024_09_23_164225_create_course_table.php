@@ -20,7 +20,10 @@ return new class extends Migration
             $table->unsignedBigInteger('program_type_id')->nullable(); // FK for program_types
             $table->string('course_or_event', 150); // Name of the course, event, or program
             $table->string('image_one'); // Path for the first background image
-            $table->string('image_two')->nullable(); // Path for the second background image
+            $table->string('image_two')->nullable();
+            $table->string('image_cm')->nullable();
+            $table->string('image_cp')->nullable();
+            $table->string('image_re')->nullable();
             $table->date('dateFinish')->nullable(); // Optional finish date
             $table->timestamps(); // Timestamps for creation and updates
 
