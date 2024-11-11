@@ -34,9 +34,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                             if (e) {
                                 return `<a href="${enrollmentUrl}/${a.code}.pdf" download class= "btn btn-icon   btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
-                                        </a> <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit_cm"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                        </a> <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_m" data-name="Constancia de Matricula"><span class="mdi mdi-note-edit-outline"></span></button>`;
                             } else {
-                                return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit_cm"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
                             }
                         },
                     },
@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                             if (e) {
                                 return `<a href="${constancyUrl}/${a.code}.pdf" download class= "btn btn-icon   btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
-                                        </a>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                        </a>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación"><span class="mdi mdi-note-edit-outline"></span></button>`;
                             } else {
-                                return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
                             }
                         },
                     },
@@ -58,11 +58,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         className: "text-center",
                         render: function (e, t, a, s) {
                             if (e) {
-                                return `<a href="${recognitionUrl}/${a.code}.pdf" download class= "btn btn-icon   btn-danger">
+                                return `<a href="${recognitionUrl}/${a.code}.pdf" download class= "btn btn-icon btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
-                                        </a>   <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                        </a>   <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="r_e" data-name="Reconocimiento a la Excelencia"><span class="mdi mdi-note-edit-outline"></span></button>`;
                             } else {
-                                return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
                             }
                         },
                     },
@@ -71,9 +71,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         className: "text-center",
                         render: function (e, t, a, s) {
                             if (e) {
-                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>  
+                                <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="m" data-name="Certificado de Matrícula"><span class="mdi mdi-note-edit-outline"></span></button>
+                                `;
                             } else {
-                                return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
                             }
                         },
                     },
@@ -116,20 +118,96 @@ document.addEventListener("DOMContentLoaded", function (e) {
             $("#modal_student").modal("show");
         });
 
-        t.on("click", ".datatable_edit_cm", function () {
+        t.on("click", ".datatable_edit", function () {
             let row = $(this).closest("tr");
             let rowData = $(this).closest("table").DataTable().row(row).data();
-
+            let certificate = $(this).data("certificate"),
+                subtitle = $(this).data("name");
+            console.log(rowData);
             $("#modal_title").text("Modificar estudiante");
 
+            $("#modal_subtitle").text(subtitle);
+            $("#certificate").val(certificate);
             $("#student_id").val(rowData.id);
             $("#names").val(rowData.names);
             $("#document").val(rowData.document);
             $("#email").val(rowData.email);
-            $("#webinar").val(rowData.course);
+            $("#score").val(rowData.score);
+            $("#course_name").val(rowData.course);
             $("#code").val(rowData.code);
 
             $("#modal_student").modal("show");
+        });
+
+        const f = document.getElementById("form_student"),
+            urlMap = {
+                add: "insertStudent",
+                edit: "updateStudent",
+                c_m: "cmStudent",
+                c_p: "cpStudent",
+                r_e: "reStudent",
+                m: "mStudent",
+            };
+
+        f.onsubmit = function (event) {
+            event.preventDefault(); // Evita el envío automático del formulario
+
+            // Seleccionar los campos requeridos
+            const requiredFields = [
+                "names",
+                "document",
+                "email",
+                "score",
+                "course_name",
+                "course_date",
+            ];
+            let formIsValid = true;
+            let errorMessage = "";
+
+            // Iterar sobre cada campo y verificar si está vacío
+            requiredFields.forEach((fieldId) => {
+                const field = document.getElementById(fieldId);
+                if (field && field.value.trim() === "") {
+                    formIsValid = false;
+                    errorMessage =
+                        "Por favor, complete todos los campos requeridos.";
+                    field.classList.add("is-invalid"); // Agrega una clase para resaltar el campo vacío
+                } else if (field) {
+                    field.classList.remove("is-invalid"); // Remueve la clase si el campo está lleno
+                }
+            });
+
+            if (!formIsValid) {
+                // Mostrar mensaje de error general si algún campo está vacío
+                Toast.fire({
+                    icon: "error",
+                    title: errorMessage,
+                });
+                return;
+            }
+
+            // Si el formulario es válido, continuar con el envío
+            const action = $("#modal_title").text();
+            const url = urlMap[action];
+
+            if (url) {
+                console.log("URL para enviar:", url);
+                sendDataServe(url);
+            }
+        };
+
+        function sendDataServe(url) {
+            blockUI();
+
+            let formData = new FormData(f);
+            formData.append("_token", csrf_token);
+
+            console.log("url");
+        }
+
+        $("#modal_student").on("hidden.bs.modal", function () {
+            f.reset();
+            fv.resetForm(true);
         });
 
         var e,
@@ -303,4 +381,16 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
                 reader.readAsArrayBuffer(file);
             });
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            },
+        });
     });

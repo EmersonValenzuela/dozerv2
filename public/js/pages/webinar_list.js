@@ -127,7 +127,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
             if (!formIsValid) {
                 // Mostrar mensaje de error general si algún campo está vacío
-                alert(errorMessage);
+                Toast.fire({
+                    icon: 'error',
+                    title: errorMessage,
+                });
                 return;
             }
 

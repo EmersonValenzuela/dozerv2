@@ -70,42 +70,54 @@
                     <h1 class="modal-title fs-5 text-white " id="modal_title"></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="d-flex flex-row mb-3 justify-content-between">
-                        <div class="px-2 w-100">
-                            <label for="smallInput" class="form-label ">Nombres y apellidos:</label>
-                            <input id="smallInput" class="form-control form-control-sm bg-input" type="text"
-                                placeholder="">
+                <form id="form_student">
+                    <div class="modal-body">
+                        <p class="pt-1" id="modal_subtitle"></p>
+                        <div class="d-flex flex-row mb-3 justify-content-between">
+                            <input type="hidden" id="certificate" name="certificate">
+                            <input type="hidden" id="course_id" name="course_id">
+                            <input type="hidden" id="student_id" name="student_id">
+                            <div class="px-2 w-100">
+                                <label for="smallInput" class="form-label ">Nombres y apellidos:</label>
+                                <input id="names" name="names" class="form-control form-control-sm bg-input"
+                                    type="text" placeholder="">
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row mb-3 justify-content-between">
+                            <div class="px-2 w-50">
+                                <label for="smallInput" class="form-label ">DNI:</label>
+                                <input id="document" name="document" class="form-control form-control-sm bg-input"
+                                    type="text" placeholder="">
+                            </div>
+                            <div class="px-2 w-50">
+                                <label for="smallInput" class="form-label ">Correo Electronico:</label>
+                                <input id="email" name="email" class="form-control form-control-sm bg-input"
+                                    type="text" placeholder="">
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="p-2"><label for="smallInput" class="form-label ">Nota:</label>
+                                <input id="score" name="score" class="form-control form-control-sm bg-input"
+                                    type="text" placeholder="">
+                            </div>
+                            <div class="p-2 flex-grow-1"><label for="smallInput" class="form-label ">Nombre de la
+                                    Capacitación:</label>
+                                <input id="course_name" name="course_name" class="form-control form-control-sm bg-input"
+                                    type="text" placeholder="">
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="p-2 flex-grow-1"><label for="smallInput" class="form-label ">Fecha:</label>
+                                <input id="course_date" name="course_date" class="form-control form-control-sm bg-input"
+                                    type="text" placeholder="">
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex flex-row mb-3 justify-content-between">
-                        <div class="px-2 w-50">
-                            <label for="smallInput" class="form-label ">DNI:</label>
-                            <input id="smallInput" class="form-control form-control-sm bg-input" type="text"
-                                placeholder="">
-                        </div>
-                        <div class="px-2 w-50">
-                            <label for="smallInput" class="form-label ">Correo Electronico:</label>
-                            <input id="smallInput" class="form-control form-control-sm bg-input" type="text"
-                                placeholder="">
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar " data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-guardar ">Guardar</button>
                     </div>
-                    <div class="d-flex">
-                        <div class="p-2"><label for="smallInput" class="form-label ">Nota:</label>
-                            <input id="smallInput" class="form-control form-control-sm bg-input" type="text"
-                                placeholder="">
-                        </div>
-                        <div class="p-2 flex-grow-1"><label for="smallInput" class="form-label ">Nombre de la
-                                Capacitación:</label>
-                            <input id="smallInput" class="form-control form-control-sm bg-input" type="text"
-                                placeholder="">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-cancelar " data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-guardar ">Guardar</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
