@@ -32,6 +32,11 @@ Route::controller(HomeController::class)->group(function ($route) {
 Route::controller(CertificateController::class)->group(function ($route) {
     Route::get('/Crear_Curso', 'create')->name('certificate.create');
     Route::post('/insertCertificates', 'store');
+    Route::get('/Generar_Certificados', 'index')->name('certificate.index');
+    Route::get('/pdfCourse/{id}', 'example');
+    Route::post('addStudent', 'insertStudent');
+    Route::post('/scopeStudentCertificate', 'searchStudents');
+    Route::post('/generateCertificates', 'generateCertificates');
 });
 
 Route::controller(EnrollmentController::class)->group(function ($route) {

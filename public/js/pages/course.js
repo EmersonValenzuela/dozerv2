@@ -115,6 +115,9 @@ $(function () {
     $("#btnModalAdd").on("click", function () {
         $("#modal_title").text("Agregar estudiante");
         $("#modal_student").modal("show");
+        $("#certificate").val("add");
+        $("#course_id").val(course_id);
+
     });
 
     const images = {
@@ -154,7 +157,7 @@ $(function () {
 
     const f = document.getElementById("form_student"),
         urlMap = {
-            add: "insertStudent",
+            add: "addStudent",
             edit: "updateStudent",
             c_m: "cmStudent",
             c_p: "cpStudent",

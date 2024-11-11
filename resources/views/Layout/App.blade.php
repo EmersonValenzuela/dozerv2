@@ -99,8 +99,8 @@
 
                     <li class="menu-item">
                         <a href="{{ route('certificate.create') }}" class="menu-link">
-                            <i class="menu-icon tf-icons mdi mdi-certificate"></i>
-                            <div data-i18n="Crear Capacitación">Crear Capacitación</div>
+                            <i class="menu-icon tf-icons mdi mdi-book-plus-multiple"></i>
+                            <div data-i18n="Crear Curso">Crear Capacitación</div>
                         </a>
                     </li>
                     <li class="menu-item">
@@ -126,6 +126,15 @@
                             <div data-i18n="Reconocimiento <br> a la Excelencia">
                                 Reconocimiento <br />
                                 a la Excelencia
+                            </div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{{ route('certificate.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons mdi mdi-certificate"></i>
+                            <div data-i18n="Certificado <br> de Estudio">
+                                Certificado <br />
+                                de Estudio
                             </div>
                         </a>
                     </li>

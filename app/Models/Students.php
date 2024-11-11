@@ -45,6 +45,7 @@ class Students extends Model
             ->select('code', 'full_name', 'id_student', 'code', 'course_or_event')
             ->get();
     }
+    
 
     /**
      * Contar los estudiantes de un curso cuyo c_m sea true.
