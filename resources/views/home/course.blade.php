@@ -170,6 +170,10 @@
 @section('scripts')
     <script>
         const course_id = {{ $course->id_course }};
+        const enrollmentUrl = "{{ asset('pdfs/enrollments/') }}";
+        const constancyUrl = "{{ asset('pdfs/constancy/') }}";
+        const recognitionUrl = "{{ asset('pdfs/recognition/') }}";
+        const certificateUrl = "{{ asset('pdfs/certificates/') }}";
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="{{ asset('js/pages/course.js') }}"></script>

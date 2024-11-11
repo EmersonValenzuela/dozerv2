@@ -32,7 +32,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         className: "text-center",
                         render: function (e, t, a, s) {
                             if (e) {
-                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit_cm"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                return `<a href="${enrollmentUrl}/${a.code}.pdf" download class= "btn btn-icon   btn-danger">
+                                            <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
+                                        </a> <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit_cm"><span class="mdi mdi-note-edit-outline"></span></button>`;
                             } else {
                                 return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit_cm"><span class="mdi mdi-note-edit-outline"></span></button>`;
                             }
@@ -43,7 +45,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         className: "text-center",
                         render: function (e, t, a, s) {
                             if (e) {
-                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                return `<a href="${constancyUrl}/${a.code}.pdf" download class= "btn btn-icon   btn-danger">
+                                            <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
+                                        </a>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
                             } else {
                                 return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
                             }
@@ -54,7 +58,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         className: "text-center",
                         render: function (e, t, a, s) {
                             if (e) {
-                                return `<button type="button" class="btn btn-icon btn-danger"><span class="mdi mdi-file-pdf-box text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                return `<a href="${recognitionUrl}/${a.code}.pdf" download class= "btn btn-icon   btn-danger">
+                                            <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
+                                        </a>   <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
                             } else {
                                 return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>`;
                             }

@@ -119,7 +119,7 @@ class RecognitionController extends Controller
 
         $anchoTexto = $pdf->GetStringWidth($name);
         $x = ($anchoPagina - $anchoTexto) / 2;
-        $pdf->SetXY($x, 47);
+        $pdf->SetXY($x, 49);
         $pdf->Cell($anchoTexto, 40, $name, '', 1, 'C', false);
 
         $pdf->SetFont('Oswald-Medium', '', 18);
