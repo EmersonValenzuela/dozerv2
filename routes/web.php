@@ -5,6 +5,7 @@ use App\Http\Controllers\ConstancyController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailsController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RecognitionController;
 use App\Http\Controllers\WebinarController;
@@ -82,4 +83,8 @@ Route::controller(ProgramController::class)->group(function ($route) {
 
 Route::controller(CourseController::class)->group(function ($route) {
     Route::get('/scopeCoruse', 'search');
+});
+
+Route::controller(MailsController::class)->group(function ($route){
+    Route::get('/Enviar_correos', 'index')->name('sendmail.index');
 });

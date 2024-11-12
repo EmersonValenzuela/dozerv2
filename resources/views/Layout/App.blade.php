@@ -146,6 +146,14 @@
                             </div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="{{ route('sendmail.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons mdi mdi-email-outline"></i>
+                            <div data-i18n="Envio Correos">
+                                Envio Correos
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <!-- / Menu -->
