@@ -34,7 +34,7 @@ class RecognitionController extends Controller
     public function searchStudents(Request $request)
     {
         $searchTerm = $request->input('course');
-        $results = Students::studentConstancy($searchTerm);
+        $results = Students::studentRecognition($searchTerm);
 
         return response()->json($results);
     }
