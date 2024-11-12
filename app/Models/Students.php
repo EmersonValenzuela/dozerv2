@@ -32,7 +32,6 @@ class Students extends Model
     {
         return static::query()
             ->where('course_id', $course)
-            ->where('c_m', 0)
             ->select('code', 'full_name', 'id_student', 'code', 'course_or_event')
             ->get();
     }
@@ -41,6 +40,25 @@ class Students extends Model
     {
         return static::query()
             ->where('course_id', $course)
+            ->where('certificate', 0)
+            ->select('code', 'full_name', 'id_student', 'code', 'course_or_event')
+            ->get();
+    }
+
+    public static function studentRecognition($course)
+    {
+        return static::query()
+            ->where('course_id', $course)
+            ->whereIn('score', ['18', '19', '20'])
+            ->select('code', 'full_name', 'id_student', 'code', 'course_or_event')
+            ->get();
+    }
+
+    public static function studentCertificate($course)
+    {
+        return static::query()
+            ->where('course_id', $course)
+            ->where('cp', 0)
             ->select('code', 'full_name', 'id_student', 'code', 'course_or_event')
             ->get();
     }

@@ -36,7 +36,7 @@ class CertificateController extends Controller
     public function searchStudents(Request $request)
     {
         $searchTerm = $request->input('course');
-        $results = Students::studentConstancy($searchTerm);
+        $results = Students::studentCertificate($searchTerm);
 
         return response()->json($results);
     }
