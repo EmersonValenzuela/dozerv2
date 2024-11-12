@@ -6,36 +6,7 @@
         <p class="text-white px-5 fw-bold font-cat pt-3">CREAR CAPACITACIÓN </p>
         <div class="d-flex flex-row mb-3">
             <div class="p-2">
-                <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-5 fondo-cargacerti">
-                    <div class="d-flex flex-column align-items-center">
-                        <img src="https://certificados.institutodozer.edu.pe/img/avatars/1.png" alt="user-avatar"
-                            class="d-block w-px-250 h-px-200 rounded mb-3" id="uploadedAvatar">
-                        <div class="button-wrapper">
-                            <label for="upload"
-                                class="btn btn-primary me-2 mb-3 waves-effect waves-light btn-generador-img" tabindex="0">
-                                <span class="d-none d-sm-block">Subir Hoja 1</span>
-                                <i class="mdi mdi-tray-arrow-up d-block d-sm-none"></i>
-                                <input type="file" id="upload" class="account-file-input" hidden=""
-                                    accept="image/png, image/jpeg">
-                            </label>
-                            <div class="small text-white">Allowed JPG, GIF or PNG. Max size of 800K</div>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-column align-items-center">
-                        <img src="https://certificados.institutodozer.edu.pe/img/avatars/1.png" alt="user-avatar"
-                            class="d-block w-px-250 h-px-200 rounded mb-3" id="uploadedAvatar2">
-                        <div class="button-wrapper">
-                            <label for="upload2"
-                                class="btn btn-primary me-2 mb-3 waves-effect waves-light btn-generador-img" tabindex="0">
-                                <span class="d-none d-sm-block">Subir Hoja 2</span>
-                                <i class="mdi mdi-tray-arrow-up d-block d-sm-none"></i>
-                                <input type="file" id="upload2" class="account-file-input2" hidden=""
-                                    accept="image/png, image/jpeg">
-                            </label>
-                            <div class="small text-white">Allowed JPG, GIF or PNG. Max size of 800K</div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="p-2 flex-column d-flex justify-content-center">
 

@@ -4,25 +4,54 @@
     <div class="container-xxl flex-grow-1 container-p-y">
 
         <p class="text-white px-5 fw-bold font-cat pt-3">Generar Constancia de Matricula </p>
-        <div class="row" id="dataConstancy">
-            <div class="col-12">
-                <div class="card mb-4 style-course">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <div class="form-floating form-floating-outline form-floating-select2">
-                                    <div class="position-relative">
-                                        <select id="course" class=" form-select">
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+
+
+        <div class="d-flex flex-row mb-3" id="dataConstancy">
+            <div class="p-2">
+                <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-5 fondo-cargacerti">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="https://certificados.institutodozer.edu.pe/img/avatars/1.png" alt="user-avatar"
+                            class="d-block w-px-250 h-px-200 rounded mb-3" id="uploadedAvatar">
+                        <div class="button-wrapper">
+                            <label for="upload"
+                                class="btn btn-primary me-2 mb-3 waves-effect waves-light btn-generador-img" tabindex="0">
+                                <span class="d-none d-sm-block">Subir Hoja 1</span>
+                                <i class="mdi mdi-tray-arrow-up d-block d-sm-none"></i>
+                                <input type="file" id="upload" class="account-file-input" hidden=""
+                                    accept="image/png, image/jpeg">
+                            </label>
+                            <div class="small text-white">Allowed JPG, GIF or PNG. Max size of 800K</div>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="https://certificados.institutodozer.edu.pe/img/avatars/1.png" alt="user-avatar"
+                            class="d-block w-px-250 h-px-200 rounded mb-3" id="uploadedAvatar2">
+                        <div class="button-wrapper">
+                            <label for="upload2"
+                                class="btn btn-primary me-2 mb-3 waves-effect waves-light btn-generador-img" tabindex="0">
+                                <span class="d-none d-sm-block">Subir Hoja 2</span>
+                                <i class="mdi mdi-tray-arrow-up d-block d-sm-none"></i>
+                                <input type="file" id="upload2" class="account-file-input2" hidden=""
+                                    accept="image/png, image/jpeg">
+                            </label>
+                            <div class="small text-white">Allowed JPG, GIF or PNG. Max size of 800K</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="p-2 flex-column d-flex justify-content-center">
 
+                <div class="p-2 ">
+                    <div class="mb-3 px-2">
+                        <label for="typeCertificate" class="form-label text-white">Tipo de Certificado</label>
+                        <select id="course" class=" form-select">
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
 
         <!--Contenido-->
         <div class="d-flex mb-3">

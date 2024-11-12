@@ -1,5 +1,23 @@
 "use strict";
-!(function () {})(),
+!(function () {
+    let e = document.getElementById("uploadedAvatar");
+    const l = document.querySelector(".account-file-input");
+    if (e) {
+        const r = e.src;
+        l.onchange = () => {
+            l.files[0] && (e.src = window.URL.createObjectURL(l.files[0]));
+        };
+    }
+
+    let a = document.getElementById("uploadedAvatar2");
+    const b = document.querySelector(".account-file-input2");
+    if (a) {
+        const f = a.src;
+        b.onchange = () => {
+            b.files[0] && (a.src = window.URL.createObjectURL(b.files[0]));
+        };
+    }
+})(),
     $(function () {
         let csrfToken = $('meta[name="csrf-token"]').attr("content");
 
@@ -240,6 +258,8 @@
 
             let formData = new FormData();
 
+            formData.append("file1", $("#upload")[0].files[0]);
+            formData.append("file2", $("#upload2")[0].files[0]);
             formData.append("course", $("#course").val());
             formData.append("rows", JSON.stringify(ids));
 

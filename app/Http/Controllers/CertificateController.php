@@ -49,21 +49,7 @@ class CertificateController extends Controller
      */
     public function store(Request $request)
     {
-        // Define the directory without 'public/'
-        $directory = 'uploads/certificates';
 
-        // Verifica si el directorio existe y lo crea si no, dentro de 'public/'
-        if (!Storage::disk('public')->exists($directory)) {
-            Storage::disk('public')->makeDirectory($directory);
-        }
-
-        // Store the files
-        $file1Path = $request->file('file1')->store($directory, 'public');
-        $file2Path = $request->file('file2')->store($directory, 'public');
-
-        // Get the URLs to access the files
-        $img1Url = Storage::url($file1Path);
-        $img2Url = Storage::url($file2Path);
 
         $lastCourse = Course::latest('id_course')->first();
         $nextId = $lastCourse ? $lastCourse->id_course + 1 : 1;
@@ -74,8 +60,6 @@ class CertificateController extends Controller
             'certificate_type_id' => $request->input('type'),
             'program_type_id' => $request->input('program'),
             'course_or_event' => $request->input('name'),
-            'image_one' => $file1Path,
-            'image_two' => $file2Path,
             'dateFinish' => now(),
             'code_course' => $codeCourse, // Asignar el código al curso
         ]);
@@ -114,11 +98,29 @@ class CertificateController extends Controller
     public function generateCertificates(Request $request)
     {
 
-        $students = json_decode($request->input('rows'), true);
+        // Define the directory without 'public/'
+        $directory = 'uploads/certificates';
+
+        // Verifica si el directorio existe y lo crea si no, dentro de 'public/'
+        if (!Storage::disk('public')->exists($directory)) {
+            Storage::disk('public')->makeDirectory($directory);
+        }
+
+        // Store the files
+        $file1Path = $request->file('file1')->store($directory, 'public');
+        $file2Path = $request->file('file2')->store($directory, 'public');
+
+        // Get the URLs to access the files
+        $img1Url = Storage::url($file1Path);
+        $img2Url = Storage::url($file2Path);
 
         $course = Course::find($request->input('course'));
-        $img1Path = Storage::url($course->image_one);
-        $img2Path = Storage::url($course->image_two);
+        $course->image_one = $img1Url;
+        $course->image_two = $img2Url;
+        $course->save();
+
+
+        $students = json_decode($request->input('rows'), true);
 
         // Itera sobre los IDs de los estudiantes
         foreach ($students as $id) {
@@ -129,7 +131,7 @@ class CertificateController extends Controller
                 $student->certificate = 1;
 
                 // Genera el PDF pasando los datos necesarios
-                $this->generatePdf($img1Path, $img2Path, $student);
+                $this->generatePdf($img1Url, $img2Url, $student);
 
                 // Guarda los cambios en el estudiante
                 $student->save();
@@ -322,7 +324,7 @@ class CertificateController extends Controller
         $student->certificate = 1;
         $student->save();
 
-        $this->generatePdf(Storage::url($request->imgUrl), Storage::url($request->imgUrl2), $student);
+        $this->generatePdf($request->imgUrl, $request->imgUrl2, $student);
 
         return response()->json([
             'success' => true,
