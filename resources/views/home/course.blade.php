@@ -46,6 +46,7 @@
                             <tr>
                                 <th class="text-white fw-bold" rowspan="2">Estudiante</th>
                                 <th class="text-white fw-bold" rowspan="2">Correo</th>
+                                <th class="text-white fw-bold" rowspan="2">Nota</th>
                                 <th class="text-white fw-bold text-center" colspan="4">Documentos Adjuntos</th>
                                 <th class="text-white fw-bold" rowspan="2">Acciones</th>
                             </tr>

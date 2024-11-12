@@ -13,6 +13,7 @@ $(function () {
             columns: [
                 { data: "names" },
                 { data: "email" },
+                { data: "score" },
                 { data: "cm" },
                 { data: "cp" },
                 { data: "r_e" },
@@ -27,7 +28,7 @@ $(function () {
                     },
                 },
                 {
-                    targets: 2,
+                    targets: 3,
                     className: "text-center",
                     render: function (e, t, a, s) {
                         if (e) {
@@ -40,7 +41,7 @@ $(function () {
                     },
                 },
                 {
-                    targets: 3,
+                    targets: 4,
                     className: "text-center",
                     render: function (e, t, a, s) {
                         if (e) {
@@ -53,7 +54,7 @@ $(function () {
                     },
                 },
                 {
-                    targets: 4,
+                    targets: 5,
                     className: "text-center",
                     render: function (e, t, a, s) {
                         if (e) {
@@ -66,7 +67,7 @@ $(function () {
                     },
                 },
                 {
-                    targets: 5,
+                    targets: 6,
                     className: "text-center",
                     render: function (e, t, a, s) {
                         if (e) {

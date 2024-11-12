@@ -337,41 +337,46 @@ class CertificateController extends Controller
         $studentsData = json_decode($request->input('rows'), true);
 
         foreach ($studentsData as $student) {
-            // Check if a student with the same DNI and course ID already exists
+            // Busca si ya existe un estudiante con el mismo DNI y ID de curso
             $existingStudent = Students::where('document_number', $student['dni'])
                 ->where('course_id', $idCourse)
                 ->first();
 
             if ($existingStudent) {
-                // Skip this student if already exists
-                continue;
+                // Si el estudiante ya existe, actualiza sus datos
+                $existingStudent->course_or_event = $student['course'];
+                $existingStudent->full_name = $student['names'];
+                $existingStudent->email = $student['email'];
+                $existingStudent->score = $student['score'];
+                $existingStudent->save();
+            } else {
+                // Crea un nuevo registro de estudiante si no existe
+                $newStudent = new Students([
+                    'course_id' => $idCourse,
+                    'course_or_event' => $student['course'],
+                    'full_name' => $student['names'],
+                    'document_number' => $student['dni'],
+                    'email' => $student['email'],
+                    'score' => $student['score'],
+                    'status' => 'active',
+                ]);
+
+                $newStudent->save();
+                $id = $newStudent->id_student;
+
+                // Genera el código del estudiante
+                $prefix = floor(($id - 1) / 1000) + 2;
+                $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
+                $newStudent->code = $code;
+                $newStudent->w_p = 1;
+                $newStudent->save();
             }
-
-            // Create a new student record if it doesn't exist
-            $row = new Students([
-                'course_id' => $idCourse,
-                'course_or_event' => $student['course'],
-                'full_name' => $student['names'],
-                'document_number' => $student['dni'],
-                'email' => $student['email'],
-                'status' => 'active',
-            ]);
-
-            $row->save();
-            $id = $row->id_student;
-
-            // Generate the code
-            $prefix = floor(($id - 1) / 1000) + 2;
-            $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
-            $row->code = $code;
-            $row->w_p = 1;
-            $row->save();
         }
 
         return response()->json([
             'success' => true,
             'icon' => 'success',
-            'message' => 'Alumnos ingresados',
+            'message' => 'Alumnos ingresados o actualizados',
         ]);
     }
 }
