@@ -3,71 +3,72 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
 
-        <p class="text-white px-5 fw-bold font-cat pt-3">Generar Constancia de participación en Webinar </p>
+        <p class="text-white px-5 fw-bold font-cat pt-3">Enviar Correos</p>
         <div class="row">
             <div class="col-xl-3 col-md-8 col-12 mb-md-0 mb-4">
                 <div class="card bg-dark">
                     <div class="card-body">
-                        <!-- Vendor -->
-                        <div class="mb-3 col ecommerce-select2-dropdown">
-                            <div class="form-floating form-floating-outline">
-                                <select id="vendor" class="select2 form-select"
-                                    data-placeholder="Seleccionar tipo certificado">
-                                    <option value="">Seleccionar tipo capacitación</option>
-                                    <option value="men-clothing">Dozer</option>
-                                    <option value="women-clothing">CIP</option>
-                                    <option value="kid-clothing">CAP</option>
-                                    <option value="kid-clothing">WEBINAR</option>
-                                </select>
-                                <label for="vendor">TIPO CERTIFICADO</label>
+                        <form id="filterMails">
+                            <!-- Vendor -->
+                            <div class="mb-3 col ecommerce-select2-dropdown">
+                                <div class="form-floating form-floating-outline">
+                                    <select id="type_txt" name="type_txt" class="select2 form-select"
+                                        data-placeholder="Seleccionar tipo certificado">
+                                        <option value="">Seleccionar tipo capacitación</option>
+                                        @foreach ($types as $type)
+                                            <option value="{{ $type->id_certificate_type }}">{{ $type->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="type_txt">Tipos Certificados</label>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Collection -->
-                        <div class="mb-4 col ecommerce-select2-dropdown">
-                            <div class="form-floating form-floating-outline">
-                                <select id="collection" class="select2 form-select" data-placeholder="Seleccionar programa">
-                                    <option value="">Seleccionar programa</option>
-                                    <option value="men-clothing">Curso</option>
-                                    <option value="women-clothing">Especializacion</option>
-                                    <option value="kid-clothing">Diplomado</option>
-                                </select>
-                                <label for="collection">PROGRAMA</label>
-                            </div>
-                        </div>
-                        <!-- Status -->
-                        <div class="mb-4 col ecommerce-select2-dropdown">
-                            <div class="form-floating form-floating-outline">
-                                <select id="status-org" class="select2 form-select" data-placeholder="Seleccionar Curso">
-                                    <option value="">Seleccionar Curso</option>
-                                    <option value="Published">curso 1</option>
-                                    <option value="Scheduled">curso 2</option>
-                                    <option value="Inactive">curso 3</option>
-                                </select>
-                                <label for="status-org">Status</label>
-                            </div>
-                        </div>
+                            <!-- Collection -->
+                            <div class="mb-4 col ecommerce-select2-dropdown">
+                                <div class="form-floating form-floating-outline">
+                                    <select id="program_txt" name="program_txt" class="select2 form-select"
+                                        data-placeholder="Seleccionar programa">
+                                        <option value="">Seleccionar programa</option>
 
-                        <!-- Status -->
-                        <div class="mb-4 col ecommerce-select2-dropdown">
-                            <div class="form-floating form-floating-outline">
-                                <select id="certificate" class="select2 form-select" data-placeholder="Seleccionar Certificado">
-                                    <option value="">Seleccionar certificado</option>
-                                    <option value="Published">Matricula</option>
-                                    <option value="Scheduled">Participacion</option>
-                                    <option value="Inactive">Excelencia</option>
-                                    <option value="Inactive">Webinar</option>
-                                </select>
-                                <label for="certificate">Status</label>
+                                    </select>
+                                    <label for="program_txt">Programas</label>
+                                </div>
                             </div>
-                        </div>
+                            <!-- Status -->
+                            <div class="mb-4 col ecommerce-select2-dropdown">
+                                <div class="form-floating form-floating-outline">
+                                    <select id="course_txt" name="course_txt" class="select2 form-select"
+                                        data-placeholder="Seleccionar Curso">
+                                    </select>
+                                    <label for="course_txt">Cursos</label>
+                                </div>
+                            </div>
 
+                            <!-- Status -->
+                            <div class="mb-4 col ecommerce-select2-dropdown">
+                                <div class="form-floating form-floating-outline">
+                                    <select id="certificate_txt" name="certificate_txt" class="select2 form-select"
+                                        data-placeholder="Seleccionar Certificado">
+                                        <option value="">Seleccionar certificado</option>
+                                        <option value="c_m">C. Matricula</option>
+                                        <option value="c_p">C. Participación</option>
+                                        <option value="r_e">R. Excelencia</option>
+                                        <option value="certificate">C. Curso</option>
+                                        <option value="w_p">Webinar</option>
+                                    </select>
+                                    <label for="certificate_txt">Certificados</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <button type="submit" class="btn btn-guardar  waves-effect waves-light fw-bold"><i
+                                        class="mdi mdi-refresh"></i> INGRESAR</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="col-xl-9 col-md-8 col-12 mb-md-0 mb-4">
-
                 <div class="card style-course">
-
                     <div class="d-flex">
                         <div class="me-auto p-2">
                             <div class="d-flex flex-row px-5 pb-3">
@@ -81,7 +82,7 @@
 
                         <div class="p-2">
                             <div class="p-2 d-flex align-items-end "><button type="button"
-                                    class="btn btn-guardar  waves-effect waves-light fw-bold btn-generate">Agregar</button>
+                                    class="btn btn-guardar  waves-effect waves-light fw-bold ">Agregar</button>
                             </div>
                         </div>
 
@@ -109,6 +110,9 @@
                                     </tr>
                                 </thead>
                             </table>
+                            <tbody>
+
+                            </tbody>
                         </div>
                     </div>
 

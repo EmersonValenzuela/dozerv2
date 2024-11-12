@@ -17,5 +17,11 @@ class CourseController extends Controller
         return response()->json($results);
     }
 
-
+    public function searchCourse($type, $program)
+    {
+        $results = Course::where('certificate_type_id', $type)
+            ->where('program_type_id', $program)
+            ->get();
+        return response()->json($results);
+    }
 }

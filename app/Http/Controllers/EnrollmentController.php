@@ -177,11 +177,11 @@ class EnrollmentController extends Controller
         $pdf->SetXY($x, 98); // Ajustar la posición vertical según sea necesario
         $pdf->Cell($anchoTexto, 40, utf8_decode($course), '', 1, 'C', false);
 
-        $pdf->SetFont('Oswald-Light', '', 12);
+        $pdf->SetFont('Oswald-Light', '', 14);
 
         $pdf->SetTextColor(127, 128, 128);
 
-        $pdf->SetXY(179.5, 120.2);
+        $pdf->SetXY(179.5, 120.1);
         $pdf->Cell(1, 35, $date, 0, 1, 'L');
 
         $pdf->Output();

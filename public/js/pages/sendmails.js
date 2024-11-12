@@ -13,32 +13,32 @@ $(function () {
               (a = config.colors.bodyBg),
               config.colors)
     ).headingColor;
-    var e = $(".select2"),
-        e =
-            e.length &&
-            e.each(function () {
-                var e = $(this);
-                select2Focus(e),
-                    e.wrap('<div class="position-relative"></div>').select2({
-                        dropdownParent: e.parent(),
-                        placeholder: e.data("placeholder"),
+    var z = $(".select2"),
+        z =
+            z.length &&
+            z.each(function () {
+                var z = $(this);
+                select2Focus(z),
+                    z.wrap('<div class="position-relative"></div>').select2({
+                        dropdownParent: z.parent(),
+                        placeholder: z.data("placeholder"),
                     });
             });
+    var e;
     var o = $(".datatables_certificates");
     o.length &&
         ((e = o.DataTable({
             columns: [
-                { data: "" },
+                { data: "id" },
                 { data: "" },
                 { data: "dni" },
                 { data: "names" },
-                { data: "course" },
+                { data: "email" },
                 { data: " " },
             ],
 
             columnDefs: [
                 {
-                    className: "control",
                     searchable: !1,
                     orderable: !1,
                     responsivePriority: 2,
@@ -161,57 +161,124 @@ $(function () {
         $(".dataTables_filter .form-control").removeClass("form-control-sm"),
             $(".dataTables_length .form-select").removeClass("form-select-sm");
     }, 300);
-    $("#btnImport").on("click", function () {
-        document.getElementById("excelFile").click();
+
+    $("#type_txt").on("change", function () {
+        blockUI();
+        $.ajax({
+            url: "get-programs/" + this.value,
+            method: "GET",
+            dataType: "json",
+        })
+            .done(function (response) {
+                $("#program_txt").empty();
+                $("#program_txt").append(
+                    `<option value="">Selecciona programa</option>`
+                );
+                $("#course_txt").empty();
+                $("#course_txt").append(
+                    `<option value="">Selecciona Curso</option>`
+                );
+
+                response.forEach((program) => {
+                    $("#program_txt").append(
+                        '<option value="' +
+                            program.id_program_type +
+                            '">' +
+                            program.program_type.name +
+                            "</option>"
+                    );
+                });
+            })
+            .fail(function (xhr, status, error) {
+                console.error(xhr.responseText);
+            })
+            .always(() => {
+                $.unblockUI();
+            });
     });
-    document
-        .getElementById("excelFile")
-        .addEventListener("change", function (event) {
-            const file = event.target.files[0];
-            const reader = new FileReader();
 
-            reader.onload = function (i) {
-                const data = new Uint8Array(i.target.result);
-                const workbook = XLSX.read(data, { type: "array" });
+    $("#program_txt").on("change", function () {
+        console.log(this.value);
+        console.log($("#type_txt").val());
 
-                // primera hoja
-                const firstSheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[firstSheetName];
+        blockUI();
+        $.ajax({
+            url: "get-courses/" + $("#type_txt").val() + "/" + this.value,
+            method: "GET",
+            dataType: "json",
+        })
+            .done(function (response) {
+                console.log(response);
 
-                // Convierte la hoja de trabajo a un array de objetos JSON
-                const jsonData = XLSX.utils.sheet_to_json(worksheet, {
-                    header: 1,
+                $("#course_txt").empty();
+                $("#course_txt").append(
+                    `<option value="">Selecciona Curso</option>`
+                );
+                response.forEach((course) => {
+                    $("#course_txt").append(
+                        '<option value="' +
+                            course.id_course +
+                            '">' +
+                            course.course_or_event +
+                            "</option>"
+                    );
                 });
-
-                // Formato Objeto
-                const headers = jsonData[0];
-                const rows = jsonData.slice(1).map((row) => {
-                    let rowData = {};
-                    row.forEach((cell, index) => {
-                        rowData[headers[index]] = cell;
-                    });
-                    return rowData;
-                });
-
-                rows.forEach((row) => {
-                    let rowData = {
-                        code: row.code,
-                        dni: row.dni,
-                        names: row.nombres,
-                        course: row.curso,
-                        score: row.nota,
-                        email: row.email,
-                        "": "",
-                    };
-                    e.row.add(rowData).draw();
-                });
-            };
-
-            reader.readAsArrayBuffer(file);
-        });
+            })
+            .fail(function (xhr, status, error) {
+                console.error(xhr.responseText);
+            })
+            .always(() => {
+                $.unblockUI();
+            });
+    });
 
     $("#referralLink").on("keyup", function () {
         e.search(this.value).draw();
+    });
+
+    const f = document.getElementById("filterMails");
+
+    $("#filterMails").on("submit", function (g) {
+        g.preventDefault();
+
+        blockUI();
+
+        const csrfToken = $('meta[name="csrf-token"]').attr("content");
+
+        let formData = new FormData(f);
+
+        formData.append("_token", csrfToken);
+
+        $.ajax({
+            url: "/get-students-mails",
+            method: "POST",
+            data: formData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+        })
+            .done(function (response) {
+                console.log(response);
+
+                Toast.fire({
+                    icon: response.icon,
+                    title: response.message,
+                });
+                e.rows.add(response.data).draw();
+            })
+            .fail(function (xhr, status, error) {
+                Toast.fire({
+                    icon: error.icon,
+                    title: error.message,
+                });
+                console.error(xhr.responseText);
+            })
+            .always(function () {
+                $.unblockUI();
+            });
+
+        console.log(formData);
+        console.log(rows);
     });
 
     $(".btn-generate").on("click", function () {
@@ -220,33 +287,6 @@ $(function () {
         let name = $("#title").val(),
             csrfToken = $('meta[name="csrf-token"]').attr("content"),
             date = $("#date").val();
-
-        if (!name.trim()) {
-            $.unblockUI();
-            Toast.fire({
-                icon: "error",
-                title: "Debes ingresar un nombre para el webinar",
-            });
-            return;
-        }
-
-        if (rows.length === 0) {
-            $.unblockUI();
-            Toast.fire({
-                icon: "error",
-                title: "Debe existir al menos un registro en la tabla",
-            });
-            return;
-        }
-
-        if (date.length === 0) {
-            $.unblockUI();
-            Toast.fire({
-                icon: "error",
-                title: "Debe ingresar una fecha",
-            });
-            return;
-        }
 
         let formData = new FormData();
 
