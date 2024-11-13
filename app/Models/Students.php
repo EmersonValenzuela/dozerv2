@@ -49,7 +49,7 @@ class Students extends Model
     {
         return static::query()
             ->where('course_id', $course)
-            ->whereIn('score', ['18', '19', '20'])
+            ->whereIn('score', [18, 19, 20])
             ->select('code', 'full_name', 'id_student', 'code', 'course_or_event')
             ->get();
     }
@@ -58,7 +58,7 @@ class Students extends Model
     {
         return static::query()
             ->where('course_id', $course)
-            ->where('cp', 0)
+            ->where('c_p', 0)
             ->select('code', 'full_name', 'id_student', 'code', 'course_or_event')
             ->get();
     }

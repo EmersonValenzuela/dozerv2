@@ -86,8 +86,6 @@ class EnrollmentController extends Controller
         ]);
     }
 
-
-
     public function generatePdf($names, $course, $date, $img, $code)
     {
 
@@ -112,7 +110,7 @@ class EnrollmentController extends Controller
         $anchoTexto = $pdf->GetStringWidth($names);
         $x = ($anchoPagina - $anchoTexto) / 2;
         $pdf->SetXY($x, 70); // Ajustar la posición vertical según sea necesario
-        $pdf->Cell($anchoTexto, 40, $names, '', 1, 'C', false);
+        $pdf->Cell($anchoTexto, 40, utf8_decode($names), '', 1, 'C', false);
 
         $pdf->SetFont('Oswald-Medium', '', 21);
         $pdf->SetTextColor(0, 0, 0);
@@ -125,7 +123,7 @@ class EnrollmentController extends Controller
         $pdf->SetFont('Oswald-Light', '', 13);
         $pdf->SetTextColor(127, 128, 128);
         $pdf->SetXY(179.5, 120.2);
-        $pdf->Cell(1, 35, $date, 0, 1, 'L');
+        $pdf->Cell(1, 35, utf8_decode($date), 0, 1, 'L');
 
         $pdfFileName = $code . '.pdf';
         $pdf->Output(public_path('pdfs/enrollments/') . $pdfFileName, 'F');

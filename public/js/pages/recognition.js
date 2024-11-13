@@ -174,7 +174,7 @@
         $("#course").on("change", function () {
             const courseId = $(this).val();
 
-            fetch("/scopeStudentConstancy", {
+            fetch("scopeStudentRecognition", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

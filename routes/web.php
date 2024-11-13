@@ -63,6 +63,7 @@ Route::controller(RecognitionController::class)->group(function ($route) {
     Route::get('/pdfRecognition/{id}', 'show');
     Route::post('/generateRecognition', 'store');
     Route::post('reStudent', 'updateStudent');
+    Route::post('scopeStudentRecognition', 'searchStudents');
 });
 
 Route::controller(WebinarController::class)->group(function ($route) {
