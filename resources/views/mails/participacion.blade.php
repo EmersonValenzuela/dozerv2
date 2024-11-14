@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CONSTANCIA DE PARTICIPACIÓN</title>
-    <link rel="icon" href="{{ public_path('mails/img/icon-dozer.svg') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ url('mails/img/icon-dozer.svg') }}" type="image/x-icon" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <style>
@@ -483,7 +483,7 @@
             <div class="row">
                 <div class="d-flex flex-row my-3 justify-content-between align-items-center">
                     <div class="p-2">
-                        <img class="w-220" src="{{ public_path('mails/img/logo-dozer.png') }}" alt="" />
+                        <img class="w-220" src="{{ url('mails/img/logo-dozer.png') }}" alt="" />
                     </div>
                     <div class="d-flex justify-content-end">
                         <div class="vertical"></div>
@@ -516,7 +516,7 @@
                 </p>
             </div>
             <div>
-                <div><img class="w-100" src="{{ public_path('mails/img/imagen.png') }}" alt="" /></div>
+                <div><img class="w-100" src="{{ url('mails/img/imagen.png') }}" alt="" /></div>
                 <div class="container section-descargacp">
                     <div class="row">
                         <div class="col-6">
@@ -570,8 +570,8 @@
             <div>
                 <div class="d-flex flex-row  justify-content-center fondo-wssp align-items-center">
                     <div class="p-2">
-                        <a href=""> <img class="wssp-50" src="{{ public_path('mails/img/wssp.png') }}"
-                                alt="" /> </a>
+                        <a href=""> <img class="wssp-50" src="{{ url('mails/img/wssp.png') }}" alt="" />
+                        </a>
                     </div>
 
                     <div class="p-2 d-flex flex-column">
@@ -583,12 +583,12 @@
         </div>
     </section>
     <div>
-        <img class="w-100" src="{{ public_path('mails/img/fondo.png') }}" alt="" />
+        <img class="w-100" src="{{ url('mails/img/fondo.png') }}" alt="" />
     </div>
     <section class="section-finalcp">
         <div class="d-flex flex-row  d-flex align-items-center top-bloque">
             <div class="">
-                <img class="w-550" src="{{ public_path('mails/img/imagen-dos.png') }}" alt="" />
+                <img class="w-550" src="{{ url('mails/img/imagen-dos.png') }}" alt="" />
             </div>
             <div class="d-flex flex-column px-80">
                 <div class="p-2 titulo-registro">Gildo Darwin Espinoza Reyes</div>
@@ -617,36 +617,32 @@
 
                     <a href="https://institutodozer.edu.pe/" target="_blank">
                         <div class="mx-2 fondo-icon">
-                            <img class="icon-style" src="{{ public_path('mails/img/icon-web.png') }}" alt="" />
+                            <img class="icon-style" src="{{ url('mails/img/icon-web.png') }}" alt="" />
                         </div>
                     </a>
                     <a href="https://www.facebook.com/InstitutoDozer" target="_blank">
                         <div class="mx-2 fondo-icon w-50px">
-                            <img class="icon-stylefb" src="{{ public_path('mails/img/icon-fb.png') }}" alt="" />
+                            <img class="icon-stylefb" src="{{ url('mails/img/icon-fb.png') }}" alt="" />
                         </div>
                     </a>
                     <a href="https://www.instagram.com/instituto.dozer/" target="_blank">
                         <div class="mx-2 fondo-icon">
-                            <img class="icon-style" src="{{ public_path('mails/img/icon-ig.png') }}"
-                                alt="" />
+                            <img class="icon-style" src="{{ url('mails/img/icon-ig.png') }}" alt="" />
                         </div>
                     </a>
                     <a href="https://www.linkedin.com/company/institutodozer/" target="_blank">
                         <div class="mx-2 fondo-icon">
-                            <img class="icon-style" src="{{ public_path('mails/img/icon-in.png') }}"
-                                alt="" />
+                            <img class="icon-style" src="{{ url('mails/img/icon-in.png') }}" alt="" />
                         </div>
                     </a><a href="" target="_blank">
                         <div class="mx-2 fondo-icon d-flex align-items-center h-50px w-50px">
-                            <img class="icon-style" src="{{ public_path('mails/img/icon-yt.png') }}"
-                                alt="" />
+                            <img class="icon-style" src="{{ url('mails/img/icon-yt.png') }}" alt="" />
                         </div>
                     </a>
 
                     <a href="https://www.tiktok.com/@institutodozer" target="_blank">
                         <div class="mx-2 fondo-icon w-50px">
-                            <img class="icon-styletk" src="{{ public_path('mails/img/icon-tk.png') }}"
-                                alt="" />
+                            <img class="icon-styletk" src="{{ url('mails/img/icon-tk.png') }}" alt="" />
                         </div>
                     </a>
                 </div>
