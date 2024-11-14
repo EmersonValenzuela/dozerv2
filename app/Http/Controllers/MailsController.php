@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendCertificates;
 use App\Models\CertificateType;
 use App\Models\Students;
 use Illuminate\Http\Request;
@@ -19,17 +20,17 @@ class MailsController extends Controller
         $students = Students::where('course_id', $request->input('course_txt'))
             ->where($request->certificate_txt, 1)
             ->get();
-    
+
         // Verifica si se encontraron estudiantes
         if ($students->isEmpty()) {
             // Respuesta cuando no hay datos
             return response()->json([
                 'icon' => 'warning',
-                'message' => 'No se encontraron estudiantes para este curso y condición.',
+                'message' => 'No se encontraron documentos generados pra el filtro.',
                 'data' => []
             ]);
         }
-    
+
         // Si hay datos, prepara el arreglo de estudiantes
         $data = [];
         foreach ($students as $student) {
@@ -39,10 +40,11 @@ class MailsController extends Controller
                 'dni' => $student->document_number,
                 'names' => $student->full_name,
                 'email' => $student->email,
+                'code' => $student->code,
                 '' => '', // Columna vacía
             ];
         }
-    
+
         // Respuesta cuando hay datos
         return response()->json([
             'icon' => 'success',
@@ -50,5 +52,22 @@ class MailsController extends Controller
             'data' => $data
         ]);
     }
+
+    public function sendMails(Request $request)
+    {
+        $records = $request->input('records');
+
+
+        foreach ($records as $record) {
+            // Pasamos el registro al Job
+            dispatch(new SendCertificates($record));
+        }
     
+
+        return response()->json([
+            'icon' => 'success',
+            'message' => 'Correos encolados para envío',
+            'records' => $records
+        ]);
+    }
 }

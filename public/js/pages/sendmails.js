@@ -30,10 +30,11 @@ $(function () {
         ((e = o.DataTable({
             columns: [
                 { data: "id" },
-                { data: "" },
+                { data: "id" },
                 { data: "dni" },
                 { data: "names" },
                 { data: "email" },
+                { data: "code" },
                 { data: " " },
             ],
 
@@ -49,14 +50,13 @@ $(function () {
                     },
                 },
                 {
-                    targets: 1,
-                    orderable: !1,
-                    searchable: !1,
-                    responsivePriority: 3,
+                    targets: 1, // Ajusta el índice de la columna donde están los checkboxes
+                    orderable: false,
                     checkboxes: !0,
                     checkboxes: {
+                        selectRow: true,
                         selectAllRender:
-                            '<input type="checkbox" class="form-check-input">',
+                            '<div class="form-check form-check-primary"><input type="checkbox" class="dt-checkboxes form-check-input"></div>',
                     },
                     render: function () {
                         return '<div class="form-check form-check-warning"><input type="checkbox" class="dt-checkboxes form-check-input"></div>';
@@ -67,7 +67,7 @@ $(function () {
                     targets: 2,
                     render: function (a, t, x, s) {
                         return (
-                            '<a href="javascript:void(0);"><span>' +
+                            '<a href="javascript:void(0);" class="text-warning"><span>' +
                             a +
                             "</span></a>"
                         );
@@ -78,7 +78,7 @@ $(function () {
                     responsivePriority: 1,
                     render: function (a, t, x, s) {
                         return (
-                            '<div class="d-flex flex-column"><span class="text-heading fw-medium" > ' +
+                            '<div class="d-flex flex-column"><span class="fw-medium text-white" > ' +
                             a +
                             "</span></div></div>"
                         );
@@ -89,13 +89,16 @@ $(function () {
                     responsivePriority: 2,
                     render: function (a, t, x, s) {
                         return (
-                            '<div class="d-flex flex-column"><span class="text-heading fw-medium" > ' +
+                            '<div class="d-flex flex-column"><span class="fw-medium text-white" > ' +
                             a +
                             "</span></div></div>"
                         );
                     },
                 },
-
+                {
+                    targets: -2,
+                    visible: false,
+                },
                 {
                     targets: -1,
                     title: "Acciones",
@@ -107,6 +110,9 @@ $(function () {
                     },
                 },
             ],
+            select: {
+                style: "multi", // Permite selección múltiple
+            },
             order: [[1, "asc"]],
             dom: '<"card-header d-flex align-items-md-center flex-wrap"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-end align-items-md-center justify-content-md-end pt-0 gap-3 flex-wrap"l<"review_filter">>>t<"row mx-2"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
 
@@ -198,9 +204,6 @@ $(function () {
     });
 
     $("#program_txt").on("change", function () {
-        console.log(this.value);
-        console.log($("#type_txt").val());
-
         blockUI();
         $.ajax({
             url: "get-courses/" + $("#type_txt").val() + "/" + this.value,
@@ -208,8 +211,6 @@ $(function () {
             dataType: "json",
         })
             .done(function (response) {
-                console.log(response);
-
                 $("#course_txt").empty();
                 $("#course_txt").append(
                     `<option value="">Selecciona Curso</option>`
@@ -258,13 +259,11 @@ $(function () {
             contentType: false,
         })
             .done(function (response) {
-                console.log(response);
-
                 Toast.fire({
                     icon: response.icon,
                     title: response.message,
                 });
-                e.rows.add(response.data).draw();
+                e.clear().rows.add(response.data).draw();
             })
             .fail(function (xhr, status, error) {
                 Toast.fire({
@@ -276,9 +275,50 @@ $(function () {
             .always(function () {
                 $.unblockUI();
             });
+    });
 
-        console.log(formData);
-        console.log(rows);
+    $("#send_mails").on("click", function () {
+        // Obtener las filas seleccionadas
+        let selectedRecords = e.rows({ selected: true }).data().toArray();
+
+        // Verifica si hay registros seleccionados
+        if (selectedRecords.length > 0) {
+            // Preparar los datos para enviar al backend
+            let recordsToSend = selectedRecords.map((record) => ({
+                id: record.id,
+                code: record.code,
+                names: record.names,
+                email: record.email,
+            }));
+
+            console.log(recordsToSend);
+
+            $.ajax({
+                url: "sendMails",
+                method: "POST",
+                data: {
+                    _token: csrfToken, // Token CSRF para Laravel
+                    records: recordsToSend,
+                },
+                dataType: "json",
+
+            })
+                .done(function (response) {
+                    console.log(response);
+                })
+                .fail(function (xhr, status, error) {
+                    Toast.fire({
+                        icon: error.icon,
+                        title: error.message,
+                    });
+                    console.error(xhr.responseText);
+                })
+                .always(function () {
+                    $.unblockUI();
+                });
+        } else {
+            alert("Por favor selecciona al menos un registro.");
+        }
     });
 
     $(".btn-generate").on("click", function () {
@@ -306,8 +346,6 @@ $(function () {
             contentType: false,
         })
             .done(function (response) {
-                console.log(response);
-
                 Toast.fire({
                     icon: response.icon,
                     title: response.message,

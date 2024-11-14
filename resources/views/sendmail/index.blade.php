@@ -81,15 +81,9 @@
                         </div>
 
                         <div class="p-2">
-                            <div class="p-2 d-flex align-items-end "><button type="button"
-                                    class="btn btn-guardar  waves-effect waves-light fw-bold ">Agregar</button>
-                            </div>
-                        </div>
-
-                        <div class="p-2">
                             <div class="p-2 d-flex align-items-end ">
                                 <button type="button" class=" btn-import waves-effect waves-light "
-                                    id="btnImport">Enviar</button>
+                                    id="send_mails">Enviar</button>
                             </div>
                         </div>
                     </div>
@@ -106,6 +100,7 @@
                                         <th class="text-nowrap text-white fw-bold">DNI-CI</th>
                                         <th class="text-white fw-bold">Apellidos y Nombres</th>
                                         <th class="text-white fw-bold">Correo Electronico </th>
+                                        <th></th>
                                         <th class="text-white fw-bold">Acciones</th>
                                     </tr>
                                 </thead>
