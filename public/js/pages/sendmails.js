@@ -250,6 +250,12 @@ $(function () {
 
         formData.append("_token", csrfToken);
 
+        let cert = $("#type_txt").val();
+        let program = $("#program_txt").val();
+        let certTxt = $("#certificate_txt").val();
+        console.log(cert, program, certTxt);
+        
+
         $.ajax({
             url: "/get-students-mails",
             method: "POST",
@@ -280,7 +286,9 @@ $(function () {
     $("#send_mails").on("click", function () {
         // Obtener las filas seleccionadas
         let selectedRecords = e.rows({ selected: true }).data().toArray();
-
+        let cert = $("#type_txt").val();
+        let program = $("#program_txt").val();
+        let certTxt = $("#certificate_txt").val();
         // Verifica si hay registros seleccionados
         if (selectedRecords.length > 0) {
             // Preparar los datos para enviar al backend
@@ -297,11 +305,13 @@ $(function () {
                 url: "sendMails",
                 method: "POST",
                 data: {
+                    certificado: cert,
+                    programa: program,
+                    certificadoTxt: certTxt,
                     _token: csrfToken, // Token CSRF para Laravel
                     records: recordsToSend,
                 },
                 dataType: "json",
-
             })
                 .done(function (response) {
                     console.log(response);

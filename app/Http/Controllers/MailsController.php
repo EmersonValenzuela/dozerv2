@@ -26,7 +26,7 @@ class MailsController extends Controller
             // Respuesta cuando no hay datos
             return response()->json([
                 'icon' => 'warning',
-                'message' => 'No se encontraron documentos generados pra el filtro.',
+                'message' => 'No se encontraron documentos generados para el filtro.',
                 'data' => []
             ]);
         }
@@ -62,7 +62,7 @@ class MailsController extends Controller
             // Pasamos el registro al Job
             dispatch(new SendCertificates($record));
         }
-    
+
 
         return response()->json([
             'icon' => 'success',
