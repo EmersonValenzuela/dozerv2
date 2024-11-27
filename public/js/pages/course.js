@@ -36,7 +36,7 @@ $(function () {
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
                                         </a> <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_m" data-name="Constancia de Matricula"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         } else {
-                            return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
+                            return ` <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_m" data-name="Constancia de Matricula"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         }
                     },
                 },
@@ -49,7 +49,7 @@ $(function () {
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
                                         </a>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         } else {
-                            return `<button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
+                            return `<button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         }
                     },
                 },
@@ -62,7 +62,7 @@ $(function () {
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
                                         </a>   <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="r_e" data-name="Reconocimiento a la Excelencia"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         } else {
-                            return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
+                            return ` <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="r_e" data-name="Reconocimiento a la Excelencia"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         }
                     },
                 },
@@ -77,7 +77,7 @@ $(function () {
                                 <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="m" data-name="Certificado de Matrícula"><span class="mdi mdi-note-edit-outline"></span></button>
                                 `;
                         } else {
-                            return ` <button type="button" class="btn btn-icon btn-info"><span class="mdi mdi-file-sign text-white size-icon"></span></button>`;
+                            return ` <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="m" data-name="Certificado de Matrícula"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         }
                     },
                 },

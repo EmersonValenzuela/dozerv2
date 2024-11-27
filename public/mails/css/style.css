@@ -1,426 +1,95 @@
-.fondo-dozer {
-  width: 1517px;
+
+
+.fondo-dozer{
+    width: 1517px;
+}
+.logo-dozer{
+    width: 190px !important;
+}
+.contenido{
+ padding: 320px 0px;
+}
+.titulo{
+    padding: 25px 450px;
+    font-family: rubik;
+  
+}
+.tituto-constancia{
+        padding: 25px 410px;
+        font-family: rubik;
+     
 }
 
-.logo-dozer {
-  width: 190px !important;
+.contenido-texto{
+    padding: 30px 300px;
+    font-size: 25px;
+    font-family: rubik;
+    color: #4F4F4F !important;
+    font-weight: 300;
 }
 
-.contenido {
-  padding: 320px 0px;
+.btn-descarga{
+    margin: 40px 0;
+    background: #C2AC7C !important;
+    padding: 7px 150px !important;
+    border-radius: 9px;
+    color: white  !important;
+    font-weight: 700  !important;
+    font-size: 27px !important;
+    font-family: rubik !important;
 }
-
-.titulo {
-  padding: 25px 450px;
-  font-family: rubik;
-
-}
-
-.tituto-constancia {
-  padding: 25px 410px;
-  font-family: rubik;
-
-}
-
-.contenido-texto {
-  padding: 30px 300px;
-  font-size: 25px;
-  font-family: rubik;
-  color: #4F4F4F !important;
-  font-weight: 300;
-}
-
-
-
-.p-logo {
-  padding: 35px 0;
+.p-logo{
+    padding: 35px 0;
 }
 
 .titulo-espe {
-  padding: 25px 480px;
-  font-family: rubik;
-
+    padding: 25px 480px;
+    font-family: rubik;
+    
 }
 
 .titulo-diplo {
-  padding: 25px 520px;
-  font-family: rubik;
-
+    padding: 25px 520px;
+    font-family: rubik;
+    
 }
 
-.font-titulo {
-  font-size: 31px !important;
-  color: #171717
+.font-titulo{
+    font-size: 31px !important;
+    color: #171717
 }
 
-.titulo-excelencia {
-  padding: 25px 500px;
-  font-family: rubik;
-
+.titulo-excelencia{
+    padding: 25px 500px;
+    font-family: rubik;
+    
 }
 
 
-.btn-descarga-cip {
-  margin: 40px 0;
-  background: #A41E26 !important;
-  padding: 7px 150px !important;
-  border-radius: 9px;
-  color: white !important;
-  font-weight: 700 !important;
-  font-size: 27px !important;
-  font-family: rubik !important;
+.btn-descarga-cip{
+    margin: 40px 0;
+    background: #A41E26 !important;
+    padding: 7px 150px !important;
+    border-radius: 9px;
+    color: white  !important;
+    font-weight: 700  !important;
+    font-size: 27px !important;
+    font-family: rubik !important;
 }
 
-.titulo-cip {
-  padding: 25px 410px;
-  font-family: rubik;
+.titulo-cip{
+    padding: 25px 410px;
+    font-family: rubik;
 }
 
 .contenido-cip {
-  padding: 500px 0px;
+    padding: 500px 0px;
 }
-
 .titulo-cip-diplo {
-  padding: 25px 520px;
-  font-family: rubik;
+    padding: 25px 520px;
+    font-family: rubik;
 }
-
 .titulo-curso {
-  padding: 25px 550px;
-  font-family: rubik;
-}
-
-
-/*==============*/
-
-.fondo-encabezado {
-  background: rgb(29, 29, 27);
-  background: linear-gradient(177deg, rgba(29, 29, 27, 1) 0%, rgba(88, 89, 91, 1) 100%);
-  padding: 5px 50px;
-}
-
-.w-220 {
-  width: 220px;
-}
-
-.fondo-encabezado-dos {
-  background: rgb(188, 187, 167);
-  background: linear-gradient(59deg, rgba(188, 187, 167, 1) 0%, rgba(252, 250, 223, 1) 100%);
-  height: 15px;
-}
-
-.p-50px {
-  padding: 70px 0;
-}
-
-.text-titulo {
-  font-family: "Swiss 721 Bold Condensed";
-  font-size: 31px;
-
-}
-
-.text-cont {
-  color: #8E8E8E;
-  font-family: "Swiss 721 Condensed BT";
-  font-weight: 200;
-  font-size: 25px;
-  margin: 60px 0px;
-  text-align: justify;
-}
-
-.section-descarga {
-  position: absolute;
-  top: 126%;
-
-}
-.section-descargacp {
-  position: absolute;
-  top: 102%;
-
-}
-.text-titulo-descarga {
-  font-size: 28px !important;
-  font-family: "Swiss 721 Bold Condensed";
-}
-
-.cont-descarga {
-  text-align: justify;
-  color: #E5E5E5;
-  font-size: 24px;
-  font-family: "Swiss 721 Condensed BT";
-
-}
-
-.m-100px {
-  margin: 0 100px;
-}
-
-.btn-descarga {
-
-  background: rgb(188, 187, 167);
-  background: linear-gradient(93deg, rgba(188, 187, 167, 1) 0%, rgba(252, 250, 223, 1) 100%);
-  border-radius: 5px;
-  text-align: center;
-  padding: 5px;
-}
-
-.btn-descarga-style {
-  color: #222222 !important;
-  font-size: 22px;
-  font-family: "Swiss 721 Bold Condensed";
-  text-decoration: none;
-  font-weight: 500;
-
-}
-
-.text-id {
-  color: #CFCEB8;
-}
-
-.text-encabezado {
-  font-family: "Swiss 721 Condensed BT";
-  font-size: 23px;
- 
-  
-}
-.vertical{
-  background-color:  #FCFADF;
-  width: 5px;
-  height: 80px;
-  right: 10px;
-  position: relative;
-  margin: 20px 0;
-  border-radius: 1.5px;
-}
-
-.separador {
-  background-color: #EFEFEF;
-  height: 10px;
-  margin: 20px;
-}
-
-.color-asesor {
-  color: #666666;
-}
-
-.span-wssp {
-  font-family: "Swiss 721 Bold Condensed";
-}
-
-.fondo-wssp {
-  background: rgb(241, 242, 242);
-  background: linear-gradient(62deg, rgba(241, 242, 242, 1) 0%, rgba(255, 255, 255, 1) 100%);
-  margin: 0 38% 5% 38% !important;
-  border-radius: 40px 0px;
-  -webkit-box-shadow: 18px 16px 67px -12px #fff;
-  -moz-box-shadow: 18px 16px 67px -12px rgba(0, 0, 0, 0.75);
-  box-shadow: 6px 11px 19px 0px rgba(0, 0, 0, 0.125);
-  border: 7px solid white;
-}
-
-.wssp-50{
-  width: 50px;
-}
-.titulo-wssp{
-  font-size: 21px;
-  font-family: "Swiss 721 Condensed BT";
-  color: #666666;
-}
-.number-wssp{
-  font-size: 25px;
-  font-family: "Swiss 721 Bold Condensed";
-  color: #444444;
-}
-.w-550{
-  width: 550px;
-}
-.section-final{
-  position: absolute;
-  top: 1920px;
-}
-.titulo-registro{
-  font-size: 34px;
-  font-family: "Swiss 721 Bold Condensed";
-}
-.px-80{
-  padding: 0 80px;
-}
-.fondo-footer{
-  background-color: #F2F2F2;
-}
-.text-footer{
-  font-family: "Swiss 721 Bold Condensed";
-  font-size: 25px;
-  color: #595959;
-}
-.linia-footer{
-  background-color: #C9C9C9;
-  height: 5px;
-}
-.horizontal{
-  background-color:  #CFCEB8;
-  width: 50px;
-  height: 5px;
-  right: 10px;
-  position: relative;
-  margin: 0 20px ;
-  border-radius: 1.5px;
-}
-.icon-style
-{
-  width: 30px;
-}
-.icon-stylefb
-{
-  width: 15px;
-  margin: auto;
-  display: block;
-  
-}
-.icon-styletk
-{
-  width: 30px;
-  margin: auto;
-  display: block;
-}
-
-.fondo-icon{
-  background: rgb(29, 29, 27);
-  background: linear-gradient(177deg, rgba(29, 29, 27, 1) 0%, rgba(88, 89, 91, 1) 100%);
-  border-radius: 50%;
-  padding: 10px;
-
-}
-.w-50px{
-  width: 50px;
-}
-.h-50px{
-  height: 50px;
-}
-.text-contdirec {
-  color: #8E8E8E;
-  font-family: "Swiss 721 Condensed BT";
-  font-weight: 200;
-  font-size: 25px;
-  
-}
-.top-bloque{
-  bottom: 7rem;
-  position: relative;
-}
-.top-bloquecp{
-  position: relative;
-  top: 1rem;
-}
-
-.section-descarga-curso {
-  position: absolute;
-  top: 140%;
-}
-.top-bloque-curso {
-  position: relative;
-  top: 15rem;
-}
-.text-cont-dos {
-  color: #8E8E8E;
-  font-family: "Swiss 721 Condensed BT";
-  font-weight: 200;
-  font-size: 25px;
-  margin: 20px 0px !important;
-}
-.section-finalcp {
-  position: absolute;
-  top: 2010px;
-}
-
-.fondo-encabezado-cip {
-
-  padding: 5px 50px;
- 
-}
-
-.encabezado-cip{
-  width: 100%;
-  
-}
-.text-cip{
-  position: absolute;
-  top: 2rem;
-}
-.img-cip{
-  width: 150px;
-}
-.text-cip-titulo{
-  font-family: "Swiss 721 Bold Condensed";
-  font-size: 31px;
-}
-.text-encabezado-cip{
-  position: absolute;
-  top: 12px;
-  right: 100px;
-}
-
-.btn-descargarcip{
-  background: #A41E26;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  padding: 5px 130px;
-  border-radius: 10px;
- font-size: 27px;
- font-family: "Swiss 721 Bold Condensed";
- margin-bottom: 60px;
-}
-.top-12px{
-  top: 15rem;
-  position: relative;
-}
-.section-final-cip{
-  position: absolute;
-  top: 90.5rem;
-}
-
-
-.btn-descargarcap{
-  background: #BFBC99;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  padding: 5px 130px;
-  border-radius: 10px;
- font-size: 27px;
- font-family: "Swiss 721 Bold Condensed";
- margin-bottom: 60px;
-}
-.fondo-icon:hover{
-  background: #C1BFA7;
-}
-.section-final-m{
-  position: absolute;
-  top: 1990px;
-}
-
-.section-descarga-diplomado {
-  position: absolute;
-  top: 135%;
-}
-
-.top-bloque-diplomado {
-  position: relative;
-  top: 13rem;
-}
-
-.seccion-especip {
-  top: 19rem;
-  position: relative;
-}
-
-.seccion-dicip  {
-  top: 13rem;
-  position: relative;
-}
-
-.seccion-especap {
-  top: 20rem;
-  position: relative;
+    padding: 25px 550px;
+    font-family: rubik;
 }

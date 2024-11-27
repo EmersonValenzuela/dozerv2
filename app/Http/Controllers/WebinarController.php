@@ -61,7 +61,6 @@ class WebinarController extends Controller
         }
 
         $file1Path = $request->file('file1')->store($directory, 'public');
-
         $imgUrl = Storage::url($file1Path);
 
         $lastCourse = Course::latest('id_course')->first();
@@ -81,6 +80,7 @@ class WebinarController extends Controller
 
         $courseId = $course->id_course;
 
+        // Obtener los estudiantes enviados en el request
         $studentsData = json_decode($request->input('rows'), true);
 
         foreach ($studentsData as $student) {
@@ -95,14 +95,22 @@ class WebinarController extends Controller
             $student->save();
             $id = $student->id_student;
 
-            $prefix = floor(($id - 1) / 1000) + 2;
-            $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
-            $student->code = $code;
+            // Contar cuántos estudiantes hay en el curso actualmente
+            $currentStudentCount = Students::where('course_id', $courseId)->count();
+
+            // Genera el código del estudiante
+            $coursePrefix = str_pad($courseId, 3, '0', STR_PAD_LEFT);
+            $studentNumber = str_pad($currentStudentCount, 3, '0', STR_PAD_LEFT);
+            $studentCode = $coursePrefix . $studentNumber;
+
+            $student->code = $studentCode;
             $student->w_p = 1;
             $student->save();
 
-            $this->generatePdf($student->full_name, $student->course_or_event, $request->input('date'), $imgUrl, $code);
+            // Generar PDF para cada estudiante
+            $this->generatePdf($student->full_name, $student->course_or_event, $request->input('date'), $imgUrl, $studentCode);
         }
+
         return response()->json([
             'success' => true,
             'icon' => 'success',
@@ -110,6 +118,7 @@ class WebinarController extends Controller
             'course' => $codeCourse
         ]);
     }
+
 
     public function import(Request $request)
     {
@@ -144,10 +153,16 @@ class WebinarController extends Controller
                 $newStudent->save();
                 $id = $newStudent->id_student;
 
-                // Genera el código del estudiante
-                $prefix = floor(($id - 1) / 1000) + 2;
-                $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
-                $newStudent->code = $code;
+                // Cálculo del código del estudiante
+                // Genera un número secuencial dentro del curso basado en el ID del curso
+                $coursePrefix = str_pad($idCourse, 3, '0', STR_PAD_LEFT); // Formato del curso
+                $studentCount = Students::where('course_id', $idCourse)->count(); // Contador de estudiantes en el curso
+                $studentNumber = str_pad($studentCount, 3, '0', STR_PAD_LEFT); // Formato secuencial para el estudiante
+
+                // El código del estudiante será algo como '001002' (donde 001 es el código del curso y 002 es el número secuencial)
+                $studentCode = $coursePrefix . $studentNumber;
+
+                $newStudent->code = $studentCode; // Asigna el código generado al estudiante
                 $newStudent->w_p = 1;
                 $newStudent->save();
             }
@@ -202,7 +217,7 @@ class WebinarController extends Controller
         $pdf->SetXY($x, 108.5); // Ajustar la posición vertical según sea necesario
         $pdf->Cell($anchoTexto, 40, utf8_decode($date), 0, 1, 'C');
 
-        $pdfFileName = "webinar" . $code . '.pdf';
+        $pdfFileName = "webinar_" . $code . '.pdf';
         $pdf->Output(public_path('pdfs/webinar/' . $pdfFileName), 'F');
     }
 
@@ -259,6 +274,7 @@ class WebinarController extends Controller
 
     public function insertStudent(Request $request)
     {
+        // Crear un nuevo estudiante
         $student = new Students();
         $student->course_id = $request->course_id;
         $student->full_name = $request->names;
@@ -267,21 +283,34 @@ class WebinarController extends Controller
         $student->course_or_event = $request->webinar;
         $student->w_p = 1;
         $student->save();
-
-        $id = $student->id_student;
-
-        $prefix = floor(($id - 1) / 1000) + 2;
-        $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
-        $student->code = $code;
+    
+        // Obtener el ID del curso
+        $courseId = $request->course_id;
+    
+        // Contar cuántos estudiantes hay ya en ese curso
+        $studentCount = Students::where('course_id', $courseId)->count();
+    
+        // Generar el código del estudiante
+        $coursePrefix = str_pad($courseId, 3, '0', STR_PAD_LEFT); // Formato del curso con 3 dígitos
+        $studentNumber = str_pad($studentCount, 3, '0', STR_PAD_LEFT); // Número secuencial del estudiante en el curso
+    
+        $studentCode = $coursePrefix . $studentNumber; // Código final
+    
+        // Asignar y guardar el código del estudiante
+        $student->code = $studentCode;
         $student->save();
-
-        $this->generatePdf($request->names, $request->webinar, $request->date_webinar, Storage::url($request->imgUrl), $code);
+    
+        // Generar PDF para el estudiante
+        $this->generatePdf($request->names, $request->webinar, $request->date_webinar, Storage::url($request->imgUrl), $studentCode);
+    
+        // Responder con un mensaje de éxito
         return response()->json([
             'success' => true,
             'icon' => 'success',
             'message' => 'Alumno creado',
         ]);
     }
+    
 
     public function updateStudent(Request $request)
     {

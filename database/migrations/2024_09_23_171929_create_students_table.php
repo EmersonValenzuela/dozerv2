@@ -19,14 +19,14 @@ return new class extends Migration
             $table->string('code', 150)->unique()->nullable(); // Name of the course, event, or program
             $table->string('course_or_event', 200)->nullable(); // Name of the course, event, or program
             $table->string('full_name'); // Full name of the student
-            $table->string('document_number'); // Full name of the student
+            $table->string('document_number'); // Document number of the student
             $table->string('score')->nullable();
             $table->string('email'); // Email address of the student
-            $table->boolean('c_m')->default(false); // Status of the certificate
-            $table->boolean('c_p')->default(false); // Status of the certificate
-            $table->boolean('r_e')->default(false); // Status of the certificate
-            $table->boolean('w_p')->default(false); // Status of the certificate
-            $table->boolean('certificate')->default(false); // Status of the certificate
+            $table->tinyInteger('c_m')->default(0); // Status of the certificate (use integers: 0, 1, 2, etc.)
+            $table->tinyInteger('c_p')->default(0); // Status of the certificate (use integers: 0, 1, 2, etc.)
+            $table->tinyInteger('r_e')->default(0); // Status of the certificate (use integers: 0, 1, 2, etc.)
+            $table->tinyInteger('w_p')->default(0); // Status of the certificate (use integers: 0, 1, 2, etc.)
+            $table->tinyInteger('certificate')->default(0); // Status of the certificate (use integers: 0, 1, 2, etc.)
             $table->enum('status', ['active', 'revoked']); // Status of the certificate
             $table->timestamps(); // Timestamps for creation and updates
 

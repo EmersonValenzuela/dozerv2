@@ -13,16 +13,26 @@ class NotificationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $record;
+    public $studentRecord;    // Información del estudiante
+    public $viewTemplate;     // Ruta de la vista dinámica
+    public $certificateText;  // Texto del certificado
+    public $fileAttachment;   // Nombre del archivo adjunto
 
     /**
      * Create a new message instance.
      *
+     * @param  array  $studentRecord
+     * @param  string  $viewTemplate
+     * @param  string  $certificateText
+     * @param  string  $fileAttachment
      * @return void
      */
-    public function __construct($record)
+    public function __construct($studentRecord, $viewTemplate, $certificateText, $fileAttachment)
     {
-        $this->record = $record;
+        $this->studentRecord = $studentRecord;
+        $this->viewTemplate = $viewTemplate;
+        $this->certificateText = $certificateText;
+        $this->fileAttachment = $fileAttachment; // Asigna el archivo adjunto
     }
 
     /**
@@ -32,8 +42,9 @@ class NotificationMail extends Mailable
      */
     public function envelope()
     {
+        // Asunto dinámico con el texto del certificado
         return new Envelope(
-            subject: 'ASUNTO O TEMA DEL CORREO',
+            subject: 'Certificado de ' . $this->certificateText,
         );
     }
 
@@ -44,10 +55,10 @@ class NotificationMail extends Mailable
      */
     public function content()
     {
-
+        // Usar la vista dinámica y pasar la información del estudiante
         return new Content(
-            view: 'mails.participacion',
-            with: ['record' => $this->record]
+            view: 'mails.' . $this->viewTemplate,  // Vista dinámica
+            with: ['studentRecord' => $this->studentRecord] // Se pasa el registro del estudiante
         );
     }
 
@@ -58,6 +69,10 @@ class NotificationMail extends Mailable
      */
     public function attachments()
     {
+        // Si tienes un archivo adjunto, puedes agregarlo aquí
+        // return [
+        //     storage_path('app/attachments/' . $this->fileAttachment),
+        // ];
         return [];
     }
 }

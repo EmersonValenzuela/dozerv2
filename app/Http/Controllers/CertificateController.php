@@ -78,7 +78,7 @@ class CertificateController extends Controller
             // Crear el estudiante
             $student = new Students([
                 'course_id' => $courseId,
-                'course_or_event' => $studentData['course'],
+                'course_or_event' => $request->input('name'),
                 'full_name' => $studentData['names'],
                 'document_number' => $studentData['dni'],
                 'score' => $studentData['score'],
@@ -295,6 +295,7 @@ class CertificateController extends Controller
 
     public function insertStudent(Request $request)
     {
+        // Crear un nuevo estudiante
         $student = new Students();
         $student->course_id = $request->course_id;
         $student->full_name = $request->names;
@@ -305,13 +306,23 @@ class CertificateController extends Controller
         $student->status = "active";
         $student->save();
 
-        $id = $student->id_student;
+        // Obtener el ID del curso
+        $courseId = $request->course_id;
 
-        $prefix = floor(($id - 1) / 1000) + 2;
-        $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
-        $student->code = $code;
+        // Contar cuántos estudiantes hay ya en ese curso
+        $studentCount = Students::where('course_id', $courseId)->count();
+
+        // Generar el código del estudiante
+        $coursePrefix = str_pad($courseId, 3, '0', STR_PAD_LEFT); // Formato del curso con 3 dígitos
+        $studentNumber = str_pad($studentCount, 3, '0', STR_PAD_LEFT); // Número secuencial del estudiante en el curso
+
+        $studentCode = $coursePrefix . $studentNumber; // Código final
+
+        // Asignar y guardar el código del estudiante
+        $student->code = $studentCode;
         $student->save();
 
+        // Responder con un mensaje de éxito
         return response()->json([
             'success' => true,
             'icon' => 'success',
@@ -359,6 +370,9 @@ class CertificateController extends Controller
                 $existingStudent->score = $student['score'];
                 $existingStudent->save();
             } else {
+                // Contar cuántos estudiantes hay en el curso actualmente
+                $currentStudentCount = Students::where('course_id', $idCourse)->count();
+
                 // Crea un nuevo registro de estudiante si no existe
                 $newStudent = new Students([
                     'course_id' => $idCourse,
@@ -371,12 +385,13 @@ class CertificateController extends Controller
                 ]);
 
                 $newStudent->save();
-                $id = $newStudent->id_student;
 
                 // Genera el código del estudiante
-                $prefix = floor(($id - 1) / 1000) + 2;
-                $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
-                $newStudent->code = $code;
+                $coursePrefix = str_pad($idCourse, 3, '0', STR_PAD_LEFT);
+                $studentNumber = str_pad($currentStudentCount + 1, 3, '0', STR_PAD_LEFT);
+                $studentCode = $coursePrefix . $studentNumber;
+
+                $newStudent->code = $studentCode;
                 $newStudent->w_p = 1;
                 $newStudent->save();
             }

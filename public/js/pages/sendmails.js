@@ -106,8 +106,8 @@ $(function () {
                     render: function (data, type, row, meta) {
                         // Define las clases y textos como variables para mayor claridad
                         const statusClass =
-                            data == 1 ? "bg-label-warning" : "bg-label-success";
-                        const statusText = data == 1 ? "No Enviado" : "Enviado";
+                            data == 2 ? "bg-label-success" : "bg-label-warning";
+                        const statusText = data == 2 ? "Enviado" : "No Enviado";
 
                         // Retorna el HTML formateado
                         return `<span class="badge rounded-pill ${statusClass}">${statusText}</span>`;
@@ -266,6 +266,7 @@ $(function () {
         let cert = $("#type_txt").val();
         let program = $("#program_txt").val();
         let certTxt = $("#certificate_txt").val();
+        console.log(cert, program, certTxt);
 
         formData.append("_token", csrfToken);
         formData.append("column", certTxt);
