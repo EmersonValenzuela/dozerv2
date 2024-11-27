@@ -124,13 +124,13 @@
     <section class="container-fluid d-flex justify-content-center">
         <div class="d-flex justify-content-start">
             <div>
-                <img class="fondo-dozer" src="{{ asset('mails/img/fondo-formato-dozer.png') }}" alt="..." />
+                <img class="fondo-dozer" src="{{ asset('mails/img/fondo-formato-dozer.png')}}" alt="..." />
             </div>
         </div>
 
         <div class="text-black position-absolute pt-50 d-flex flex-column mb-3 contenido justify-content-center">
             <div class="p-logo">
-                <img class="logo-dozer d-block m-auto" src="{{ asset('mails/img/dozer.png') }}" alt="" />
+                <img class="logo-dozer d-block m-auto" src="{{ asset('mails/img/dozer.png')}}" alt="" />
             </div>
             <div class="text-center titulo-curso">
                 <h1 class="fw-bold font-titulo">CERTIFICADO DE CURSO DE INSTITUTO DOZER</h1>

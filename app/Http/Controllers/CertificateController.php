@@ -354,6 +354,8 @@ class CertificateController extends Controller
     public function import(Request $request)
     {
         $idCourse = $request->input('id');
+
+        $course = Course::find($idCourse);
         $studentsData = json_decode($request->input('rows'), true);
 
         foreach ($studentsData as $student) {
@@ -364,7 +366,6 @@ class CertificateController extends Controller
 
             if ($existingStudent) {
                 // Si el estudiante ya existe, actualiza sus datos
-                $existingStudent->course_or_event = $student['course'];
                 $existingStudent->full_name = $student['names'];
                 $existingStudent->email = $student['email'];
                 $existingStudent->score = $student['score'];
@@ -376,7 +377,7 @@ class CertificateController extends Controller
                 // Crea un nuevo registro de estudiante si no existe
                 $newStudent = new Students([
                     'course_id' => $idCourse,
-                    'course_or_event' => $student['course'],
+                    'course_or_event' => $course->course_or_event,
                     'full_name' => $student['names'],
                     'document_number' => $student['dni'],
                     'email' => $student['email'],

@@ -6,6 +6,7 @@ use App\Models\CertificateType;
 use App\Models\Course;
 use App\Models\Students;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class HomeController extends Controller
 {
@@ -56,5 +57,30 @@ class HomeController extends Controller
         $students = Students::getStudentByCourse($data);
 
         return response()->json(['data' => $students]);
+    }
+
+    public function downloadFile($data)
+    {
+        try {
+            // Descifra los datos encriptados
+            $decodedData = Crypt::decryptString($data);
+
+            // Convierte los datos descifrados de JSON a un array
+            $dataArray = json_decode($decodedData, true);
+
+            // Construye la ruta del archivo
+            $filePath = public_path('pdfs/' . $dataArray['route'] . '/' . $dataArray['name'] . $dataArray['code'] . '.pdf');
+
+            // Verifica si el archivo existe
+            if (!file_exists($filePath)) {
+                abort(404, 'Archivo no encontrado');
+            }
+
+            // Forzar la descarga del archivo
+            return response()->download($filePath);
+        } catch (\Exception $e) {
+            // Si algo falla (por ejemplo, datos manipulados), lanza un error
+            abort(400, 'Datos inválidos o manipulados');
+        }
     }
 }

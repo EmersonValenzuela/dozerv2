@@ -119,6 +119,8 @@ $(function () {
         $("#modal_title").text("Agregar estudiante");
         $("#modal_student").modal("show");
         $("#certificate").val("add");
+        $("#certificate").val("add");
+        $("#course_name").val($(".font-tituview").text());
         $("#course_id").val(course_id);
     });
 
@@ -262,7 +264,6 @@ $(function () {
                 { data: "code" },
                 { data: "dni" },
                 { data: "names" },
-                { data: "course" },
                 { data: "score" },
                 { data: "email" },
                 { data: " " },
@@ -367,7 +368,7 @@ $(function () {
         })),
         $(".dataTables_length").addClass("mt-0 mt-md-3")),
         $(".datatables_add tbody").on("click", ".delete-record", function () {
-            var table = $(".datatables_certificates").DataTable(); // Obtén la instancia de DataTable
+            var table = $(".datatables_add").DataTable(); // Obtén la instancia de DataTable
             table.row($(this).closest("tr")).remove().draw(); // Elimina la fila correspondiente
         });
 
@@ -409,7 +410,6 @@ $(function () {
                         code: row.code,
                         dni: row.dni,
                         names: row.nombres,
-                        course: row.curso,
                         score: row.nota,
                         email: row.email,
                         "": "",

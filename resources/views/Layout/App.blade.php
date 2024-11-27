@@ -87,23 +87,23 @@
                     </a>
                 </div>
                 <div class="menu-inner-shadow"></div>
-
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
-                    <li class="menu-item active open">
+                    <li class="menu-item {{ Route::is('home') ? 'active open' : '' }}">
                         <a href="{{ route('home') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-home"></i>
                             <div data-i18n="Página de Inicio">Página de Inicio</div>
                         </a>
                     </li>
 
-                    <li class="menu-item">
+                    <li class="menu-item {{ Route::is('certificate.create') ? 'active' : '' }}">
                         <a href="{{ route('certificate.create') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-book-plus-multiple"></i>
                             <div data-i18n="Crear Curso">Crear Capacitación</div>
                         </a>
                     </li>
-                    <li class="menu-item">
+
+                    <li class="menu-item {{ Route::is('enrollment.create') ? 'active' : '' }}">
                         <a href="{{ route('enrollment.create') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-account-arrow-right"></i>
                             <div data-i18n="Constancia de Matricula">
@@ -111,7 +111,8 @@
                             </div>
                         </a>
                     </li>
-                    <li class="menu-item">
+
+                    <li class="menu-item {{ Route::is('constancy.create') ? 'active' : '' }}">
                         <a href="{{ route('constancy.create') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-account"></i>
                             <div data-i18n="Constancia <br> de Participación">
@@ -120,7 +121,8 @@
                             </div>
                         </a>
                     </li>
-                    <li class="menu-item">
+
+                    <li class="menu-item {{ Route::is('recognition.create') ? 'active' : '' }}">
                         <a href="{{ route('recognition.create') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-medal"></i>
                             <div data-i18n="Reconocimiento <br> a la Excelencia">
@@ -129,7 +131,8 @@
                             </div>
                         </a>
                     </li>
-                    <li class="menu-item">
+
+                    <li class="menu-item {{ Route::is('certificate.index') ? 'active' : '' }}">
                         <a href="{{ route('certificate.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-certificate"></i>
                             <div data-i18n="Certificado <br> de Estudio">
@@ -138,7 +141,8 @@
                             </div>
                         </a>
                     </li>
-                    <li class="menu-item">
+
+                    <li class="menu-item {{ Route::is('webinar.create') ? 'active' : '' }}">
                         <a href="{{ route('webinar.create') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-account-group"></i>
                             <div data-i18n="Participación en Webinar">
@@ -146,7 +150,8 @@
                             </div>
                         </a>
                     </li>
-                    <li class="menu-item">
+
+                    <li class="menu-item {{ Route::is('sendmail.index') ? 'active' : '' }}">
                         <a href="{{ route('sendmail.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons mdi mdi-email-outline"></i>
                             <div data-i18n="Envio Correos">
@@ -178,21 +183,6 @@
                         <!-- /Search -->
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <!-- Language -->
-
-                            <!--/ Language -->
-
-                            <!-- Style Switcher -->
-
-                            <!-- / Style Switcher-->
-
-                            <!-- Quick links  -->
-
-                            <!-- Quick links -->
-
-                            <!-- Notification -->
-
-                            <!--/ Notification -->
 
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">

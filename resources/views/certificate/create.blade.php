@@ -78,7 +78,6 @@
                             <th class="text-white fw-bold">Código</th>
                             <th class="text-nowrap text-white fw-bold">DNI-CI</th>
                             <th class="text-white fw-bold">Apellidos y Nombres</th>
-                            <th class="text-nowrap text-white fw-bold">Capacitacion</th>
                             <th class="text-white fw-bold">Nota </th>
                             <th class="text-white fw-bold">Correo Electronico </th>
                             <th class="text-white fw-bold">Acciones</th>

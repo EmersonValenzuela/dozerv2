@@ -58,7 +58,11 @@ class NotificationMail extends Mailable
         // Usar la vista dinámica y pasar la información del estudiante
         return new Content(
             view: 'mails.' . $this->viewTemplate,  // Vista dinámica
-            with: ['studentRecord' => $this->studentRecord] // Se pasa el registro del estudiante
+            with: [
+                'studentRecord' => $this->studentRecord,
+                'route' => $this->certificateText,
+                'name' => $this->fileAttachment
+            ]
         );
     }
 

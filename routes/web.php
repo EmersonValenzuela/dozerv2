@@ -28,6 +28,7 @@ Route::controller(HomeController::class)->group(function ($route) {
     Route::get('/Lista/{category}', 'list')->name('home.list');
     Route::get('/Curso/{data}', 'course')->name('home.course');
     Route::get('/Curso/{data}/students', 'students');
+    Route::get('/documento/{data}', 'downloadFile')->name('home.certificate');
 });
 
 Route::controller(CertificateController::class)->group(function ($route) {
