@@ -125,7 +125,7 @@ class EnrollmentController extends Controller
         $pdf->SetXY(179.5, 120.2);
         $pdf->Cell(1, 35, utf8_decode($date), 0, 1, 'L');
 
-        $pdfFileName = $code . '.pdf';
+        $pdfFileName ='matricula_' . $code . '.pdf';
         $pdf->Output(public_path('pdfs/enrollments/') . $pdfFileName, 'F');
     }
 

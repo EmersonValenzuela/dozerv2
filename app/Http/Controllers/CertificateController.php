@@ -49,11 +49,10 @@ class CertificateController extends Controller
      */
     public function store(Request $request)
     {
-
-
+        // Obtener el último curso y calcular el próximo ID
         $lastCourse = Course::latest('id_course')->first();
         $nextId = $lastCourse ? $lastCourse->id_course + 1 : 1;
-        $codeCourse = 'C' . str_pad($nextId, 5, '0', STR_PAD_LEFT); // Ejemplo de código
+        $codeCourse = 'C' . str_pad($nextId, 5, '0', STR_PAD_LEFT); // Generar código del curso
 
         // Crear el curso
         $course = new Course([
@@ -67,32 +66,40 @@ class CertificateController extends Controller
         // Guardar el curso
         $course->save();
 
-
         $courseId = $course->id_course;
 
+        // Obtener los datos de los estudiantes
         $studentsData = json_decode($request->input('rows'), true);
 
-        foreach ($studentsData as $student) {
+        foreach ($studentsData as $studentData) {
+            // Contar cuántos estudiantes hay en el curso actualmente
+            $currentStudentCount = Students::where('course_id', $courseId)->count();
+
+            // Crear el estudiante
             $student = new Students([
                 'course_id' => $courseId,
-                'course_or_event' => $student['course'],
-                'full_name' => $student['names'],
-                'document_number' => $student['dni'],
-                'score' => $student['score'],
-                'email' => $student['email'],
+                'course_or_event' => $studentData['course'],
+                'full_name' => $studentData['names'],
+                'document_number' => $studentData['dni'],
+                'score' => $studentData['score'],
+                'email' => $studentData['email'],
                 'status' => 'active',
             ]);
             $student->save();
-            $id = $student->id_student;
 
-            $prefix = floor(($id - 1) / 1000) + 2;
-            $code = str_pad($prefix, 3, '0', STR_PAD_LEFT) . str_pad($id, 3, '0', STR_PAD_LEFT);
-            $student->code = $code;
+            // Generar el código del estudiante
+            $coursePrefix = str_pad($courseId, 3, '0', STR_PAD_LEFT);
+            $studentNumber = str_pad($currentStudentCount + 1, 3, '0', STR_PAD_LEFT);
+            $studentCode = $coursePrefix . $studentNumber;
+
+            // Actualizar el código del estudiante
+            $student->code = $studentCode;
             $student->save();
         }
 
         return response()->json(['success' => true, 'icon' => 'success', 'message' => 'Curso Generado', 'course' => $codeCourse]);
     }
+
 
 
     public function generateCertificates(Request $request)
@@ -210,7 +217,7 @@ class CertificateController extends Controller
         $pdf->Cell(1, 5, $code, 0, 1, 'L');
 
         // Guardar el archivo PDF en una carpeta específica dentro del proyecto
-        $pdfFileName = $code . '.pdf';
+        $pdfFileName = "certificado_" . $code . '.pdf';
         $pdf->Output(public_path('pdfs/certificates/' . $pdfFileName), 'F');
     }
 

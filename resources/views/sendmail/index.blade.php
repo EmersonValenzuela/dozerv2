@@ -101,6 +101,7 @@
                                         <th class="text-white fw-bold">Apellidos y Nombres</th>
                                         <th class="text-white fw-bold">Correo Electronico </th>
                                         <th></th>
+                                        <th class="text-white fw-bold">Estado</th>
                                         <th class="text-white fw-bold">Acciones</th>
                                     </tr>
                                 </thead>

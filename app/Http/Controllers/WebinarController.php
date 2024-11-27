@@ -202,7 +202,7 @@ class WebinarController extends Controller
         $pdf->SetXY($x, 108.5); // Ajustar la posición vertical según sea necesario
         $pdf->Cell($anchoTexto, 40, utf8_decode($date), 0, 1, 'C');
 
-        $pdfFileName = $code . '.pdf';
+        $pdfFileName = "webinar" . $code . '.pdf';
         $pdf->Output(public_path('pdfs/webinar/' . $pdfFileName), 'F');
     }
 

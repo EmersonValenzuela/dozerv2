@@ -32,7 +32,7 @@ $(function () {
                     className: "text-center",
                     render: function (e, t, a, s) {
                         if (e) {
-                            return `<a href="${enrollmentUrl}/${a.code}.pdf" download class= "btn btn-icon   btn-danger">
+                            return `<a href="${enrollmentUrl}/matricula_${a.code}.pdf" download class= "btn btn-icon   btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
                                         </a> <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_m" data-name="Constancia de Matricula"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         } else {
@@ -45,7 +45,7 @@ $(function () {
                     className: "text-center",
                     render: function (e, t, a, s) {
                         if (e) {
-                            return `<a href="${constancyUrl}/${a.code}.pdf" download class= "btn btn-icon   btn-danger">
+                            return `<a href="${constancyUrl}/constacia_participacion_${a.code}.pdf" download class= "btn btn-icon   btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
                                         </a>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         } else {
@@ -58,7 +58,7 @@ $(function () {
                     className: "text-center",
                     render: function (e, t, a, s) {
                         if (e) {
-                            return `<a href="${recognitionUrl}/${a.code}.pdf" download class= "btn btn-icon btn-danger">
+                            return `<a href="${recognitionUrl}/excelencia_${a.code}.pdf" download class= "btn btn-icon btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
                                         </a>   <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="r_e" data-name="Reconocimiento a la Excelencia"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         } else {
@@ -71,7 +71,7 @@ $(function () {
                     className: "text-center",
                     render: function (e, t, a, s) {
                         if (e) {
-                            return `<a href="${certificateUrl}/${a.code}.pdf" download class= "btn btn-icon btn-danger">
+                            return `<a href="${certificateUrl}/certificado_${a.code}.pdf" download class= "btn btn-icon btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
                                         </a> 
                                 <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="m" data-name="Certificado de Matrícula"><span class="mdi mdi-note-edit-outline"></span></button>

@@ -139,7 +139,7 @@ class ConstancyController extends Controller
         $pdf->SetXY(211, 177.6);
         $pdf->Cell(1, 5, $code, 0, 1, 'L');
 
-        $pdfFileName = $code . '.pdf';
+        $pdfFileName = 'constancia_participacion_' . $code . '.pdf';
         $pdf->Output(public_path('pdfs/constancy/') . $pdfFileName, 'F');
     }
 

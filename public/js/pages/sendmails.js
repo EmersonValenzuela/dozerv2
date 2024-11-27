@@ -35,6 +35,7 @@ $(function () {
                 { data: "names" },
                 { data: "email" },
                 { data: "code" },
+                { data: "status" },
                 { data: " " },
             ],
 
@@ -96,9 +97,23 @@ $(function () {
                     },
                 },
                 {
-                    targets: -2,
+                    targets: -3,
                     visible: false,
                 },
+                {
+                    targets: 6,
+                    responsivePriority: 2,
+                    render: function (data, type, row, meta) {
+                        // Define las clases y textos como variables para mayor claridad
+                        const statusClass =
+                            data == 1 ? "bg-label-warning" : "bg-label-success";
+                        const statusText = data == 1 ? "No Enviado" : "Enviado";
+
+                        // Retorna el HTML formateado
+                        return `<span class="badge rounded-pill ${statusClass}">${statusText}</span>`;
+                    },
+                },
+
                 {
                     targets: -1,
                     title: "Acciones",
@@ -248,13 +263,12 @@ $(function () {
 
         let formData = new FormData(f);
 
-        formData.append("_token", csrfToken);
-
         let cert = $("#type_txt").val();
         let program = $("#program_txt").val();
         let certTxt = $("#certificate_txt").val();
-        console.log(cert, program, certTxt);
-        
+
+        formData.append("_token", csrfToken);
+        formData.append("column", certTxt);
 
         $.ajax({
             url: "/get-students-mails",

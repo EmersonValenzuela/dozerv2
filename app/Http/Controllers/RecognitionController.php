@@ -151,7 +151,7 @@ class RecognitionController extends Controller
         $pdf->Cell(1, 5, $code, 0, 1, 'L');
 
 
-        $pdfFileName = $code . '.pdf';
+        $pdfFileName = "excelencia_".$code . '.pdf';
         $pdf->Output(public_path('pdfs/recognition/' . $pdfFileName), 'F');
     }
 

@@ -21,6 +21,8 @@ class MailsController extends Controller
             ->where($request->certificate_txt, 1)
             ->get();
 
+        $column = $request->input('column');
+
         // Verifica si se encontraron estudiantes
         if ($students->isEmpty()) {
             // Respuesta cuando no hay datos
@@ -41,6 +43,7 @@ class MailsController extends Controller
                 'names' => $student->full_name,
                 'email' => $student->email,
                 'code' => $student->code,
+                'status' => $student->$column,
                 '' => '', // Columna vacía
             ];
         }
