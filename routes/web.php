@@ -85,10 +85,9 @@ Route::controller(ProgramController::class)->group(function ($route) {
 Route::controller(CourseController::class)->group(function ($route) {
     Route::get('/scopeCoruse', 'search');
     Route::get('/get-courses/{type}/{program}', 'searchCourse');
-
 });
 
-Route::controller(MailsController::class)->group(function ($route){
+Route::controller(MailsController::class)->group(function ($route) {
     Route::get('/Enviar_correos', 'index')->name('sendmail.index');
     Route::post('/get-students-mails', 'getStudentsMails');
     Route::post('/sendMails', 'sendMails');

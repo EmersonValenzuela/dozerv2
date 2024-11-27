@@ -299,6 +299,8 @@ $(function () {
     });
 
     $("#send_mails").on("click", function () {
+        blockUI();
+
         // Obtener las filas seleccionadas
         let selectedRecords = e.rows({ selected: true }).data().toArray();
         let cert = $("#type_txt").val();
@@ -314,8 +316,6 @@ $(function () {
                 email: record.email,
             }));
 
-            console.log(recordsToSend);
-
             $.ajax({
                 url: "sendMails",
                 method: "POST",
@@ -330,6 +330,10 @@ $(function () {
             })
                 .done(function (response) {
                     console.log(response);
+                    Toast.fire({
+                        icon: response.icon,
+                        title: response.message,
+                    });
                 })
                 .fail(function (xhr, status, error) {
                     Toast.fire({
@@ -344,76 +348,6 @@ $(function () {
         } else {
             alert("Por favor selecciona al menos un registro.");
         }
-    });
-
-    $(".btn-generate").on("click", function () {
-        blockUI();
-        const rows = e.rows().data().toArray();
-        let name = $("#title").val(),
-            csrfToken = $('meta[name="csrf-token"]').attr("content"),
-            date = $("#date").val();
-
-        let formData = new FormData();
-
-        formData.append("file1", $("#upload")[0].files[0]);
-        formData.append("name", name);
-        formData.append("date", date);
-        formData.append("rows", JSON.stringify(rows));
-
-        formData.append("_token", csrfToken);
-
-        $.ajax({
-            url: "insertWebinar",
-            method: "POST",
-            data: formData,
-            dataType: "json",
-            processData: false,
-            contentType: false,
-        })
-            .done(function (response) {
-                Toast.fire({
-                    icon: response.icon,
-                    title: response.message,
-                });
-
-                Swal.fire({
-                    title: "<strong>Webinar Creado</strong>",
-                    icon: "success",
-                    html: "Puedes ir al curso para generar los PDFs y enviar correos",
-                    showCloseButton: true,
-                    showCancelButton: true,
-                    focusConfirm: false,
-                    confirmButtonText:
-                        '<i class="mdi mdi mdi-page-next me-2"></i> Ir al webinar',
-                    cancelButtonText:
-                        "<i class='mdi mdi mdi-plus-box me-2'></i> Seguir Aqui",
-                    customClass: {
-                        confirmButton:
-                            "btn btn-primary me-3 waves-effect waves-light",
-                        cancelButton: "btn btn-outline-warning waves-effect",
-                    },
-                    buttonsStyling: false,
-                    allowOutsideClick: false, // Evita que el modal se cierre al hacer clic fuera de él
-                    allowEscapeKey: false, // Evita que el modal se cierre al presionar la tecla Escape
-                    preConfirm: () => {
-                        window.location.href = "Webinar/" + response.course;
-                    },
-                }).then((result) => {
-                    if (result.dismiss === Swal.DismissReason.cancel) {
-                        location.reload();
-                    }
-                });
-            })
-            .fail(function (xhr, status, error) {
-                Toast.fire({
-                    icon: error.icon,
-                    title: error.message,
-                });
-                console.error(xhr.responseText);
-            })
-            .always(function () {
-                $.unblockUI();
-            });
     });
 
     function blockUI() {

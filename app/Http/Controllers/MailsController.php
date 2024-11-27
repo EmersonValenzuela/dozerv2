@@ -18,6 +18,7 @@ class MailsController extends Controller
     public function getStudentsMails(Request $request)
     {
         $students = Students::where('course_id', $request->input('course_txt'))
+            ->where($request->certificate_txt, '!=', 0) // Filtrar diferente de 0
             ->get();
 
         $column = $request->input('column');
