@@ -254,7 +254,7 @@
                 height: 334px;
                 position: relative;
               "
-                        src="{{ asset('mails/images2/img/cm.png') }}" alt="Imagen de servicio" />
+                        src="{{ asset('mails/images2/img/cons-matri.png') }}" alt="Imagen de servicio" />
 
                     @php
                         use Illuminate\Support\Facades\Crypt;
