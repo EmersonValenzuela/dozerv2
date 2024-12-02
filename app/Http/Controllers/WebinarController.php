@@ -87,7 +87,7 @@ class WebinarController extends Controller
         foreach ($studentsData as $student) {
             $student = new Students([
                 'course_id' => $courseId,
-                'course_or_event' => $student['course'],
+                'course_or_event' =>  $request->input('name'),
                 'full_name' => $student['names'],
                 'document_number' => $student['dni'],
                 'email' => $student['email'],

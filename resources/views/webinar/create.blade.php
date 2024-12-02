@@ -75,7 +75,6 @@
                             <th></th>
                             <th class="text-nowrap text-white fw-bold">DNI-CI</th>
                             <th class="text-white fw-bold">Apellidos y Nombres</th>
-                            <th class="text-nowrap text-white fw-bold">Webinar</th>
                             <th class="text-white fw-bold">Correo Electronico </th>
                             <th class="text-white fw-bold">Acciones</th>
                         </tr>

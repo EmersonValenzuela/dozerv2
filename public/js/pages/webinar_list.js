@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         className: "text-center",
                         render: function (e, t, a, s) {
                             if (e) {
-                                return `<a href="${basePdfUrl}/${a.code}.pdf" download class= "btn btn-icon btn-danger">
+                                return `<a href="${basePdfUrl}/webinar_${a.code}.pdf" download class= "btn btn-icon btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
                                         </a>`;
                             } else {
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             if (!formIsValid) {
                 // Mostrar mensaje de error general si algún campo está vacío
                 Toast.fire({
-                    icon: 'error',
+                    icon: "error",
                     title: errorMessage,
                 });
                 return;

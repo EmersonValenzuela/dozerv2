@@ -40,7 +40,6 @@
                     { data: "" },
                     { data: "dni" },
                     { data: "names" },
-                    { data: "course" },
                     { data: "email" },
                     { data: " " },
                 ],
@@ -79,17 +78,7 @@
                             );
                         },
                     },
-                    {
-                        targets: 4,
-                        responsivePriority: 2,
-                        render: function (a, t, x, s) {
-                            return (
-                                '<div class="d-flex flex-column"><span class="text-heading fw-medium" > ' +
-                                a +
-                                "</span></div></div>"
-                            );
-                        },
-                    },
+
 
                     {
                         targets: -1,
@@ -194,11 +183,8 @@
 
                     rows.forEach((row) => {
                         let rowData = {
-                            code: row.code,
                             dni: row.dni,
                             names: row.nombres,
-                            course: row.curso,
-                            score: row.nota,
                             email: row.email,
                             "": "",
                         };
