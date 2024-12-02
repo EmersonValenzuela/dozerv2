@@ -34,7 +34,7 @@
                 </div>
                 <div class="p-2 ">
                     <div class="px-2">
-                        <label for="date" class="form-label text-white ">Fecha</label>
+                        <label for="date" class="form-label text-white ">Descripción del Webinar</label>
                         <input id="date" class="form-control form-control-sm bg-input w-420" type="text"
                             placeholder="">
                     </div>
@@ -90,6 +90,6 @@
 @endsection()
 
 @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
-<script src="{{ asset('js/pages/webinar.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="{{ asset('js/pages/webinar.js') }}"></script>
 @endsection
