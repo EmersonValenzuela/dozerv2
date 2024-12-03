@@ -54,9 +54,9 @@ $(function () {
                         if (e) {
                             return `<a href="${enrollmentUrl}/matricula_${a.code}.pdf" download class= "btn btn-icon   btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
-                                        </a> <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_m" data-name="Constancia de Matricula"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                        </a> <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_m" data-name="Constancia de Matricula" data-date="Fecha"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         } else {
-                            return ` <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_m" data-name="Constancia de Matricula"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                            return ` <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_m" data-name="Constancia de Matricula" data-date="Fecha"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         }
                     },
                 },
@@ -67,9 +67,9 @@ $(function () {
                         if (e) {
                             return `<a href="${constancyUrl}/constancia_participacion_${a.code}.pdf" download class= "btn btn-icon   btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
-                                        </a>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                        </a>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación" data-date="Descripción"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         } else {
-                            return `<button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                            return `<button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación"><span class="mdi mdi-note-edit-outline" data-date="Descripción"></span></button>`;
                         }
                     },
                 },
@@ -80,9 +80,9 @@ $(function () {
                         if (e) {
                             return `<a href="${recognitionUrl}/excelencia_${a.code}.pdf" download class= "btn btn-icon btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
-                                        </a>   <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="r_e" data-name="Reconocimiento a la Excelencia"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                                        </a>   <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="r_e" data-name="Reconocimiento a la Excelencia" data-date="Fecha"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         } else {
-                            return ` <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="r_e" data-name="Reconocimiento a la Excelencia"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                            return ` <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="r_e" data-name="Reconocimiento a la Excelencia" data-date="Fecha"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         }
                     },
                 },
@@ -94,10 +94,10 @@ $(function () {
                             return `<a href="${certificateUrl}/certificado_${a.code}.pdf" download class= "btn btn-icon btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
                                         </a> 
-                                <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="m" data-name="Certificado de Matrícula"><span class="mdi mdi-note-edit-outline"></span></button>
+                                <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="m" data-name="Certificado de Matrícula" data-date="Sin descripción"><span class="mdi mdi-note-edit-outline"></span></button>
                                 `;
                         } else {
-                            return ` <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="m" data-name="Certificado de Matrícula"><span class="mdi mdi-note-edit-outline"></span></button>`;
+                            return ` <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="m" data-name="Certificado de Matrícula" data-date="Sin descripción"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         }
                     },
                 },
@@ -182,6 +182,7 @@ $(function () {
         $("#score").val("0");
         $("#course_name").val($(".font-tituview").text());
         $("#course_id").val(course_id);
+        $("#label-date").html("Sin descripción: ");
     });
 
     const images = {
@@ -195,7 +196,8 @@ $(function () {
         let row = $(this).closest("tr");
         let rowData = $(this).closest("table").DataTable().row(row).data();
         let certificate = $(this).data("certificate"),
-            subtitle = $(this).data("name");
+            subtitle = $(this).data("name"),
+            date = $(this).data("date");
 
         if (images[certificate]) {
             $("#imgUrl").val(images[certificate].imgUrl || "");
@@ -204,6 +206,7 @@ $(function () {
 
         $("#modal_title").text("Modificar estudiante");
 
+        $("#label-date").html(date);
         $("#modal_subtitle").text(subtitle);
         $("#course_id").val(course_id);
         $("#certificate").val(certificate);

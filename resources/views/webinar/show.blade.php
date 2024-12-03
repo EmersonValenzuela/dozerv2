@@ -44,6 +44,7 @@
                     <table class="dt-students table">
                         <thead class="text-white">
                             <tr>
+                                <th class="text-white fw-bold">id</th>
                                 <th class="text-white fw-bold">Estudiante</th>
                                 <th class="text-white fw-bold">Correo</th>
                                 <th class="text-white fw-bold">Webinar</th>

@@ -111,7 +111,7 @@
                             </div>
                         </div>
                         <div class="d-flex">
-                            <div class="p-2 flex-grow-1"><label for="smallInput" class="form-label ">Fecha:</label>
+                            <div class="p-2 flex-grow-1"><label for="smallInput" class="form-label" id="label-date"></label>
                                 <input id="course_date" name="course_date" class="form-control form-control-sm bg-input"
                                     type="text" placeholder="">
                             </div>

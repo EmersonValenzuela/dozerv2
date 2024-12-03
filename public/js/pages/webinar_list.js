@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             ((t = a.DataTable({
                 ajax: course_id + "/students",
                 columns: [
+                    { data: "id" },
                     { data: "names" },
                     { data: "email" },
                     { data: "w_p" },
@@ -20,7 +21,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 ],
                 columnDefs: [
                     {
-                        targets: 2,
+                        targets: 0,
+                        visible: !1,
+                    },
+                    {
+                        targets: 3,
                         className: "text-center",
                         render: function (e, t, a, s) {
                             if (e) {
@@ -41,10 +46,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         className: "text-center",
                         render: function (e, t, a, s) {
                             return `<div class ="demo-inline-spacing">
-                            <button type="button" class="btn btn-icon btn-outline-info waves-effect"><span class="mdi mdi-email-arrow-right"></span></button>
                             <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit"><span class="mdi mdi-note-edit-outline"></span></button>
 
-                             <button type="button" class="btn btn-icon btn-outline-danger waves-effect">
+                             <button type="button" class="btn btn-icon btn-outline-danger waves-effect datatable_delete">
                             <span class="tf-icons mdi mdi-trash-can-outline"></span>
                             </button>
                             </div>`;
@@ -91,10 +95,71 @@ document.addEventListener("DOMContentLoaded", function (e) {
             $("#modal_student").modal("show");
         });
 
+        t.on("click", ".datatable_delete", function () {
+            let row = $(this).closest("tr");
+            let rowData = $(this).closest("table").DataTable().row(row).data();
+
+            const formData = new FormData(f);
+            formData.append(
+                "_token",
+                $('meta[name="csrf-token"]').attr("content")
+            );
+
+            Swal.fire({
+                title: "¿Estás seguro?",
+                text: "¡No podrás recuperar este registro!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Si, eliminar",
+                customClass: {
+                    confirmButton:
+                        "btn btn-primary me-3 waves-effect waves-light",
+                    cancelButton: "btn btn-outline-secondary waves-effect",
+                },
+                buttonsStyling: false,
+            }).then(function (confirm) {
+                if (confirm.isConfirmed) {
+                    // Aquí se hace la solicitud AJAX para eliminar el registro
+                    $.ajax({
+                        url: "deleteStudentWebinar/" + rowData.id, // Cambia esta URL según tu API
+                        type: "POST",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Eliminado!",
+                                text: "El registro se eliminó con éxito.",
+                                customClass: {
+                                    confirmButton:
+                                        "btn btn-success waves-effect",
+                                },
+                            });
+                            t.ajax.reload();
+                        },
+                        error: function (error) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error!",
+                                text: "Hubo un problema al eliminar el registro.",
+                                customClass: {
+                                    confirmButton:
+                                        "btn btn-danger waves-effect",
+                                },
+                            });
+                        },
+                    });
+                }
+            });
+        });
+
         $(".modal_add").on("click", function () {
             var table = $(".datatables_certificates").DataTable(),
                 row = table.row(this).data();
-            $("#webinar").val(".font-tituview".text());
+
+            let text = $(".font-tituview").text();
+            $("#webinar").val(text);
             $("#modal_title").text("Agregar estudiante");
             $("#modal_student").modal("show");
         });
@@ -167,7 +232,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         icon: data.icon,
                         title: data.message,
                     });
-                    resetForm();
+                    f.reset();
+                    fv.resetForm(true);
                 })
                 .catch((error) => {
                     console.error("Error:", error);
@@ -179,7 +245,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         $("#modal_student").on("hidden.bs.modal", function () {
             f.reset();
-            fv.resetForm(true);
         });
 
         var e,

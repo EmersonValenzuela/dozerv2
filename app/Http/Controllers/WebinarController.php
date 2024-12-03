@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Students;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rules\Exists;
 
 require(public_path('fpdf/fpdf.php'));
 
@@ -339,5 +340,33 @@ class WebinarController extends Controller
         $students = Students::getStudentByWebinar($data);
 
         return response()->json(['data' => $students]);
+    }
+
+    public function deleteStudent($data)
+    {
+        $student = Students::find($data);
+
+        if (!$student) {
+            return response()->json([
+                'success' => false,
+                'icon' => 'error',
+                'message' => 'Estudiante no encontrado',
+            ]);
+        }
+
+        $pdfUrl = public_path("pdfs/webinar/webinar_" . $student->code . ".pdf");
+
+        // Verificar si el archivo existe y eliminarlo
+        if (file_exists($pdfUrl)) {
+            unlink($pdfUrl);
+        }
+
+        $student->delete();
+
+        return response()->json([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Alumno eliminado',
+        ]);
     }
 }
