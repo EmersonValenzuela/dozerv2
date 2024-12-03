@@ -35,4 +35,24 @@ class CourseController extends Controller
             'success' => true,
         ]);
     }
+
+    public function deleteStudent(Request $request)
+    {
+        $column = $request->certificate;
+
+        $student = Students::find($request->id);
+        $student->$column = 0;
+
+        $pdfUrl = public_path("pdfs/" . $request->route . "/" . $request->prefix . $request->code . ".pdf");
+        if (file_exists($pdfUrl)) {
+            unlink($pdfUrl);
+        }
+        $student->save();
+
+        return response()->json([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Constancia/Certificado eliminado',
+        ]);
+    }
 }

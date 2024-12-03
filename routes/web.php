@@ -88,6 +88,7 @@ Route::controller(CourseController::class)->group(function ($route) {
     Route::get('/scopeCoruse', 'search');
     Route::get('/get-courses/{type}/{program}', 'searchCourse');
     Route::post('/students/{id}/update-score', 'updateScore');
+    Route::post('/StudentCourse/delete', 'deleteStudent');
 });
 
 Route::controller(MailsController::class)->group(function ($route) {

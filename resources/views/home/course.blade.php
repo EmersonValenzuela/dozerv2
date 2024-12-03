@@ -111,7 +111,8 @@
                             </div>
                         </div>
                         <div class="d-flex">
-                            <div class="p-2 flex-grow-1"><label for="smallInput" class="form-label" id="label-date"></label>
+                            <div class="p-2 flex-grow-1"><label for="smallInput" class="form-label"
+                                    id="label-date"></label>
                                 <input id="course_date" name="course_date" class="form-control form-control-sm bg-input"
                                     type="text" placeholder="">
                             </div>
@@ -120,6 +121,53 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-cancelar " data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-guardar ">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal_delete" tabindex="-1" aria-labelledby="modal_delete" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-5 text-white " id="modal_title"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form_delete">
+                    <div class="modal-body">
+                        <p class="pt-1">Eliminar Constancia/Certificado</p>
+                        <input type="hidden" id="idDelete" name="idDelete">
+                        <input type="hidden" id="codeDelete" name="codeDelete">
+                        <div class="d-flex flex-row mb-3 justify-content-between">
+                            <div class="px-2 w-100">
+                                <label for="smallInput" class="form-label ">Estudiante:</label>
+                                <input id="studentDelete" name="studentDelete"
+                                    class="form-control form-control-sm bg-input" type="text" placeholder="">
+                            </div>
+
+                        </div>
+                        <div class="d-flex flex-row mb-3 justify-content-between">
+
+                            <div class="px-2 w-100">
+                                <label for="smallInput" class="form-label ">Correo Electronico:</label>
+                                <select class="form-select form-select-sm bg-input select2" id="deleteType" name="deleteType">
+                                    <option value="c_m" data-route="enrollments" data-prefix="matricula_">C. MATRICULA
+                                    </option>
+                                    <option value="c_p" data-route="constancy"
+                                        data-prefix="constancia_participacion_">C. PARTICIPACION</option>
+                                    <option value="r_e" data-route="recognition" data-prefix="excelencia_">R.
+                                        EXCELENCIA</option>
+                                    <option value="certificate" data-route="certificates" data-prefix="certificado_">C.
+                                        CURSO</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar " data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-guardar" id="btnDelete">Eliminar</button>
                     </div>
                 </form>
             </div>

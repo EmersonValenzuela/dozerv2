@@ -69,7 +69,7 @@ $(function () {
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
                                         </a>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación" data-date="Descripción"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         } else {
-                            return `<button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación"><span class="mdi mdi-note-edit-outline" data-date="Descripción"></span></button>`;
+                            return `<button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación" data-date="Descripción"><span class="mdi mdi-note-edit-outline" ></span></button>`;
                         }
                     },
                 },
@@ -107,7 +107,9 @@ $(function () {
                     orderable: !1,
                     className: "text-center",
                     render: function (e, t, a, s) {
-                        return `<button type="button" class="btn btn-icon btn-secondary"><span class="mdi mdi-email-arrow-right"></span></button>`;
+                        return `<button type="button" class="btn btn-icon btn-outline-warning waves-effect datatable_delete">
+                            <span class="tf-icons mdi mdi-reload-alert"></span>
+                            </button>`;
                     },
                 },
             ],
@@ -220,6 +222,47 @@ $(function () {
         $("#code").val(rowData.code);
 
         $("#modal_student").modal("show");
+    });
+
+    t.on("click", ".datatable_delete", function () {
+        let row = $(this).closest("tr");
+        let rowData = $(this).closest("table").DataTable().row(row).data();
+
+        $("#modal_delete").modal("show");
+        $("#codeDelete").val(rowData.code);
+        $("#idDelete").val(rowData.id);
+        $("#studentDelete").val(rowData.names);
+    });
+
+    $("#btnDelete").on("click", function () {
+        let certificate = $("#deleteType").val(),
+            route = $("#deleteType option:selected").data("route"),
+            prefix = $("#deleteType option:selected").data("prefix"),
+            id = $("#idDelete").val(),
+            code = $("#codeDelete").val();
+
+        $.ajax({
+            url: "/StudentCourse/delete",
+            type: "POST",
+            data: {
+                certificate: certificate,
+                prefix: prefix,
+                code: code,
+                id: id,
+                route: route,
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (data) {
+                $("#modal_delete").modal("hide");
+                t.ajax.reload();
+                console.log(data);
+
+                Toast.fire({
+                    icon: data.icon,
+                    title: data.message,
+                });
+            },
+        });
     });
 
     const f = document.getElementById("form_student"),
