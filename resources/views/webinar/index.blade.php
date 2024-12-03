@@ -19,7 +19,7 @@
                         @if ($courses->isEmpty())
                             <div class="style-course text-white align-items-start">
                                 <div class="text-white">
-                                    No hay cursos disponibles en este programa.
+                                    No hay existen webinars.
                                 </div>
                             </div>
                         @else

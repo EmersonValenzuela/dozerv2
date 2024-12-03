@@ -24,4 +24,15 @@ class CourseController extends Controller
             ->get();
         return response()->json($results);
     }
+
+    public function updateScore(Request $request)
+    {
+        $student = Students::find($request->id);
+        $student->score = $request->score;
+        $student->save();
+
+        return response()->json([
+            'success' => true,
+        ]);
+    }
 }

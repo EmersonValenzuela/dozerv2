@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         $(".modal_add").on("click", function () {
             var table = $(".datatables_certificates").DataTable(),
                 row = table.row(this).data();
+            $("#webinar").val(".font-tituview".text());
             $("#modal_title").text("Agregar estudiante");
             $("#modal_student").modal("show");
         });

@@ -28,6 +28,26 @@ $(function () {
                     },
                 },
                 {
+                    targets: 2,
+                    className: "text-center",
+                    render: function (data, type, row) {
+                        if (type === "display") {
+                            return `
+                                <input 
+                                    type="number" 
+                                    class="editable-score" 
+                                    data-id="${row.id}" 
+                                    value="${data}" 
+                                    min="0" 
+                                    max="20" 
+                                    style="width: 100%; text-align: center;"
+                                />
+                            `;
+                        }
+                        return data;
+                    },
+                },
+                {
                     targets: 3,
                     className: "text-center",
                     render: function (e, t, a, s) {
@@ -113,6 +133,46 @@ $(function () {
 
     $("#referralLink").on("keyup", function () {
         t.search(this.value).draw();
+    });
+
+    t.on("change", ".editable-score", function () {
+        var score = $(this).val();
+        var studentId = $(this).data("id");
+
+        // Validar entrada: debe estar entre 0 y 20
+        if (isNaN(score) || score < 0 || score > 20) {
+            Toast.fire({
+                icon: "error",
+                title: "Entrada no válida",
+            });
+            $(this).val(Math.max(0, Math.min(score, 20))); // Restaurar dentro del rango permitido
+            return;
+        }
+
+        // 3. Enviar la actualización vía AJAX
+        $.ajax({
+            url: `/students/${studentId}/update-score`,
+            method: "POST",
+            data: {
+                score: score,
+                _token: $('meta[name="csrf-token"]').attr("content"), // CSRF token
+            },
+            success: function (response) {
+                if (response.success) {
+                    Toast.fire({
+                        icon: "success",
+                        title: "Actualizado",
+                    });
+
+                    table.ajax.reload(null, false); // Recargar tabla sin reiniciar la paginación
+                } else {
+                    alert("Hubo un error al actualizar el puntaje.");
+                }
+            },
+            error: function () {
+                alert("Error al conectar con el servidor.");
+            },
+        });
     });
 
     $("#btnModalAdd").on("click", function () {
