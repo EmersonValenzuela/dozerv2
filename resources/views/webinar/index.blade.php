@@ -9,6 +9,11 @@
         </div>
         <div class="mb-4">
             <div class="card-body">
+                <div class="d-flex flex-row mb-3 pt-3 justify-content-start align-items-center text-white">
+                    <input type="text" class="form-control form-control-lg w-25 me-3 filter-input"
+                        placeholder="Filtrar webinars..." id="webinarFilter">
+                </div>
+
                 <div class="tab-content p-0">
                     <div class="tab-pane show active " role="tabpanel">
                         <!-- Filtros -->
@@ -57,4 +62,19 @@
 @endsection()
 
 @section('scripts')
+    <script>
+        document.getElementById('webinarFilter').addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            const courses = document.querySelectorAll('.style-course');
+
+            courses.forEach(course => {
+                const courseName = course.querySelector('.nombr-cap').textContent.toLowerCase();
+                if (courseName.includes(filter)) {
+                    course.style.display = ''; // Mostrar
+                } else {
+                    course.style.display = 'none'; // Ocultar
+                }
+            });
+        });
+    </script>
 @endsection
