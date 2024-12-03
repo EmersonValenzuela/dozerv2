@@ -213,24 +213,46 @@ class ConstancyController extends Controller
 
     public function updateStudent(Request $request)
     {
+        // Buscar el estudiante por su ID
         $student = students::find($request->student_id);
+
+        // Verificar si el estudiante existe
+        if (!$student) {
+            return response()->json([
+                'icon' => 'error',
+                'message' => 'Estudiante no encontrado',
+            ], 404);
+        }
+
+
+        // Actualizar los datos del estudiante
         $student->full_name = $request->names;
         $student->document_number = $request->document;
         $student->email = $request->email;
         $student->score = $request->score;
         $student->course_or_event = $request->course_name;
+        $student->save();
+        // Verificar si la URL de la imagen está presente
+        if (empty($request->imgUrl)) {
+            return response()->json([
+                'icon' => 'warning',
+                'message' => 'Se actualizo, Pero aun no se genera PDF (Falta Imagen)',
+            ], 400);
+        }
+
+        // Generar el PDF
+        $this->generatePdf($request->names, $request->course_name, $request->course_date, $request->imgUrl, $request->code);
         $student->c_p = 1;
         $student->save();
 
-
-        $this->generatePdf($request->names, $request->course_name, $request->course_date, $request->imgUrl, $request->code);
-
+        // Responder con éxito
         return response()->json([
             'success' => true,
             'icon' => 'success',
             'message' => 'Datos actualizados',
         ]);
     }
+
 
     /**
      * Update the specified resource in storage.

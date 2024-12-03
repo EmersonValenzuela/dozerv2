@@ -39,7 +39,7 @@ Route::controller(CertificateController::class)->group(function ($route) {
     Route::post('addStudent', 'insertStudent');
     Route::post('/scopeStudentCertificate', 'searchStudents');
     Route::post('/generateCertificates', 'generateCertificates');
-    Route::post('mStudent', 'updateStudent');
+    Route::post('/mStudent', 'updateStudent');
     Route::post('/Certificate/import', 'import');
 });
 
@@ -56,7 +56,7 @@ Route::controller(ConstancyController::class)->group(function ($route) {
     Route::post('/scopeStudentConstancy', 'searchStudents');
     Route::get('/pdfConstancy/{id}', 'show');
     Route::post('/generateConstancy', 'store');
-    Route::post('cpStudent', 'updateStudent');
+    Route::post('/cpStudent', 'updateStudent');
 });
 
 Route::controller(RecognitionController::class)->group(function ($route) {

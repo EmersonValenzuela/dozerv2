@@ -45,7 +45,7 @@ $(function () {
                     className: "text-center",
                     render: function (e, t, a, s) {
                         if (e) {
-                            return `<a href="${constancyUrl}/constacia_participacion_${a.code}.pdf" download class= "btn btn-icon   btn-danger">
+                            return `<a href="${constancyUrl}/constancia_participacion_${a.code}.pdf" download class= "btn btn-icon   btn-danger">
                                             <span class="mdi mdi-file-pdf-box text-white size-icon"></span>
                                         </a>  <button type="button" class="btn btn-icon btn-outline-success waves-effect datatable_edit" data-certificate="c_p" data-name="Constancia de Participación"><span class="mdi mdi-note-edit-outline"></span></button>`;
                         } else {
@@ -119,7 +119,7 @@ $(function () {
         $("#modal_title").text("Agregar estudiante");
         $("#modal_student").modal("show");
         $("#certificate").val("add");
-        $("#certificate").val("add");
+        $("#score").val("0");
         $("#course_name").val($(".font-tituview").text());
         $("#course_id").val(course_id);
     });
@@ -228,7 +228,10 @@ $(function () {
         })
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error("Error en la solicitud");
+                    Toast.fire({
+                        icon: response.icon,
+                        title: response.message,
+                    });
                 }
                 return response.json();
             })
@@ -241,7 +244,10 @@ $(function () {
                 resetForm();
             })
             .catch((error) => {
-                console.error("Error:", error);
+                Toast.fire({
+                    icon: error.icon,
+                    title: error.message,
+                });
             })
             .finally(() => {
                 $.unblockUI();

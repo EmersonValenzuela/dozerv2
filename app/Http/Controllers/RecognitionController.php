@@ -151,7 +151,7 @@ class RecognitionController extends Controller
         $pdf->Cell(1, 5, $code, 0, 1, 'L');
 
 
-        $pdfFileName = "excelencia_".$code . '.pdf';
+        $pdfFileName = "excelencia_" . $code . '.pdf';
         $pdf->Output(public_path('pdfs/recognition/' . $pdfFileName), 'F');
     }
 
@@ -238,24 +238,55 @@ class RecognitionController extends Controller
 
     public function updateStudent(Request $request)
     {
+        // Buscar el estudiante por su ID
         $student = students::find($request->student_id);
+
+        // Verificar si el estudiante existe
+        if (!$student) {
+            return response()->json([
+                'success' => false,
+                'icon' => 'error',
+                'message' => 'Estudiante no encontrado',
+            ], 404);
+        }
+
+        // Actualizar los datos del estudiante
         $student->full_name = $request->names;
         $student->document_number = $request->document;
         $student->email = $request->email;
         $student->score = $request->score;
         $student->course_or_event = $request->course_name;
-        $student->r_e = 1;
         $student->save();
 
+        // Verificar si la URL de la imagen está presente
+        if (empty($request->imgUrl)) {
+            return response()->json([
+                'success' => false,
+                'icon' => 'warning',
+                'message' => 'Se actualizo, Pero aun no se genera PDF (Falta Imagen)',
+            ], 400);
+        }
 
-        $this->generatePdf($request->names, $request->course_name, $request->course_date, $request->imgUrl, $request->code, $request->score);
+        // Generar el PDF
+        $this->generatePdf(
+            $request->names,
+            $request->course_name,
+            $request->course_date,
+            $request->imgUrl,
+            $request->code,
+            $request->score
+        );
 
+        $student->r_e = 1;
+        $student->save();
+        // Responder con éxito
         return response()->json([
             'success' => true,
             'icon' => 'success',
             'message' => 'Datos actualizados',
         ]);
     }
+
 
     /**
      * Update the specified resource in storage.
