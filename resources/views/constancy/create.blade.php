@@ -33,7 +33,7 @@
                 </div>
                 <div class="p-2 ">
                     <div class="px-2">
-                        <label for="date" class="form-label text-white ">Fecha</label>
+                        <label for="date" class="form-label text-white ">Descripción</label>
                         <input id="date" class="form-control form-control-sm bg-input w-420" type="text"
                             placeholder="">
                     </div>
@@ -113,17 +113,16 @@
 @endsection()
 
 @section('styles')
-<style>
-    #dataConstancy {
-        position: relative;
-        overflow: hidden;
-        max-width: 100%;
-        /* Ajustar el ancho máximo */
-    }
-</style>
+    <style>
+        #dataConstancy {
+            position: relative;
+            overflow: hidden;
+            max-width: 100%;
+            /* Ajustar el ancho máximo */
+        }
+    </style>
 @endsection()
 
 @section('scripts')
-<script src="{{ asset('js/pages/constancy.js') }}"></script>
-
+    <script src="{{ asset('js/pages/constancy.js') }}"></script>
 @endsection

@@ -219,6 +219,10 @@
 </head>
 
 <body>
+    <span style="display:none; visibility:hidden; mso-hide:all;">
+        Por medio del presente, nos dirigimos a usted para agradecerle por haber llevado a cabo y concluido seminario
+        virtual que le ha sido asignada.
+    </span>
     <div class="email-wrapper">
         <div class="email-content">
             <!-- Encabezado del correo con imagen -->

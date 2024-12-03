@@ -217,6 +217,10 @@
 </head>
 
 <body>
+    <span style="display:none; visibility:hidden; mso-hide:all;">
+        Estamos orgullosos de haber sido parte de tu formación y te deseamos mucho éxito en tus futuros proyectos.
+        ¡Felicidades y sigue adelante!
+    </span>
     <div class="email-wrapper">
         <div class="email-content">
             <!-- Encabezado del correo con imagen -->

@@ -306,6 +306,8 @@ $(function () {
         let cert = $("#type_txt").val();
         let program = $("#program_txt").val();
         let certTxt = $("#certificate_txt").val();
+        let course = $("#course_txt option:selected").text();
+        let nameType = $("#type_txt option:selected").text();
         // Verifica si hay registros seleccionados
         if (selectedRecords.length > 0) {
             // Preparar los datos para enviar al backend
@@ -325,6 +327,8 @@ $(function () {
                     certificadoTxt: certTxt,
                     _token: csrfToken, // Token CSRF para Laravel
                     records: recordsToSend,
+                    course: course,
+                    nameType: nameType,
                 },
                 dataType: "json",
             })

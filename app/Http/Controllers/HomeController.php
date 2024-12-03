@@ -28,7 +28,7 @@ class HomeController extends Controller
             // Filtra los cursos por el tipo de certificado y cuenta solo los estudiantes cuyo c_m sea true
             $courses = Course::where('certificate_type_id', $certificateType->id_certificate_type)
                 ->withCount(['students' => function ($query) {
-                    $query->where('c_m', true);
+                    $query->whereIn('c_m', [1, 2]); // Aquí filtramos por 1 o 2
                 }])
                 ->get();
 

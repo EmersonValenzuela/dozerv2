@@ -110,7 +110,7 @@ class RecognitionController extends Controller
 
         $pdf->SetFont('Oswald-Regular', '', 11);
         $pdf->SetTextColor(117, 117, 117);
-        $pdf->SetXY(29.6, 33);
+        $pdf->SetXY(28.9, 31);
         $pdf->Cell(1, 35, $code, 0, 1, 'L');
 
         // Configurar para centrar el texto
@@ -147,7 +147,7 @@ class RecognitionController extends Controller
 
         $pdf->SetFont('Oswald-Regular', '', 12);
         $pdf->SetTextColor(127, 128, 128); // color #7f8080
-        $pdf->SetXY(82, 181.8);
+        $pdf->SetXY(212, 176);
         $pdf->Cell(1, 5, $code, 0, 1, 'L');
 
 
@@ -164,10 +164,10 @@ class RecognitionController extends Controller
      */
     public function show($id)
     {
-        $img1 = "img/examples/recognition2.png";
+        $img1 = "img/examples/recognition.png";
 
         $name = "Antonella Perez Rodriguez";
-        $code = "0745147";
+        $code = "045147";
         $course = "Nombre del Curso modular";
         $date = "24 de abril del 2024";
 
@@ -192,7 +192,7 @@ class RecognitionController extends Controller
 
         $pdf->SetFont('Oswald-Regular', '', 11);
         $pdf->SetTextColor(117, 117, 117);
-        $pdf->SetXY(29.6, 33);
+        $pdf->SetXY(28.9, 31);
         $pdf->Cell(1, 35, $code, 0, 1, 'L');
 
         // Configurar para centrar el texto
@@ -229,7 +229,7 @@ class RecognitionController extends Controller
 
         $pdf->SetFont('Oswald-Regular', '', 12);
         $pdf->SetTextColor(127, 128, 128); // color #7f8080
-        $pdf->SetXY(82, 181.8);
+        $pdf->SetXY(212, 176);
         $pdf->Cell(1, 5, $code, 0, 1, 'L');
 
         // Guardar el archivo PDF en una carpeta específica dentro del proyecto

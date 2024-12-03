@@ -74,6 +74,15 @@ class MailsController extends Controller
             'w_p' => 'webinar_',
         ];
 
+        $subjectMap = [
+            'c_m' => 'CONSTANCIA DE MATRICULA EN "' . $request->course . ' - ' . $request->nameType . '"',
+            'c_p' => 'CONSTANCIA DE PARTICIPACION "' . $request->course . ' - ' . $request->nameType . '"',
+            'r_e' => 'CERTIFICADO EXCELENCIA ACADÁDEMICA EN "' . $request->course . ' - ' . $request->nameType . '"',
+            'w_p' => 'CONSTANCIA DE PARTICIPACIÓN WEBINAR EN "' . $request->course . ' - ' . $request->nameType . '"',
+            'certificate' => 'CERTIFICADO EN "' . $request->course . ' - ' . $request->nameType . '"',
+        ];
+
+
         $records = $request->input('records');
         $certificado = $request->input('certificado');
         $programa = $request->input('programa');
@@ -81,6 +90,7 @@ class MailsController extends Controller
         $sync = $viewName;
         $routeFile = $certificadoMap[$viewName] ?? null;  // Obtener la ruta
         $fileName = $nameMap[$viewName] ?? null;          // Obtener el nombre del archivo
+        $subject = $subjectMap[$viewName] ?? null;        // Obtener el asunto del correo
 
         // Procesar el valor de certificadoTxt según la lógica
         if ($viewName == "certificate") {
@@ -103,7 +113,7 @@ class MailsController extends Controller
         // Enviar los correos con la vista específica
         foreach ($records as $record) {
             // Enviar correo
-            dispatch(new SendCertificates($record, $viewName, $routeFile, $fileName));
+            dispatch(new SendCertificates($record, $viewName, $routeFile, $fileName, $subject));
 
             // Actualizar la columna correspondiente con el nombre de $viewName a 2
             $student = Students::find($record['id']);  // Encuentra el estudiante por su ID o ajusta según sea necesario

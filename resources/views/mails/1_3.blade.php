@@ -1,195 +1,391 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CERTIFICADO DIPLOMADO</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificado de Aprobración de Diplomado</title>
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
-    </style>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet" />
-    <style>
-        .fondo-dozer {
-            width: 1517px;
+        /* Estilos generales */
+        body {
+            font-family: 'Arial Narrow';
+            background-color: white;
+            margin: 0;
+            padding: 0;
         }
 
-        .logo-dozer {
-            width: 190px !important;
+        .email-wrapper {
+            width: 100%;
+            background-color: white;
+            padding: 20px 0;
         }
 
-        .contenido {
-            padding: 320px 0px;
+        .email-content {
+            width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
         }
 
-        .titulo {
-            padding: 25px 450px;
-            font-family: rubik;
-
+        .email-header {
+            text-align: center;
+            padding-bottom: 20px;
         }
 
-        .tituto-constancia {
-            padding: 25px 410px;
-            font-family: rubik;
-
+        .email-header img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
         }
 
-        .contenido-texto {
-            padding: 30px 300px;
-            font-size: 25px;
-            font-family: rubik;
-            color: #4F4F4F !important;
-            font-weight: 300;
+        .email-header h1 {
+            color: #333333;
+            margin: 20px 0 0;
+            font-size: 17px;
+        }
+
+        .email-body img {
+            width: 100%;
+            /* Imagen a tamaño completo */
+        }
+
+        .button {
+            background-color: #262626;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            font-weight: 700;
+        }
+
+        .email-footer {
+            text-align: center;
+            font-size: 12px;
+            color: #888888;
+            padding-top: 20px;
+            border-top: 2px solid #f1f1f1;
+        }
+
+        .email-footer a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .text-cont {
+            color: #8e8e8e !important;
+
+            font-weight: 200;
+            font-size: 15px;
+
+            text-align: justify;
+        }
+
+        .text-titulo {
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .span-wssp {
+            color: #cfceb8;
+            text-decoration: underline !important;
+        }
+
+        .color-white {
+            color: white;
+        }
+
+        .text-titulo-descarga {
+            font-size: 13px !important;
+            text-align: left;
+        }
+
+        .text-id {
+            color: #cfceb8;
+        }
+
+        .cont-descarga {
+            text-align: justify;
+            color: #e5e5e5;
+            font-size: 11px;
         }
 
         .btn-descarga {
-            margin: 40px 0;
-            background: #C2AC7C !important;
-            padding: 7px 150px !important;
-            border-radius: 9px;
-            color: white !important;
-            font-weight: 700 !important;
-            font-size: 27px !important;
-            font-family: rubik !important;
+            background: rgb(188, 187, 167);
+            background: linear-gradient(93deg,
+                    rgba(188, 187, 167, 1) 0%,
+                    rgba(252, 250, 223, 1) 100%);
+            border-radius: 5px;
+            text-align: center;
+            padding: 5px 2px;
+            bottom: 10px;
+            position: relative;
         }
 
-        .p-logo {
-            padding: 35px 0;
+        .btn-descarga-style {
+            color: #222222 !important;
+            font-size: 12px;
+
+            text-decoration: none;
+            font-weight: 700;
+            justify-content: center;
         }
 
-        .titulo-espe {
-            padding: 25px 480px;
-            font-family: rubik;
-
+        .fondo-footer {
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
         }
 
-        .titulo-diplo {
-            padding: 25px 520px;
-            font-family: rubik;
-
+        .group-footer {
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+            align-items: center !important;
+            display: flex !important;
         }
 
-        .font-titulo {
-            font-size: 31px !important;
-            color: #171717
+        .p-2 {
+            padding: 0.5rem !important;
         }
 
-        .titulo-excelencia {
-            padding: 25px 500px;
-            font-family: rubik;
-
+        .text-footer {
+            font-size: 15px;
+            color: #595959;
+            text-align: left;
+            font-weight: 700;
+            text-align: center;
         }
 
-
-        .btn-descarga-cip {
-            margin: 40px 0;
-            background: #A41E26 !important;
-            padding: 7px 150px !important;
-            border-radius: 9px;
-            color: white !important;
-            font-weight: 700 !important;
-            font-size: 27px !important;
-            font-family: rubik !important;
+        .direccion-icon {
+            display: flex;
+            flex-direction: row;
         }
 
-        .titulo-cip {
-            padding: 25px 410px;
-            font-family: rubik;
+        .mx-2 {
+            margin-right: 0.5rem !important;
+            margin-left: 0.5rem !important;
         }
 
-        .contenido-cip {
-            padding: 500px 0px;
+        .fondo-icon:hover {
+            background: #c1bfa7;
         }
 
-        .titulo-cip-diplo {
-            padding: 25px 520px;
-            font-family: rubik;
+        .fondo-icon {
+            background: rgb(29, 29, 27);
+            background: linear-gradient(177deg,
+                    rgba(29, 29, 27, 1) 0%,
+                    rgba(88, 89, 91, 1) 100%);
+            border-radius: 50%;
+            padding: 2px;
+            margin-right: 0.5rem !important;
+            margin-left: 0.5rem !important;
+            display: flex !important;
+            align-items: center !important;
         }
 
-        .titulo-curso {
-            padding: 25px 550px;
-            font-family: rubik;
+        .fondo-fb {
+            height: 40px !important;
+            width: 40px !important;
+        }
+
+        .icon-style {
+            width: 18px !important;
+            margin: auto;
+            display: block;
+        }
+
+        .icon-stylefb {
+            width: 9px !important;
+            margin: auto;
+            display: block;
+        }
+
+        .icon-styletk {
+            width: 15px !important;
+            margin: auto;
+            display: block;
+        }
+
+        .linia-footer {
+            background-color: #c9c9c9;
+            height: 5px;
         }
     </style>
 </head>
 
 <body>
-    <section class="container-fluid d-flex justify-content-center">
-        <div class="d-flex justify-content-start">
-            <div>
-                <img class="fondo-dozer" src="{{ asset('mails/img/fondo-diplomado.png') }}" alt="..." />
+    <div class="email-wrapper">
+        <div class="email-content">
+            <!-- Encabezado del correo con imagen -->
+            <div class="email-header">
+                <img src="{{ asset('mails/images2/img/dozer_encabezado.png') }}" alt="Encabezado del Correo" />
+                <h1 class="text-titulo">Certificado de Aprobración de Diplomado</h1>
             </div>
+
+            <!-- Cuerpo del correo con imagen -->
+            <div class="email-body text-cont">
+                <div style="margin: 0 20px">
+                    <p>Director de Registros Académicos de Instituto Dozer</p>
+                    <p>
+                        Me complace enormemente dirigirme a ti para felicitarte por el
+                        magnífico logro que has obtenido. Tu esfuerzo, dedicación y
+                        talento han dado sus frutos y te has convertido en un verdadero
+                        ejemplo de éxito.
+                    </p>
+                    <p>
+                        Tu persistencia y determinación han sido fundamentales para
+                        alcanzar este importante hito en tu vida. Has demostrado una gran
+                        capacidad para superar obstáculos y enfrentar desafíos con
+                        valentía. Estoy seguro/a de que este logro es solo el inicio de
+                        muchos más triunfos que vendrán en tu camino.
+                    </p>
+                    <p>
+                        Tu talento y trabajo duro son dignos de admiración. Has demostrado
+                        ser una persona comprometida y capaz de enfrentar cualquier reto
+                        que se te presente. Este logro es un reflejo de tu dedicación y
+                        perseverancia en todo lo que haces.
+                    </p>
+                    <br>
+                    <img style="
+                background-position: center center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                height: 334px;
+                position: relative;
+              "
+                        src="{{ asset('mails/images2/img/certi-diplo.png') }}" alt="Imagen de servicio" />
+                    @php
+                        use Illuminate\Support\Facades\Crypt;
+
+                        $data = [
+                            'route' => $route,
+                            'name' => $name,
+                            'code' => $studentRecord['code'],
+                        ];
+
+                        // Encripta los datos
+                        $encryptedData = Crypt::encryptString(json_encode($data));
+
+                        // Genera la URL para la descarga
+                        $downloadUrl = route('home.certificate', ['data' => $encryptedData]);
+                    @endphp
+                    <table align="center" style="margin: 20px auto; text-align: center;">
+                        <tr>
+                            <td>
+                                <a href="{{ $downloadUrl }}"
+                                    style="
+                          display: inline-block;
+                          background-color: #262626;
+                          color: white !important;
+                          padding: 10px 80px;
+                          text-align: center;
+                          text-decoration: none;
+                          border-radius: 5px;
+                          font-size: 16px;
+                          font-weight: bold;
+                          margin: 34px auto;
+                        ">
+                                    Descarga Constancia
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div style="border-bottom: 5px solid #efefef"></div>
+
+                    <p>
+                        Si tienes alguna inquietud, ingresa en el Portal de Asesoramiento
+                        o ponte en contacto con nosotros a través de
+                        <span class="text-id span-wssp">
+                            WhatsApp clicando en el botón verde:</span>
+                    </p>
+                    <a href="https://wa.link/bgwth9" target="_blank">
+                        <img style="
+                  background-size: cover;
+                  width: 40% !important;
+                  background-position: center !important;
+                  margin: auto;
+                  display: block;
+                  padding: 17px 0px;
+                "
+                            src="{{ asset('mails/images2/img/wssp.png') }}" alt="Imagen de servicio" /></a>
+                </div>
+
+                <img src="{{ asset('mails/images2/img/ademico-dozer.png') }}" alt="Imagen de servicio" />
+                <div class="fondo-footer">
+                    <table align="center" width="100%" cellpadding="0" cellspacing="0"
+                        style="background-color: #f2f2f2;">
+                        <tr>
+                            <td align="center" style="padding: 1rem;">
+                                <p
+                                    style="padding: 0.5rem; margin: 0; font-family: Arial Narrow, sans-serif; font-size: 14px; color: #000;">
+                                    Visita nuestra web y síguenos en redes sociales:
+                                </p>
+                                <table align="center" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td style="padding: 0 5px;">
+                                            <a href="https://institutodozer.edu.pe/" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb"><img
+                                                        src="{{ asset('mails/images2/img/icon-web.png') }}"
+                                                        alt="" class="icon-style" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td style="padding: 0 5px;">
+                                            <a href="https://www.facebook.com/InstitutoDozer" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb">
+                                                    <img src="{{ asset('mails/images2/img/icon-fb.png') }}"
+                                                        alt="" class="icon-stylefb" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td style="padding: 0 5px;">
+                                            <a href="https://www.instagram.com/instituto.dozer/" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb"><img
+                                                        src="{{ asset('mails/images2/img/icon-ig.png') }}"
+                                                        alt="" class="icon-style" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td style="padding: 0 5px;">
+                                            <a href="https://www.linkedin.com/company/institutodozer/" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb"><img
+                                                        src="{{ asset('mails/images2/img/icon-in.png') }}"
+                                                        alt="" class="icon-style" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td style="padding: 0 5px;">
+                                            <a href="#" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb"><img
+                                                        src="{{ asset('mails/images2/img/icon-yt.png') }}"
+                                                        alt="" class="icon-style" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td style="padding: 0 5px;">
+                                            <a href="https://www.tiktok.com/@institutodozer" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb"><img
+                                                        src="{{ asset('mails/images2/img/icon-tk.png') }}"
+                                                        alt="" class="icon-style" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="linia-footer"></div>
+            </div>
+
+            <!-- Pie de página del correo -->
         </div>
-
-        <div class="text-black position-absolute pt-50 d-flex flex-column  contenido justify-content-center">
-            <div class="p-logo">
-                <img class="logo-dozer d-block m-auto" src="{{ asset('mails/img/dozer.png') }}" alt="" />
-            </div>
-            <div class="text-center titulo-diplo">
-                <h1 class="fw-bold font-titulo">CERTIFICADO DE DIPLOMADO DE INSTITUTO DOZER</h1>
-            </div>
-
-            <div class="contenido-texto text-center">
-                <div class="mb-3">
-                    Me complace enormemente dirigirme a ti para felicitarte por el
-                    magnífico logro que has obtenido. Tu esfuerzo, dedicación y talento
-                    han dado sus frutos y te has convertido en un verdadero ejemplo de
-                    éxito.
-                </div>
-
-                <div class="mb-3">
-                    Tu persistencia y determinación han sido fundamentales para alcanzar
-                    este importante hito en tu vida. Has demostrado una gran capacidad
-                    para superar obstáculos y enfrentar desafíos con valentía. Estoy
-                    seguro/a de que este logro es solo el inicio de muchos más triunfos
-                    que vendrán en tu camino.
-                </div>
-
-                <div class="mb-3">
-                    Tu talento y habilidades son innegables. Has trabajado arduamente
-                    para alcanzar tus metas y ahora eres reconocido/a por ello. Tu
-                    determinación y perseverancia son dignas de admiración y estoy
-                    seguro de que este logro es solo el comienzo de una larga lista de
-                    éxitos.
-                </div>
-
-                <div class="mb-3">
-                    Espero que celebres este éxito de la manera que mereces. Te animo a
-                    seguir persiguiendo tus metas con la misma pasión y determinación
-                    que hasta ahora. Estoy seguro/a de que tu futuro estará lleno de
-                    éxitos aún mayores.
-                </div>
-                <div class="mb-3">
-                    Una vez más, ¡enhorabuena por este logro tan merecido! Permíteme
-                    expresar mi más sincero orgullo y alegría por ti. Estoy emocionado/a
-                    de ver qué más cosas maravillosas lograrás en el futuro.
-                </div>
-
-                <div class="my-5">
-                    <div>
-                        Cpc. Gildo Espinoza Reyes <br />
-                        (CPC - Callao, N° 6498)
-                    </div>
-                    <div class="fw-semibold">
-                        Director de Registros Académicos <br />
-                        de Instituto Dozer
-                    </div>
-                </div>
-                <div>
-                    <button class="btn btn-descarga" type="submit">Descargar</button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
+    </div>
 </body>
 
 </html>

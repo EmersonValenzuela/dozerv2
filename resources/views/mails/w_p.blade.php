@@ -217,6 +217,10 @@
 </head>
 
 <body>
+    <span style="display:none; visibility:hidden; mso-hide:all;">
+        En Instituto Dozer, queremos expresarte nuestro más sincero agradecimiento por tu asistencia y dedicación a lo
+        largo de tu formación.
+    </span>
     <div class="email-wrapper">
         <div class="email-content">
             <!-- Encabezado del correo con imagen -->

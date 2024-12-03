@@ -17,6 +17,7 @@ class NotificationMail extends Mailable
     public $viewTemplate;     // Ruta de la vista dinámica
     public $certificateText;  // Texto del certificado
     public $fileAttachment;   // Nombre del archivo adjunto
+    public $subject;          // Asunto del correo
 
     /**
      * Create a new message instance.
@@ -27,12 +28,13 @@ class NotificationMail extends Mailable
      * @param  string  $fileAttachment
      * @return void
      */
-    public function __construct($studentRecord, $viewTemplate, $certificateText, $fileAttachment)
+    public function __construct($studentRecord, $viewTemplate, $certificateText, $fileAttachment, $subject)
     {
         $this->studentRecord = $studentRecord;
         $this->viewTemplate = $viewTemplate;
         $this->certificateText = $certificateText;
         $this->fileAttachment = $fileAttachment; // Asigna el archivo adjunto
+        $this->subject = $subject;
     }
 
     /**
@@ -44,7 +46,7 @@ class NotificationMail extends Mailable
     {
         // Asunto dinámico con el texto del certificado
         return new Envelope(
-            subject: 'Certificado de ' . $this->certificateText,
+            subject: $this->subject,
         );
     }
 

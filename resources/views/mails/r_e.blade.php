@@ -217,6 +217,10 @@
 </head>
 
 <body>
+    <span style="display:none; visibility:hidden; mso-hide:all;">
+        Estamos seguros de que los conocimientos adquiridos te impulsarán hacia nuevos logros y éxitos. ¡Gracias por ser
+        parte de nuestra comunidad educativa!
+    </span>
     <div class="email-wrapper">
         <div class="email-content">
             <!-- Encabezado del correo con imagen -->

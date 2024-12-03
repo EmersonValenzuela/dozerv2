@@ -218,6 +218,10 @@
 </head>
 
 <body>
+    <span style="display:none; visibility:hidden; mso-hide:all;">
+        ¡Nos complace darte la bienvenida a Instituto Dozer! Estamos emocionados de acompañarte en este nuevo camino de
+        aprendizaje y formación.
+    </span>
     <div class="email-wrapper">
         <div class="email-content">
             <!-- Encabezado del correo con imagen -->

@@ -19,6 +19,7 @@ class SendCertificates implements ShouldQueue
     protected $viewTemplate;  // Nombre de la vista a usar
     protected $certificateText;  // Texto relacionado con el certificado
     protected $fileAttachment;  // Nombre del archivo adjunto
+    protected $subject;  // Asunto del correo
 
     /**
      * Create a new job instance.
@@ -29,12 +30,13 @@ class SendCertificates implements ShouldQueue
      * @param  string  $fileAttachment
      * @return void
      */
-    public function __construct($studentRecord, $viewTemplate, $certificateText, $fileAttachment)
+    public function __construct($studentRecord, $viewTemplate, $certificateText, $fileAttachment, $subject)
     {
         $this->studentRecord = $studentRecord;
         $this->viewTemplate = $viewTemplate;
         $this->certificateText = $certificateText;
         $this->fileAttachment = $fileAttachment; // Asigna el nombre del archivo
+        $this->subject = $subject;
     }
 
     /**
@@ -45,6 +47,6 @@ class SendCertificates implements ShouldQueue
     public function handle()
     {
         // Envía el correo usando NotificationMail con los parámetros necesarios
-        Mail::to($this->studentRecord['email'])->send(new NotificationMail($this->studentRecord, $this->viewTemplate, $this->certificateText, $this->fileAttachment));
+        Mail::to($this->studentRecord['email'])->send(new NotificationMail($this->studentRecord, $this->viewTemplate, $this->certificateText, $this->fileAttachment, $this->subject));
     }
 }

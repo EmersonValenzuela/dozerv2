@@ -121,6 +121,9 @@
 </head>
 
 <body>
+    <span style="display:none; visibility:hidden; mso-hide:all;">
+        Estamos orgullosos de haber sido parte de tu formación y te deseamos mucho éxito en tus futuros proyectos. ¡Felicidades y sigue adelante!
+    </span>
     <section class="container-fluid d-flex justify-content-center">
         <div class="d-flex justify-content-start">
             <div>
