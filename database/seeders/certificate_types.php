@@ -19,10 +19,10 @@ class certificate_types extends Seeder
             ['name' => 'DOZER', 'description' => 'INSTITUTO DOZER'],
             ['name' => 'CIP', 'description' => 'COLEGIO DE INGENIEROS DEL PERÚ'],
             ['name' => 'CAP', 'description' => 'COLEGIO DE ARQUITECTOS DEL PERÚ'],
-            ['name' => 'Constancia de matrícula'],
-            ['name' => 'Constancia de Participación'],
-            ['name' => 'Reconocimiento a la excelencia'],
-            ['name' => 'Participación Webinar'],
+            ['name' => 'Constancia de matrícula', 'description' => null],
+            ['name' => 'Constancia de Participación', 'description' => null],
+            ['name' => 'Reconocimiento a la excelencia', 'description' => null],
+            ['name' => 'Participación Webinar', 'description' => null],
         ]);
     }
 }
