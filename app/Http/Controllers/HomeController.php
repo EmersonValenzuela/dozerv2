@@ -83,4 +83,17 @@ class HomeController extends Controller
             abort(400, 'Datos inválidos o manipulados');
         }
     }
+
+    public function updateName(Request $request)
+    {
+        $course = Course::find($request->id);
+        $course->course_or_event = $request->value;
+        $course->save();
+
+        return response()->json([
+            'success' => true,
+            'icon' => 'success',
+            'message' => 'Actualización exitosa',
+        ]);
+    }
 }

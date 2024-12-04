@@ -604,4 +604,13 @@ $(function () {
             toast.onmouseleave = Swal.resumeTimer;
         },
     });
+
+    function updateCourse(element) {
+        const id = element.getAttribute("data-id");
+        const field = element.getAttribute("data-field");
+        const value = element.innerText;
+
+        console.log(id, field, value);
+        
+    }
 });

@@ -42,7 +42,7 @@
                             .select2({
                                 placeholder: "Select value",
                                 dropdownParent: e.parent(),
-                                maximumSelectionLength: 12, // Límite de selección
+                                maximumSelectionLength: 15, // Límite de selección
                                 language: {
                                     searching: function () {
                                         return "Buscando...";
