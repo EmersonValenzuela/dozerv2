@@ -79,7 +79,6 @@
                         },
                     },
 
-
                     {
                         targets: -1,
                         title: "Acciones",

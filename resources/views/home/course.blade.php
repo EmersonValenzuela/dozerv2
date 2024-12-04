@@ -4,7 +4,10 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="content-wrapper py-5" style="flex: 0.6 !important;">
 
-            <div class="text-white px-5 fw-bold font-tituview">{{ $course->course_or_event }}</div>
+            <div class="text-white px-5 fw-bold font-tituview" contenteditable="true" data-id="{{ $course->id_course }}"
+                data-field="course_or_event" onblur="updateCourse(this)">
+                {{ $course->course_or_event }}
+            </div>
             <div class="d-flex mb-3">
                 <div class="d-flex flex-row  px-5   fw-light text-plo">
                     <div class="p-2"> <span class="mdi mdi-calendar-month-outline"></span> Fecha de Registro
@@ -150,8 +153,9 @@
                         <div class="d-flex flex-row mb-3 justify-content-between">
 
                             <div class="px-2 w-100">
-                                <label for="smallInput" class="form-label ">Correo Electronico:</label>
-                                <select class="form-select form-select-sm bg-input select2" id="deleteType" name="deleteType">
+                                <label for="smallInput" class="form-label ">Constancia/Certificado:</label>
+                                <select class="form-select form-select-sm bg-input select2" id="deleteType"
+                                    name="deleteType">
                                     <option value="c_m" data-route="enrollments" data-prefix="matricula_">C. MATRICULA
                                     </option>
                                     <option value="c_p" data-route="constancy"
@@ -247,6 +251,37 @@
 
 
         const baseUrl = "{{ url('/') }}";
+
+        function updateCourse(element) {
+            const id = element.getAttribute('data-id');
+            const field = element.getAttribute('data-field');
+            const value = element.innerText;
+
+            fetch(`updateName`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        id,
+                        field,
+                        value
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Actualización exitosa');
+                    } else {
+                        alert('Error al actualizar');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Ocurrió un error al guardar los cambios.');
+                });
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="{{ asset('js/pages/course.js') }}"></script>
