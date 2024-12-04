@@ -94,7 +94,7 @@
                         </div>
                         <div class="col-6 text-center d-flex align-items-center">
                             <div class="card-body pb-0 pt-3">
-                                <img src="{{ asset('img/cap.png') }}" alt="Ratings" class="img-fluid" width="95" />
+                                <img src="{{ asset('img/dozer.png') }}" alt="Ratings" class="img-fluid" width="95" />
                             </div>
                         </div>
                     </div>

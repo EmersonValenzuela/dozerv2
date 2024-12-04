@@ -8,7 +8,7 @@
     <style>
         /* Estilos generales */
         body {
-            font-family: 'Arial Narrow';
+            font-family: "Arial Narrow";
             background-color: white;
             margin: 0;
             padding: 0;
@@ -54,7 +54,7 @@
         }
 
         .button {
-            background-color: #BFBC99;
+            background-color: #bfbc99;
             color: white;
             padding: 10px 20px;
             text-align: center;
@@ -227,20 +227,18 @@
         <div class="email-content">
             <!-- Encabezado del correo con imagen -->
             <div class="email-header">
-                <img src="img/encabezado-cap.png" alt="Encabezado del Correo" />
+                <img src="{{ asset('mails/images2/img/encabezado-cap.png') }}" alt="Encabezado del Correo" />
 
-                <div style="margin: 0 20px; display: flex
-          ;">
-
+                <div style="margin: 0 20px; display: flex">
                     <div>
-                        <h1 class="text-titulo" style="
-                  text-align: left !important; ">Certificado de
-                            Aprobración de Diplomado <br>
-                            por el Colegio de Arquitectos del Perú</h1>
+                        <h1 class="text-titulo" style="text-align: left !important">
+                            Certificado de Aprobración de Diplomado <br />
+                            por el Colegio de Arquitectos del Perú
+                        </h1>
                     </div>
-                    <div style="display: flex;     margin-left: auto;"> <img class="img-cip" src="img/cap.png" alt />
+                    <div style="display: flex; margin-left: auto">
+                        <img class="img-cip" src="{{ asset('mails/images2/img/cap.png') }}" alt="Imagen de servicio" />
                     </div>
-
                 </div>
             </div>
 
@@ -249,15 +247,16 @@
                 <div style="margin: 0 20px">
                     <p>Director de Registros Académicos de Instituto Dozer</p>
                     <p>
-                        En esta ocasión, me dirijo a ti para felicitarte por el impresionante logro que has obtenido. Tu
-                        dedicación y esfuerzo constante han dado frutos y te has destacado entre los demás.
-
+                        En esta ocasión, me dirijo a ti para felicitarte por el
+                        impresionante logro que has obtenido. Tu dedicación y esfuerzo
+                        constante han dado frutos y te has destacado entre los demás.
                     </p>
                     <p>
-                        Tu talento y habilidades son innegables. Has trabajado arduamente para alcanzar tus metas y
-                        ahora eres reconocido/a por ello. Tu determinación y perseverancia son dignas de admiración y
-                        estoy seguro de que este logro es solo el comienzo de una larga lista de éxitos.
-
+                        Tu talento y habilidades son innegables. Has trabajado arduamente
+                        para alcanzar tus metas y ahora eres reconocido/a por ello. Tu
+                        determinación y perseverancia son dignas de admiración y estoy
+                        seguro de que este logro es solo el comienzo de una larga lista de
+                        éxitos.
                     </p>
                     <p>
                         Tu talento y trabajo duro son dignos de admiración. Has demostrado
@@ -266,15 +265,16 @@
                         perseverancia en todo lo que haces.
                     </p>
                     <p>
-                        Te animo a continuar persiguiendo tus sueños y aspiraciones con la misma determinación y pasión
-                        que hasta ahora. Estoy convencido de que tu futuro será aún más brillante y lleno de logros.
+                        Te animo a continuar persiguiendo tus sueños y aspiraciones con la
+                        misma determinación y pasión que hasta ahora. Estoy convencido de
+                        que tu futuro será aún más brillante y lleno de logros.
                     </p>
                     <p>
-                        Enhorabuena por este merecido éxito. Estoy emocionado/a por las increíbles cosas que vendrán en
-                        tu camino. Celebra este logro y recuerda siempre lo lejos que has llegado.
-
+                        Enhorabuena por este merecido éxito. Estoy emocionado/a por las
+                        increíbles cosas que vendrán en tu camino. Celebra este logro y
+                        recuerda siempre lo lejos que has llegado.
                     </p>
-                    <br>
+                    <br />
                     <img style="
                 background-position: center center;
                 background-size: cover;
@@ -282,15 +282,43 @@
                 height: 334px;
                 position: relative;
               "
-                        src="img/cap-diplo.png" alt="Imagen de servicio" />
-                    <a style="
-                display: flex;
-                justify-content: center;
-                margin: 34px 150px;
-                padding: 9px;
-              "
-                        href="#" class="button">Descarga Certificado
-                    </a>
+                        src="{{ asset('mails/images2/img/cap-diplo.png') }}" alt="Imagen de servicio" />
+                    @php
+                        use Illuminate\Support\Facades\Crypt;
+
+                        $data = [
+                            'route' => $route,
+                            'name' => $name,
+                            'code' => $studentRecord['code'],
+                        ];
+
+                        // Encripta los datos
+                        $encryptedData = Crypt::encryptString(json_encode($data));
+
+                        // Genera la URL para la descarga
+                        $downloadUrl = route('home.certificate', ['data' => $encryptedData]);
+                    @endphp
+                    <table align="center" style="margin: 20px auto; text-align: center;">
+                        <tr>
+                            <td>
+                                <a href="{{ $downloadUrl }}"
+                                    style="
+                          display: inline-block;
+                          background-color: #BFBC99;
+                          color: white !important;
+                          padding: 10px 80px;
+                          text-align: center;
+                          text-decoration: none;
+                          border-radius: 5px;
+                          font-size: 16px;
+                          font-weight: bold;
+                          margin: 34px auto;
+                        ">
+                                    Descarga Constancia
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
 
                     <div style="border-bottom: 5px solid #efefef"></div>
 
@@ -300,7 +328,7 @@
                         <span class="text-id span-wssp">
                             WhatsApp clicando en el botón verde:</span>
                     </p>
-                    <a href="https://wa.link/bgwth9" Target="_blank">
+                    <a href="https://wa.link/bgwth9" target="_blank">
                         <img style="
                   background-size: cover;
                   width: 40% !important;
@@ -309,51 +337,74 @@
                   display: block;
                   padding: 17px 0px;
                 "
-                            src="img/wssp.png" alt="Imagen de servicio" /></a>
+                            src="{{ asset('mails/images2/img/wssp.png') }}" alt="Imagen de servicio" /></a>
                 </div>
 
-                <img src="img/ideledirec-cap.png" alt="Imagen de servicio" />
+                <img src="{{ asset('mails/images2/img/ideledirec-cap.png') }}" alt="Imagen de servicio" />
                 <div class="fondo-footer">
-                    <div class="group-footer">
-                        <div class>
-                            <div class="p-2 text-footer">
-                                Visita nuestra web y síguenos en redes sociales:
-                            </div>
-
-                            <div class="direccion-icon">
-                                <a href="https://institutodozer.edu.pe/" target="_blank">
-                                    <div class="mx-2 fondo-icon fondo-fb">
-                                        <img class="icon-style" src="img/icon-web.png" alt />
-                                    </div>
-                                </a>
-                                <a href="https://www.facebook.com/InstitutoDozer" target="_blank">
-                                    <div class="mx-2 fondo-icon w-50px fondo-fb">
-                                        <img class="icon-stylefb" src="img/icon-fb.png" alt />
-                                    </div>
-                                </a>
-                                <a href="https://www.instagram.com/instituto.dozer/" target="_blank">
-                                    <div class="mx-2 fondo-icon fondo-fb">
-                                        <img class="icon-style" src="img/icon-ig.png" alt />
-                                    </div>
-                                </a>
-                                <a href="https://www.linkedin.com/company/institutodozer/" target="_blank">
-                                    <div class="mx-2 fondo-icon fondo-fb">
-                                        <img class="icon-style" src="img/icon-in.png" alt />
-                                    </div>
-                                </a><a href target="_blank">
-                                    <div class="fondo-icon fondo-fb">
-                                        <img class="icon-style" src="img/icon-yt.png" alt />
-                                    </div>
-                                </a>
-
-                                <a href="https://www.tiktok.com/@institutodozer" target="_blank">
-                                    <div class="mx-2 fondo-icon w-50px fondo-fb">
-                                        <img class="icon-styletk" src="img/icon-tk.png" alt />
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <table align="center" width="100%" cellpadding="0" cellspacing="0"
+                        style="background-color: #f2f2f2;">
+                        <tr>
+                            <td align="center" style="padding: 1rem;">
+                                <p
+                                    style="padding: 0.5rem; margin: 0; font-family: Arial Narrow, sans-serif; font-size: 14px; color: #000;">
+                                    Visita nuestra web y síguenos en redes sociales:
+                                </p>
+                                <table align="center" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td style="padding: 0 5px;">
+                                            <a href="https://institutodozer.edu.pe/" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb"><img
+                                                        src="{{ asset('mails/images2/img/icon-web.png') }}"
+                                                        alt="" class="icon-style" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td style="padding: 0 5px;">
+                                            <a href="https://www.facebook.com/InstitutoDozer" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb">
+                                                    <img src="{{ asset('mails/images2/img/icon-fb.png') }}"
+                                                        alt="" class="icon-stylefb" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td style="padding: 0 5px;">
+                                            <a href="https://www.instagram.com/instituto.dozer/" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb"><img
+                                                        src="{{ asset('mails/images2/img/icon-ig.png') }}"
+                                                        alt="" class="icon-style" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td style="padding: 0 5px;">
+                                            <a href="https://www.linkedin.com/company/institutodozer/" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb"><img
+                                                        src="{{ asset('mails/images2/img/icon-in.png') }}"
+                                                        alt="" class="icon-style" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td style="padding: 0 5px;">
+                                            <a href="#" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb"><img
+                                                        src="{{ asset('mails/images2/img/icon-yt.png') }}"
+                                                        alt="" class="icon-style" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                        <td style="padding: 0 5px;">
+                                            <a href="https://www.tiktok.com/@institutodozer" target="_blank">
+                                                <div class="mx-2 fondo-icon fondo-fb"><img
+                                                        src="{{ asset('mails/images2/img/icon-tk.png') }}"
+                                                        alt="" class="icon-style" />
+                                                </div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="linia-footer"></div>
             </div>
