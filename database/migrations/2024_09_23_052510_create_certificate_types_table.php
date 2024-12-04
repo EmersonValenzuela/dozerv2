@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('certificate_types', function (Blueprint $table) {
             $table->id('id_certificate_type');
             $table->string('name', 100); // Nombre del tipo de certificado (CIP, CAP, Dozer, etc.)
+            $table->string('description', 100)->nullable(); // Descripción del tipo de certificado
             $table->timestamps();
         });
     }

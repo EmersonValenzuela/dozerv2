@@ -223,19 +223,31 @@
                 const student = studentData.find(
                     (s) => s.id_student === Number(id)
                 );
+
                 if (student) {
-                    d.row
-                        .add({
-                            id: student.id_student,
-                            code: student.code,
-                            names: student.full_name,
-                            course: student.course_or_event,
-                            actions:
-                                '<button class="removeStudent">Eliminar</button>',
-                        })
-                        .draw();
+                    // Verificar si el estudiante ya está en la tabla
+                    const isStudentAdded = d
+                        .rows()
+                        .data()
+                        .toArray()
+                        .some((row) => row.id === student.id_student);
+
+                    if (!isStudentAdded) {
+                        d.row
+                            .add({
+                                id: student.id_student,
+                                code: student.code,
+                                names: student.full_name,
+                                course: student.course_or_event,
+                                actions:
+                                    '<button class="removeStudent">Eliminar</button>',
+                            })
+                            .draw();
+                    }
                 }
             });
+
+            $("#shareProject").modal("hide");
         });
 
         $("#btnModal").on("click", function () {

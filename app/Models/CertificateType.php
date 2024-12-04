@@ -9,11 +9,10 @@ class CertificateType extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id_certificate_type';
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'description'];
 
     public function programTypes()
     {
         return $this->belongsToMany(ProgramType::class, 'certificate_programs', 'id_certificate_type', 'id_program_type');
     }
-
 }

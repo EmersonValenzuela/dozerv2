@@ -33,6 +33,7 @@ class HomeController extends Controller
                 ->get();
 
             return view('home.list')->with([
+                'typeCertificate' => $certificateType,
                 'courses' => $courses,
                 'programTypes' => $programTypes
             ]);

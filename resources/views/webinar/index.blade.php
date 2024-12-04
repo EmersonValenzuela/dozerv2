@@ -4,7 +4,7 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="d-flex justify-content-star">
             <h5 class="mb-3 text-nowrap text-white">
-                COLEGIO DE INGENIEROS DEL PERÚ
+                INSTITUTO DOZER - WEBINAR
             </h5>
         </div>
         <div class="mb-4">
