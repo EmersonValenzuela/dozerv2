@@ -4,7 +4,10 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="content-wrapper py-5" style="flex: 0.6 !important;">
 
-            <div class="text-white px-5 fw-bold font-tituview">{{ $course->course_or_event }}</div>
+            <div class="text-white px-5 fw-bold font-tituview" contenteditable="true" data-id="{{ $course->id_course }}"
+                data-field="course_or_event" onblur="updateCourse(this)">
+                {{ $course->course_or_event }}
+            </div>
             <div class="d-flex mb-3">
                 <div class="d-flex flex-row  px-5   fw-light text-plo">
                     <div class="p-2"> <span class="mdi mdi-calendar-month-outline"></span> Fecha de Registro
@@ -177,6 +180,37 @@
     <script>
         const course_id = {{ $course->id_course }};
         const basePdfUrl = "{{ asset('pdfs/webinar/') }}";
+
+        function updateCourse(element) {
+            const id = element.getAttribute('data-id');
+            const field = element.getAttribute('data-field');
+            const value = element.innerText;
+
+            fetch(`/Curso/updateName`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        id,
+                        field,
+                        value
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Actualización exitosa');
+                    } else {
+                        alert('Error al actualizar');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Ocurrió un error al guardar los cambios.');
+                });
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="{{ asset('js/pages/webinar_list.js') }}"></script>

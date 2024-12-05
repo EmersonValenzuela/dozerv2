@@ -45,7 +45,7 @@
                                         return "Por favor, ingresa 2 o más caracteres";
                                     },
                                     maximumSelected: function () {
-                                        return "Solo puedes seleccionar hasta 12 estudiantes.";
+                                        return "Solo puedes seleccionar hasta 15 estudiantes.";
                                     },
                                 },
                             });

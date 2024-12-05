@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class SendCertificates implements ShouldQueue
 {
@@ -46,7 +47,22 @@ class SendCertificates implements ShouldQueue
      */
     public function handle()
     {
-        // Envía el correo usando NotificationMail con los parámetros necesarios
-        Mail::to($this->studentRecord['email'])->send(new NotificationMail($this->studentRecord, $this->viewTemplate, $this->certificateText, $this->fileAttachment, $this->subject));
+        try {
+            Mail::to($this->studentRecord['email'])->send(
+                new NotificationMail(
+                    $this->studentRecord,
+                    $this->viewTemplate,
+                    $this->certificateText,
+                    $this->fileAttachment,
+                    $this->subject
+                )
+            );
+
+            // Registro del envío exitoso
+            Log::info('Correo enviado a: ' . $this->studentRecord['email']);
+        } catch (\Exception $e) {
+            // Registro del error
+            Log::error('Error al enviar correo a ' . $this->studentRecord['email'] . ': ' . $e->getMessage());
+        }
     }
 }
