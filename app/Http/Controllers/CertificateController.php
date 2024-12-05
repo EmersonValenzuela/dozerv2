@@ -49,6 +49,8 @@ class CertificateController extends Controller
      */
     public function store(Request $request)
     {
+
+
         // Obtener el último curso y calcular el próximo ID
         $lastCourse = Course::latest('id_course')->first();
         $nextId = $lastCourse ? $lastCourse->id_course + 1 : 1;
@@ -105,6 +107,18 @@ class CertificateController extends Controller
     public function generateCertificates(Request $request)
     {
 
+        $typeMap = [
+            1 => 'DO-',
+            2 => 'CIP-',
+            3 => 'CAP-',
+        ];
+
+        $programMap = [
+            1 => 'C-',
+            2 => 'E-',
+            3 => 'D-',
+        ];
+
         // Define the directory without 'public/'
         $directory = 'uploads/certificates';
 
@@ -126,6 +140,8 @@ class CertificateController extends Controller
         $course->image_two = $img2Url;
         $course->save();
 
+        $type = $typeMap[$course->certificate_type_id];
+        $program = $programMap[$course->program_type_id];
 
         $students = json_decode($request->input('rows'), true);
 
@@ -138,7 +154,7 @@ class CertificateController extends Controller
                 $student->certificate = 1;
 
                 // Genera el PDF pasando los datos necesarios
-                $this->generatePdf($img1Url, $img2Url, $student);
+                $this->generatePdf($img1Url, $img2Url, $student, $type, $program);
 
                 // Guarda los cambios en el estudiante
                 $student->save();
@@ -152,7 +168,7 @@ class CertificateController extends Controller
         ]);
     }
 
-    public function generatePdf($img1, $img2, $student)
+    public function generatePdf($img1, $img2, $student, $type, $program)
     {
         $name = $student->full_name;
         $code = $student->code;
@@ -175,7 +191,7 @@ class CertificateController extends Controller
         $pdf->SetFont('Oswald-Regular', '', 11);
         $pdf->SetTextColor(117, 117, 117);
         $pdf->SetXY(27.1, 28.4);
-        $pdf->Cell(1, 35, $code, 0, 1, 'L');
+        $pdf->Cell(1, 35, $type . $program . $code, 0, 1, 'L');
 
         // Configurar para centrar el texto
         $pdf->SetFont('Oswald-Bold', '', 22);
@@ -198,7 +214,7 @@ class CertificateController extends Controller
         $pdf->SetFont('Oswald-Regular', '', 12);
         $pdf->SetTextColor(117, 117, 117);
         $pdf->SetXY(210, 177);
-        $pdf->Cell(1, 5, $code, 0, 1, 'L');
+        $pdf->Cell(1, 5, $type . $program . $code, 0, 1, 'L');
 
         $pdf->AddPage('L');
         $pdf->SetFont('times', '', 12);
@@ -214,7 +230,7 @@ class CertificateController extends Controller
         $pdf->SetFont('Oswald-Regular', '', 12);
         $pdf->SetTextColor(117, 117, 117);
         $pdf->SetXY(209.5, 176.7);
-        $pdf->Cell(1, 5, $code, 0, 1, 'L');
+        $pdf->Cell(1, 5, $type . $program . $code, 0, 1, 'L');
 
         // Guardar el archivo PDF en una carpeta específica dentro del proyecto
         $pdfFileName = "certificado_" . $code . '.pdf';
@@ -228,7 +244,7 @@ class CertificateController extends Controller
         $img1 = "img/backgrounds/img1.png";
         $img2 = "img/backgrounds/img2.png";
         $name = "Marlon Valenzuela Estrada";
-        $code = "0745147";
+        $code = "DO-C-0745147";
         $course = "Panaderia Nuclear";
         $score = "20";
 
@@ -333,8 +349,25 @@ class CertificateController extends Controller
 
     public function updateStudent(Request $request)
     {
+
+        $typeMap = [
+            1 => 'DO-',
+            2 => 'CIP-',
+            3 => 'CAP-',
+        ];
+
+        $programMap = [
+            1 => 'C-',
+            2 => 'E-',
+            3 => 'D-',
+        ];
+
         // Buscar el estudiante por su ID
         $student = students::find($request->student_id);
+        $course = Course::find($request->course_id);
+        $type = $typeMap[$course->certificate_type_id];
+        $program = $programMap[$course->program_type_id];
+
 
         // Verificar si el estudiante existe
         if (!$student) {
@@ -364,15 +397,14 @@ class CertificateController extends Controller
 
         // Generar el PDF
         $this->generatePdf(
-            $request->names,
-            $request->course_name,
-            $request->course_date,
             $request->imgUrl,
-            $request->code,
-            $request->score
+            $request->imgUrl2,
+            $student,
+            $type,
+            $program
         );
 
-        $student->r_e = 1;
+        $student->certificate = 1;
         $student->save();
 
         // Responder con éxito

@@ -47,6 +47,18 @@ class ConstancyController extends Controller
      */
     public function store(Request $request)
     {
+        $typeMap = [
+            1 => 'DO-',
+            2 => 'CIP-',
+            3 => 'CAP-',
+        ];
+
+        $programMap = [
+            1 => 'C-',
+            2 => 'E-',
+            3 => 'D-',
+        ];
+
         $directory = 'uploads/constancy'; // Define el directorio donde se guardarán los archivos.
 
         if (!Storage::disk('public')->exists($directory)) {
@@ -64,6 +76,9 @@ class ConstancyController extends Controller
         $course->image_cp = $imgUrl;
         $course->save();
 
+        $type = $typeMap[$course->certificate_type_id];
+        $program = $programMap[$course->program_type_id];
+
         // Itera sobre los IDs de los estudiantes
         foreach ($students as $id) {
             $student = Students::find($id);
@@ -73,7 +88,7 @@ class ConstancyController extends Controller
                 $student->c_p = 1;
 
                 // Genera el PDF pasando los datos necesarios
-                $this->generatePdf($student->full_name, $student->course_or_event, $request->input('date'), $imgUrl, $student->code);
+                $this->generatePdf($student->full_name, $student->course_or_event, $request->input('date'), $imgUrl, $student->code, $type, $program);
 
                 // Guarda los cambios en el estudiante
                 $student->save();
@@ -88,7 +103,7 @@ class ConstancyController extends Controller
     }
 
 
-    public function generatePdf($names, $course, $date, $img, $code)
+    public function generatePdf($names, $course, $date, $img, $code, $type, $program)
     {
 
         $pdf = new \FPDF('L', 'mm', 'A4');
@@ -108,7 +123,7 @@ class ConstancyController extends Controller
         $pdf->SetFont('Oswald-Regular', '', 11);
         $pdf->SetTextColor(117, 117, 117);
         $pdf->SetXY(28, 30);
-        $pdf->Cell(1, 35, $code, 0, 1, 'L');
+        $pdf->Cell(1, 35, $type . $program . $code, 0, 1, 'L');
 
         // Configurar para centrar el texto
         $pdf->SetFont('Oswald-Bold', '', 21);
@@ -137,7 +152,7 @@ class ConstancyController extends Controller
         $pdf->SetFont('Oswald-Regular', '', 12);
         $pdf->SetTextColor(117, 117, 117);
         $pdf->SetXY(211, 177.6);
-        $pdf->Cell(1, 5, $code, 0, 1, 'L');
+        $pdf->Cell(1, 5, $type . $program . $code, 0, 1, 'L');
 
         $pdfFileName = 'constancia_participacion_' . $code . '.pdf';
         $pdf->Output(public_path('pdfs/constancy/') . $pdfFileName, 'F');
@@ -213,8 +228,23 @@ class ConstancyController extends Controller
 
     public function updateStudent(Request $request)
     {
+        $typeMap = [
+            1 => 'DO-',
+            2 => 'CIP-',
+            3 => 'CAP-',
+        ];
+
+        $programMap = [
+            1 => 'C-',
+            2 => 'E-',
+            3 => 'D-',
+        ];
+
         // Buscar el estudiante por su ID
         $student = students::find($request->student_id);
+        $course = Course::find($request->course_id);
+        $type = $typeMap[$course->certificate_type_id];
+        $program = $programMap[$course->program_type_id];
 
         // Verificar si el estudiante existe
         if (!$student) {
@@ -241,7 +271,7 @@ class ConstancyController extends Controller
         }
 
         // Generar el PDF
-        $this->generatePdf($request->names, $request->course_name, $request->course_date, $request->imgUrl, $request->code);
+        $this->generatePdf($request->names, $request->course_name, $request->course_date, $request->imgUrl, $request->code, $type, $program);
         $student->c_p = 1;
         $student->save();
 

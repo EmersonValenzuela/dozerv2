@@ -611,6 +611,5 @@ $(function () {
         const value = element.innerText;
 
         console.log(id, field, value);
-        
     }
 });

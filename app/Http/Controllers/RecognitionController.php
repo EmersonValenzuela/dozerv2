@@ -111,7 +111,7 @@ class RecognitionController extends Controller
         $pdf->SetFont('Oswald-Regular', '', 11);
         $pdf->SetTextColor(117, 117, 117);
         $pdf->SetXY(28.9, 31);
-        $pdf->Cell(1, 35, $code, 0, 1, 'L');
+        $pdf->Cell(1, 35, "EXC-" . $code, 0, 1, 'L');
 
         // Configurar para centrar el texto
         $pdf->SetFont('Oswald-Bold', '', 21);
@@ -148,7 +148,7 @@ class RecognitionController extends Controller
         $pdf->SetFont('Oswald-Regular', '', 12);
         $pdf->SetTextColor(127, 128, 128); // color #7f8080
         $pdf->SetXY(212, 176);
-        $pdf->Cell(1, 5, $code, 0, 1, 'L');
+        $pdf->Cell(1, 5, "EXC-" . $code, 0, 1, 'L');
 
 
         $pdfFileName = "excelencia_" . $code . '.pdf';
@@ -167,7 +167,7 @@ class RecognitionController extends Controller
         $img1 = "img/examples/recognition.png";
 
         $name = "Antonella Perez Rodriguez";
-        $code = "045147";
+        $code = "EXC-045147";
         $course = "Nombre del Curso modular";
         $date = "24 de abril del 2024";
 

@@ -75,11 +75,11 @@ class MailsController extends Controller
         ];
 
         $subjectMap = [
-            'c_m' => 'CONSTANCIA DE MATRICULA EN ' . $request->course,
-            'c_p' => 'CONSTANCIA DE PARTICIPACION ' . $request->course,
-            'r_e' => 'CERTIFICADO EXCELENCIA ACADÁDEMICA EN ' . $request->course,
-            'w_p' => 'CONSTANCIA DE PARTICIPACIÓN WEBINAR EN ' . $request->course,
-            'certificate' => 'CERTIFICADO EN ' . $request->course,
+            'c_m' => 'CONSTANCIA DE MATRICULA EN ' . strtoupper($request->course),
+            'c_p' => 'CONSTANCIA DE PARTICIPACION ' . strtoupper($request->course),
+            'r_e' => 'CERTIFICADO EXCELENCIA ACADÁDEMICA EN ' . strtoupper($request->course),
+            'w_p' => 'CONSTANCIA DE PARTICIPACIÓN WEBINAR EN ' . strtoupper($request->course),
+            'certificate' => 'CERTIFICADO EN ' . strtoupper($request->course),
         ];
 
 
