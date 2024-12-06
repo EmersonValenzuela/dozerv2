@@ -10,49 +10,53 @@ class Verifier extends Controller
 {
     public function certified(Request $request, $code)
     {
+        // Mapeo de prefijos a rutas y prefijos de archivo
         $mapRoute = [
-            'CIP-E' => ['route' => 'certificates', 'prefix' => 'certificado_'],
-            'CIP-D' => ['route' => 'certificates', 'prefix' => 'certificado_'],
-            'CAP-E' => ['route' => 'certificates', 'prefix' => 'certificado_'],
-            'CAP-D' => ['route' => 'certificates', 'prefix' => 'certificado_'],
-            'EXC-' => ['route' => 'recognition', 'prefix' => 'excelencia_'],
+            'CIP-E-' => ['route' => 'certificates', 'prefix' => 'certificado_'],
+            'CIP-D-' => ['route' => 'certificates', 'prefix' => 'certificado_'],
+            'CAP-E-' => ['route' => 'certificates', 'prefix' => 'certificado_'],
+            'CAP-D-' => ['route' => 'certificates', 'prefix' => 'certificado_'],
+            'EXC-'  => ['route' => 'recognition', 'prefix' => 'excelencia_'],
         ];
-
-        // Variable para almacenar la ruta
-        $route = '';
-        $prefix = '';
 
         // Separar el código en prefijo y sufijo
         if (preg_match('/^([A-Za-z\-]+)(\d+)$/', $code, $matches)) {
-            $prefijo = $matches[1];  // El prefijo (letras y guion)
-            $sufijo = $matches[2];   // El número
+            $prefijo = $matches[1];  // Letras y guion
+            $sufijo = $matches[2];   // Número
+
+;
 
             // Buscar al estudiante por el código del sufijo
             $student = Students::where('code', $sufijo)->first();
 
-            // Verificar si el estudiante existe
             if (!$student) {
                 return response()->json([
                     'error' => 'Estudiante no encontrado'
                 ], 404);
             }
 
-            // Asignar la ruta en función del prefijo
+            // Determinar la ruta y el prefijo
+            $route = '';
+            $prefix = '';
+
             if (in_array($prefijo, ['DO-C-', 'DO-E-', 'DO-D-'])) {
-                // Verificar las condiciones específicas para los prefijos 'DO-'
+                // Prefijos para 'DO-'
                 if ($student->certificate == 1) {
                     $route = 'certificates';
                     $prefix = 'certificado_';
                 } elseif ($student->c_p == 1) {
                     $route = 'constancy';
                     $prefix = 'constancia_';
+                } else {
+                    return response()->json([
+                        'error' => 'No se encontró un certificado o constancia para este estudiante.'
+                    ], 400);
                 }
             } else {
-                // Usar el mapeo para asignar la ruta
+                // Usar el mapeo para prefijos predefinidos
                 $route = $mapRoute[$prefijo]['route'] ?? null;
-                $prefix = $mapRoute[$prefijo]['prefix'];
+                $prefix = $mapRoute[$prefijo]['prefix'] ?? '';
 
-                // Verificar si se encontró una ruta válida
                 if (!$route) {
                     return response()->json([
                         'error' => 'Prefijo no válido'
@@ -60,7 +64,10 @@ class Verifier extends Controller
                 }
             }
 
-            // Devolver respuesta con los detalles
+            // Generar URL del documento
+            $documentUrl = url("pdfs/{$route}/{$prefix}{$sufijo}.pdf");
+
+            // Respuesta con datos del estudiante
             return response()->json([
                 'status' => 'success',
                 'names' => $student->full_name,
@@ -69,13 +76,13 @@ class Verifier extends Controller
                 'route' => $route,
                 'prefijo' => $prefijo,
                 'sufijo' => $sufijo,
-                'url' => url('pdfs/' . $route . '/' . $prefix . $sufijo . '.pdf'),
+                'url' => $documentUrl,
             ]);
-        } else {
-            // Si el código no cumple con el formato esperado, retornar error
-            return response()->json([
-                'error' => 'Código no válido'
-            ], 400);
         }
+
+        // Código no válido
+        return response()->json([
+            'error' => 'Código no válido'
+        ], 400);
     }
 }
