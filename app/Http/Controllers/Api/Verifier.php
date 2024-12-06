@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class Verifier extends Controller
 {
-    public function verifier() {}
+    public function verifier() {
+        
+    }
 }
