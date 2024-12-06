@@ -107,9 +107,24 @@ $(function () {
                     orderable: !1,
                     className: "text-center",
                     render: function (e, t, a, s) {
+                        let uploadButton = "";
+
+                        // Verificar si mapCertificate es "CIP" o "CAP"
+                        if (
+                            mapCertificate === "CIP" ||
+                            mapCertificate === "CAP"
+                        ) {
+                            uploadButton = `
+                                <button type="button" class="btn btn-icon btn-outline-info waves-effect datatable_upload">
+                                    <span class="tf-icons mdi mdi-upload"></span>
+                                </button>
+                                <input type="file" class="upload-input" id="certificado_${a.code}" accept="application/pdf" style="display: none;">
+                            `;
+                        }
+
                         return `<button type="button" class="btn btn-icon btn-outline-warning waves-effect datatable_delete">
-                            <span class="tf-icons mdi mdi-reload-alert"></span>
-                            </button>`;
+                                    <span class="tf-icons mdi mdi-reload-alert"></span>
+                                </button> ${uploadButton}`;
                     },
                 },
             ],
@@ -233,6 +248,63 @@ $(function () {
         $("#idDelete").val(rowData.id);
         $("#studentDelete").val(rowData.names);
     });
+
+    t.on("click", ".datatable_upload", function () {
+        console.log("Botón subir presionado");
+        const id = $(this).next(".upload-input").attr("id"); // Busca el input asociado al botón
+        console.log(id);
+
+        if (id) {
+            $(`#${id}`).click(); // Simula el clic en el input
+        }
+    });
+
+    t.on("change", ".upload-input", function () {
+        blockUI();
+        const file = this.files[0];
+        const id = $(this).attr("id"); // Extraer el ID de la estructura "upload_ID"
+
+        if (file && id) {
+            console.log("Archivo seleccionado:", file.name);
+            console.log("ID asociado:", id);
+
+            // Crear el FormData para enviar los datos
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("id", id);
+            formData.append("_token", csrf_token);
+
+            // Enviar los datos al servidor
+            uploadFile(formData);
+        } else {
+            console.warn("No se seleccionó un archivo o no se encontró el ID.");
+        }
+    });
+
+    function uploadFile(formData) {
+        $.ajax({
+            url: "uploadFile", // Cambia por tu ruta al backend
+            type: "POST",
+            data: formData,
+            processData: false, // Evitar que jQuery procese el FormData
+            contentType: false, // Evitar que jQuery establezca el tipo de contenido
+            success: function (response) {
+                // Mostrar el mensaje basado en la respuesta del servidor
+                Toast.fire({
+                    icon: response.icon, // Usamos el icono dinámico de la respuesta
+                    title: response.message, // Usamos el mensaje dinámico de la respuesta
+                });
+                $.unblockUI();
+            },
+            error: function (xhr, status, error) {
+                // Mostrar un mensaje de error en caso de fallo
+                Toast.fire({
+                    icon: "error",
+                    title: "Error al subir el archivo",
+                });
+            },
+        });
+    }
 
     $("#btnDelete").on("click", function () {
         let certificate = $("#deleteType").val(),
@@ -363,6 +435,7 @@ $(function () {
     $("#modal_student").on("hidden.bs.modal", function () {
         f.reset();
     });
+
     function resetForm() {
         f.reset();
     }

@@ -237,6 +237,10 @@
 @section('scripts')
     <script>
         const course_id = {{ $course->id_course }};
+        const typeCertificate = {{ $course->certificate_type_id }};
+
+        const mapCertificate = @json($typeCertificade->name);
+
         const enrollmentUrl = "{{ asset('pdfs/enrollments/') }}";
         const constancyUrl = "{{ asset('pdfs/constancy/') }}";
         const recognitionUrl = "{{ asset('pdfs/recognition/') }}";

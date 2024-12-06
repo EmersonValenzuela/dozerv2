@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CertificateType;
 use App\Models\Course;
 use App\Models\Students;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -32,6 +33,7 @@ class HomeController extends Controller
                 }])
                 ->get();
 
+
             return view('home.list')->with([
                 'typeCertificate' => $certificateType,
                 'courses' => $courses,
@@ -49,7 +51,9 @@ class HomeController extends Controller
         }])
             ->first();
 
-        return view('home.course', compact('course'));
+        $typeCertificade = CertificateType::where('id_certificate_type', $course->certificate_type_id)->first();
+
+        return view('home.course', compact('course', 'typeCertificade'));
     }
 
     public function students($data)
@@ -87,14 +91,59 @@ class HomeController extends Controller
 
     public function updateName(Request $request)
     {
-        $course = Course::find($request->id);
-        $course->course_or_event = $request->value;
-        $course->save();
+        try {
+            $course = Course::find($request->id);
 
-        return response()->json([
-            'success' => true,
-            'icon' => 'success',
-            'message' => 'Actualización exitosa',
-        ]);
+            if (!$course) {
+                throw new \Exception("El curso no fue encontrado.");
+            }
+
+            $course->course_or_event = $request->value;
+            $course->save();
+
+            return response()->json([
+                'success' => true,
+                'icon' => 'success',
+                'message' => 'Actualización exitosa',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'icon' => 'error',
+                'message' => 'Error al actualizar: ' . $e->getMessage(),
+            ]);
+        }
+    }
+
+
+    public function updateFile(Request $request)
+    {
+        try {
+            if (!$request->hasFile('file')) {
+                throw new \Exception("No se ha recibido ningún archivo.");
+            }
+
+            $file = $request->file('file');
+            $id = $request->input('id');
+
+            $filePath = public_path('pdfs/certificates/' . $id . '.pdf');
+
+            if (File::exists($filePath)) {
+                File::delete($filePath);
+            }
+
+            $file->move(public_path('pdfs/certificates'), $id . '.pdf');
+            return response()->json([
+                'success' => true,
+                'icon' => 'success',
+                'message' => 'Archivo subido con éxito.',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'icon' => 'error',
+                'message' => 'Error al actualizar el archivo: ' . $e->getMessage(),
+            ]);
+        }
     }
 }

@@ -29,6 +29,7 @@ Route::controller(HomeController::class)->group(function ($route) {
     Route::get('/Curso/{data}', 'course')->name('home.course');
     Route::get('/Curso/{data}/students', 'students');
     Route::post('/Curso/updateName', 'updateName');
+    Route::post('Curso/uploadFile', 'updateFile');
     Route::get('/documento/{data}', 'downloadFile')->name('home.certificate');
 });
 
