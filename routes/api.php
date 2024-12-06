@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('coupon/{code}', [Verifier::class, 'certified']);
+Route::post('verified/{code}', [Verifier::class, 'certified']);
