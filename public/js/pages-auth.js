@@ -62,19 +62,13 @@ $(function () {
                 return response.json();
             })
             .then((data) => {
-                if (data.status === 200) {
-                    Toast.fire({
-                        icon: "success",
-                        title: data.message,
-                    });
-                    closeForm();
-                    $("#addPermissionModal").modal("hide");
-                } else {
-                    Toast.fire({
-                        icon: "error",
-                        title: data.message,
-                    });
-                }
+                Toast.fire({
+                    icon: "success",
+                    title: data.message,
+                });
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 1000);
             })
             .catch((error) => {
                 console.error("Error:", error.message);

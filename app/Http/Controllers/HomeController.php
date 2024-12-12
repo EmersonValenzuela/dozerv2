@@ -7,14 +7,11 @@ use App\Models\Course;
 use App\Models\Students;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        return view('home');
-    }
 
     public function list($category)
     {

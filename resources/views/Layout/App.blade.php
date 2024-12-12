@@ -159,6 +159,15 @@
                             </div>
                         </a>
                     </li>
+
+                    <li class="menu-item {{ Route::is('user.index') ? 'active' : '' }}">
+                        <a href="{{ route('user.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons mdi mdi-account-box-outline"></i>
+                            <div data-i18n="Usuarios">
+                                Usuarios
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -186,7 +195,7 @@
 
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
+                                <a class="dropdown-item" href="{{route('logout')}}" >
                                     <i class="mdi mdi-logout me-2"></i>
                                     <span class="align-middle">Cerrar Sesion</span>
                                 </a>

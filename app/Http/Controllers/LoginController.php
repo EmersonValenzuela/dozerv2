@@ -10,12 +10,27 @@ use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['login', 'authUser', 'logout']);
+    }
+
     public function index()
+    {
+        if (Auth::check()) {
+            return view('home');
+        }
+
+        return view('login.login'); // Vista de login si no está autenticado
+    }
+
+    public function login()
     {
         return view('login/login');
     }
 
-    public function list(){
+    public function list()
+    {
         return view('user/index');
     }
 
@@ -65,5 +80,70 @@ class LoginController extends Controller
             'icon' => 'error',
             'message' => 'Usuario no autenticado por otro motivo',
         ]);
+    }
+
+    public function userList()
+    {
+        $users = User::show();
+
+        return response()->json(['data' => $users]);
+    }
+    public function insertUser(Request $request)
+    {
+
+        $user = new User();
+
+        $user->name = $request->names;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return response()->json([
+            'icon' => 'success',
+            'message' => 'Usuario agregado correctamente',
+        ]);
+    }
+
+    public function updateUser(Request $request)
+    {
+        // Encuentra al usuario por su ID
+        $user = User::find($request->user_id);
+
+        if (!$user) {
+            return response()->json([
+                'icon' => 'error',
+                'message' => 'Usuario no encontrado',
+            ], 404);
+        }
+
+        // Actualiza los campos enviados
+        $user->name = $request->names;
+        $user->email = $request->email;
+
+        // Si se envió una contraseña, actualízala; si no, deja la anterior
+        if (!empty($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
+
+        // Guarda los cambios
+        $user->save();
+
+        return response()->json([
+            'icon' => 'success',
+            'message' => 'Usuario actualizado correctamente',
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        // Cierra la sesión del usuario autenticado
+        Auth::logout();
+
+        // Opcional: invalida la sesión y regenera el token CSRF
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }
