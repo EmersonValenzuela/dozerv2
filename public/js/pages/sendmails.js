@@ -232,11 +232,9 @@ $(function () {
                 );
                 response.forEach((course) => {
                     $("#course_txt").append(
-                        '<option value="' +
-                            course.id_course +
-                            '">' +
-                            course.course_or_event +
-                            "</option>"
+                        `<option value="${course.id_course}"> ${course.code_course} - 
+                            ${course.course_or_event}
+                            </option>`
                     );
                 });
             })
