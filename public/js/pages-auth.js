@@ -1,1 +1,116 @@
-"use strict";const formAuthentication=document.querySelector("#formAuthentication");document.addEventListener("DOMContentLoaded",function(e){var t;formAuthentication&&FormValidation.formValidation(formAuthentication,{fields:{username:{validators:{notEmpty:{message:"Please enter username"},stringLength:{min:6,message:"Username must be more than 6 characters"}}},email:{validators:{notEmpty:{message:"Please enter your email"},emailAddress:{message:"Please enter valid email address"}}},"email-username":{validators:{notEmpty:{message:"Please enter email / username"},stringLength:{min:6,message:"Username must be more than 6 characters"}}},password:{validators:{notEmpty:{message:"Please enter your password"},stringLength:{min:6,message:"Password must be more than 6 characters"}}},"confirm-password":{validators:{notEmpty:{message:"Please confirm password"},identical:{compare:function(){return formAuthentication.querySelector('[name="password"]').value},message:"The password and its confirm are not the same"},stringLength:{min:6,message:"Password must be more than 6 characters"}}},terms:{validators:{notEmpty:{message:"Please agree terms & conditions"}}}},plugins:{trigger:new FormValidation.plugins.Trigger,bootstrap5:new FormValidation.plugins.Bootstrap5({eleValidClass:"",rowSelector:".mb-3"}),submitButton:new FormValidation.plugins.SubmitButton,defaultSubmit:new FormValidation.plugins.DefaultSubmit,autoFocus:new FormValidation.plugins.AutoFocus},init:e=>{e.on("plugins.message.placed",function(e){e.element.parentElement.classList.contains("input-group")&&e.element.parentElement.insertAdjacentElement("afterend",e.messageElement)})}}),(t=document.querySelectorAll(".numeral-mask")).length&&t.forEach(e=>{new Cleave(e,{numeral:!0})})});
+$(function () {
+    let f = document.getElementById("formAuthentication");
+    let fv = FormValidation.formValidation(f, {
+        fields: {
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: "Por favor ingrese su correo electrónico",
+                    },
+                    emailAddress: {
+                        message:
+                            "Por favor ingrese una dirección de correo electrónico válida",
+                    },
+                },
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: "Por favor ingrese su contraseña",
+                    },
+                    stringLength: {
+                        min: 6,
+                        message:
+                            "La contraseña debe tener más de 6 caracteres.",
+                    },
+                },
+            },
+        },
+        plugins: {
+            trigger: new FormValidation.plugins.Trigger(),
+            bootstrap5: new FormValidation.plugins.Bootstrap5({
+                eleValidClass: "is-valid",
+                eleInvalidClass: "is-invalid",
+                rowSelector: ".mb-3",
+            }),
+            submitButton: new FormValidation.plugins.SubmitButton(),
+            autoFocus: new FormValidation.plugins.AutoFocus(),
+        },
+    });
+
+    // Interceptar el envío del formulario
+
+    fv.on("core.form.valid", function () {
+        const submitBtn = document.querySelector(".btn-iniciosesion");
+
+        const resetBtn = setLoadingState(submitBtn);
+
+        const formData = new FormData(f);
+
+        formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
+
+        fetch("auth-user", {
+            method: "POST",
+            body: formData,
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(
+                        "Hubo un problema al procesar el formulario."
+                    );
+                }
+                return response.json();
+            })
+            .then((data) => {
+                if (data.status === 200) {
+                    Toast.fire({
+                        icon: "success",
+                        title: data.message,
+                    });
+                    closeForm();
+                    $("#addPermissionModal").modal("hide");
+                } else {
+                    Toast.fire({
+                        icon: "error",
+                        title: data.message,
+                    });
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error.message);
+                Toast.fire({
+                    icon: "error",
+                    title: error.message,
+                });
+            })
+            .finally(() => {
+                resetBtn();
+            });
+    });
+
+    function setLoadingState(btnElement) {
+        const originalContent = btnElement.innerHTML;
+        const originalDisabled = btnElement.disabled;
+
+        btnElement.innerHTML =
+            '<span class="spinner-border me-1" role="status" aria-hidden="true"></span>Cargando...';
+        btnElement.disabled = true;
+
+        return function resetBtn() {
+            btnElement.innerHTML = originalContent;
+            btnElement.disabled = originalDisabled;
+        };
+    }
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        },
+    });
+});

@@ -5,6 +5,7 @@ use App\Http\Controllers\ConstancyController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailsController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RecognitionController;
@@ -97,4 +98,10 @@ Route::controller(MailsController::class)->group(function ($route) {
     Route::get('/Enviar_correos', 'index')->name('sendmail.index');
     Route::post('/get-students-mails', 'getStudentsMails');
     Route::post('/sendMails', 'sendMails');
+});
+
+Route::controller(LoginController::class)->group(function ($route) {
+    Route::get('/login', 'index')->name('login');
+    Route::get('/lista-usuarios', 'list')->name('list-users');
+    Route::post('/auth-user', 'authUser');
 });
