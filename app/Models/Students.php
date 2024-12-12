@@ -63,6 +63,7 @@ class Students extends Model
             ->where('course_id', $course)
             ->where('c_p', 0)
             ->where('certificate', 0)
+            ->where('score' > 10)
             ->select('code', 'full_name', 'id_student', 'code', 'course_or_event')
             ->get();
     }
