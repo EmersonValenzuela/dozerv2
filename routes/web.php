@@ -7,6 +7,7 @@ use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailsController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RecognitionController;
 use App\Http\Controllers\WebinarController;
@@ -33,6 +34,16 @@ Route::controller(LoginController::class)->group(function ($route) {
     Route::post('/insertUser', 'insertUser');
     Route::post('/updateUser', 'updateUser');
     Route::get('/logout', 'logout')->name('logout');
+    Route::post('/deleteUser/{id}', 'deleteUser');
+
+    Route::get('recuperar-contraseña', 'recover')->name('recover');
+    Route::post('recover-password', 'validateMail')->name('verified');
+    Route::get('Confirmacion', 'confirm')->name('confirm');
+});
+
+Route::controller(PasswordResetController::class)->group(function ($route) {
+    Route::get('/reset-password/{token}', 'showResetForm')->name('reset.password');
+    Route::post('/reset-password/change', 'resetPassword');
 });
 
 

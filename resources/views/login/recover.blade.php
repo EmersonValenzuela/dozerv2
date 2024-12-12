@@ -73,65 +73,38 @@
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner py-4">
 
-                <!-- Login -->
+                <!-- Logo -->
                 <div class="p-2">
-                    <!-- Logo -->
-                    <div class="app-brand demo ">
+                    <!-- Forgot Password -->
+                    <div class="app-brand justify-content-center mt-5">
                         <img class="img-logo-login" src="{{ asset('img/dozer.png') }}" alt="">
                     </div>
                     <!-- /Logo -->
-
-                    <div class="card-body mt-2 text-white">
-                        <h4 class="mb-2 text-center text-white">INICIAR SESION</h4>
-                        <p class="mb-4 text-center">¡Qué bueno verte otra vez!</p>
-
+                    <div class="card-body mt-2">
+                        <h4 class="mb-2 text-white text-center">Restablece tu
+                            contraseña</h4>
+                        <p class="mb-4 text-white text-center">Ingresa el correo electrónico con el que regístraste,
+                            y te enviaremos las instrucciones para actualizar
+                            tu contraseña.</p>
                         <form id="formAuthentication" class="mb-3">
+                            <label class="text-white fw-bold">Email</label>
                             <div class="form-floating form-floating-outline mb-3">
-                                <div class="form-label ">Correo Electronico</div>
                                 <input type="text" class="form-control" id="email" name="email"
-                                    placeholder="Digita tu correo" autofocus="">
+                                    placeholder="Ingresa tu correo electrónico" autofocus="">
+
                             </div>
-                            <div class="mb-3">
-                                <div class="form-label ">Contraseña</div>
-                                <div class="form-password-toggle">
-                                    <div class="input-group input-group-merge">
-                                        <div class="form-floating form-floating-outline">
-                                            <input type="password" id="password" class="form-control" name="password"
-                                                placeholder="Digita tu contraseña" autocomplete="current-password"
-                                                aria-describedby="password">
-                                        </div>
-                                        <span class="input-group-text cursor-pointer"><i
-                                                class="mdi mdi-eye-off-outline"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <button class="btn btn-iniciosesion d-grid w-100" type="submit">Iniciar Sesión</button>
-                            </div>
+                            <button class="btn btn-iniciosesion d-grid w-100">Reestablecer contraseña</button>
                         </form>
-
-                        <div class="d-flex flex-column ">
-                            <!--<div class="px-2">
-                                <p class="text-center text-white ">
-                                    <span>¿Aún no tienes cuenta?</span>
-                                    <a href="auth-register-basic.html"
-                                        class="text-do fw-bold text-decoration-underline">
-                                        <span>Regístrate</span>
-                                    </a>
-                                </p>
-                            </div>-->
-                            <div class="px-2  text-center">
-                                <a href="{{route('recover')}}" class="mb-1  text-do fw-bold ">
-                                    <span> Olvidé mi contraseña </span> </a>
-                            </div>
-
+                        <div class="text-center">
+                            <a href="{{ route('login') }}"
+                                class="d-flex align-items-center justify-content-center text-plo">
+                                <i class="mdi mdi-chevron-left scaleX-n1-rtl mdi-24px"></i>
+                                Volver a entrar a mi cuenta
+                            </a>
                         </div>
-
-                        </a>
-
                     </div>
                 </div>
-                <!-- /Login -->
+                <!-- /Forgot Password -->
             </div>
         </div>
     </div>
@@ -162,7 +135,7 @@
 
 
     <!-- Page JS -->
-    <script src="{{ asset('js/pages-auth.js') }}"></script>
+    <script src="{{ asset('js/recover.js') }}"></script>
 
 </body>
 

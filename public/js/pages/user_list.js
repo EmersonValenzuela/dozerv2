@@ -104,7 +104,7 @@ $(function () {
             if (confirm.isConfirmed) {
                 // Aquí se hace la solicitud AJAX para eliminar el registro
                 $.ajax({
-                    url: "deleteStudentWebinar/" + rowData.id, // Cambia esta URL según tu API
+                    url: "deleteUser/" + rowData.id, // Cambia esta URL según tu API
                     type: "POST",
                     data: formData,
                     processData: false,

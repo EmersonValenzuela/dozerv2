@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['login', 'authUser', 'logout']);
+        $this->middleware('auth')->except(['login', 'authUser', 'logout', 'recover', 'validateMail', 'confirm']);
     }
 
     public function index()
@@ -145,5 +149,97 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function deleteUser($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Usuario no encontrado',
+            ], 404);
+        }
+
+        $user->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Usuario eliminado correctamente',
+        ]);
+    }
+
+
+    public function recover()
+    {
+        return view('login.recover');
+    }
+
+    public function validateMail(Request $request)
+    {
+        try {
+            $email = $request->email;
+
+            // Buscar al usuario por correo electrónico
+            $user = User::where('email', $email)->first();
+
+            // Verificar si el usuario existe
+            if (!$user) {
+                return response()->json([
+                    'success' => false,
+                    'icon' => 'error',
+                    'message' => 'Usuario no encontrado',
+                ], 404);
+            }
+
+            // Generar un token único
+            $token = Str::random(60);
+
+            // Guardar el token en la base de datos (tabla de restablecimiento de contraseñas)
+            DB::table('password_resets')->updateOrInsert(
+                ['email' => $email],
+                [
+                    'email' => $email,
+                    'token' => $token,
+                    'created_at' => now(),
+                ]
+            );
+
+            // Enviar correo al usuario con el token
+            Mail::send('mails.reset-password', ['token' => $token], function ($message) use ($email) {
+                $message->to($email)->subject('Restablecer contraseña');
+            });
+
+            session(['email' => $email]);
+
+            return redirect()->route('confirm');
+        } catch (\Exception $e) {
+            // Registra el error en el archivo de log de Laravel
+            Log::error('Error en el proceso de validación de correo: ' . $e->getMessage());
+
+            // También puedes devolver el error como respuesta JSON o en una vista
+            return response()->json([
+                'success' => false,
+                'icon' => 'error',
+                'message' => 'Ocurrió un error en el proceso',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+
+    public function confirm()
+    {
+        // Recuperar el email desde la sesión
+        $email = session('email');
+
+        // Verificar si el correo está en la sesión
+        if (!$email) {
+            return redirect()->route('login')->with('error', 'No se encontró el correo electrónico.');
+        }
+
+        // Devolver la vista con el correo
+        return view('login.confirm', compact('email'));
     }
 }

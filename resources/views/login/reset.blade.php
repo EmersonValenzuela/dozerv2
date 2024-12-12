@@ -73,69 +73,57 @@
         <div class="authentication-wrapper authentication-basic container-p-y">
             <div class="authentication-inner py-4">
 
-                <!-- Login -->
-                <div class="p-2">
+                <div class=" p-2">
                     <!-- Logo -->
-                    <div class="app-brand demo ">
+                    <div class="app-brand justify-content-center mt-5">
                         <img class="img-logo-login" src="{{ asset('img/dozer.png') }}" alt="">
                     </div>
                     <!-- /Logo -->
-
-                    <div class="card-body mt-2 text-white">
-                        <h4 class="mb-2 text-center text-white">INICIAR SESION</h4>
-                        <p class="mb-4 text-center">¡Qué bueno verte otra vez!</p>
-
+                    <!-- Reset Password -->
+                    <div class="card-body  text-white">
+                        <h4 class="mb-2 fw-bold text-white text-center">Actualiza
+                            tu contraseña</h4>
+                        <p class="mb-4 text-center">Digita tu nueva contraseña, te recomendamos
+                            que uses almenos un número </p>
                         <form id="formAuthentication" class="mb-3">
-                            <div class="form-floating form-floating-outline mb-3">
-                                <div class="form-label ">Correo Electronico</div>
-                                <input type="text" class="form-control" id="email" name="email"
-                                    placeholder="Digita tu correo" autofocus="">
-                            </div>
-                            <div class="mb-3">
-                                <div class="form-label ">Contraseña</div>
-                                <div class="form-password-toggle">
-                                    <div class="input-group input-group-merge">
-                                        <div class="form-floating form-floating-outline">
-                                            <input type="password" id="password" class="form-control" name="password"
-                                                placeholder="Digita tu contraseña" autocomplete="current-password"
-                                                aria-describedby="password">
-                                        </div>
-                                        <span class="input-group-text cursor-pointer"><i
-                                                class="mdi mdi-eye-off-outline"></i></span>
+                            <input type="token" name="token" value="{{ $token }}" hidden>
+                            <div class="mb-3 form-password-toggle">
+                                <div class="text-white fw-bold">Nueva contraseña:</div>
+                                <div class="input-group input-group-merge">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="password" id="password" class="form-control" name="password"
+                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                            aria-describedby="password">
                                     </div>
+                                    <span class="input-group-text cursor-pointer"><i
+                                            class="mdi mdi-eye-off-outline"></i></span>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <button class="btn btn-iniciosesion d-grid w-100" type="submit">Iniciar Sesión</button>
+
+                            <div class="mb-3 form-password-toggle">
+                                <div class="text-white fw-bold">Confirma Nueva contraseña:</div>
+                                <div class="input-group input-group-merge">
+                                    <div class="form-floating form-floating-outline">
+                                        <input type="password" id="confirm-password" class="form-control"
+                                            name="confirm-password"
+                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                            aria-describedby="confirm-password">
+                                    </div>
+                                    <span class="input-group-text cursor-pointer"><i
+                                            class="mdi mdi-eye-off-outline"></i></span>
+                                </div>
                             </div>
+
+                            <button class="btn btn-iniciosesion d-grid w-100 mb-3" type="submit">Establecer nueva
+                                contraseña</button>
                         </form>
-
-                        <div class="d-flex flex-column ">
-                            <!--<div class="px-2">
-                                <p class="text-center text-white ">
-                                    <span>¿Aún no tienes cuenta?</span>
-                                    <a href="auth-register-basic.html"
-                                        class="text-do fw-bold text-decoration-underline">
-                                        <span>Regístrate</span>
-                                    </a>
-                                </p>
-                            </div>-->
-                            <div class="px-2  text-center">
-                                <a href="{{route('recover')}}" class="mb-1  text-do fw-bold ">
-                                    <span> Olvidé mi contraseña </span> </a>
-                            </div>
-
-                        </div>
-
-                        </a>
 
                     </div>
                 </div>
-                <!-- /Login -->
+                <!-- /Reset Password -->
             </div>
         </div>
     </div>
-
     <!-- / Content -->
 
     <!-- Core JS -->
@@ -162,7 +150,7 @@
 
 
     <!-- Page JS -->
-    <script src="{{ asset('js/pages-auth.js') }}"></script>
+    <script src="{{ asset('js/reset-password.js') }}"></script>
 
 </body>
 

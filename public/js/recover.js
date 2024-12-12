@@ -49,45 +49,29 @@ $(function () {
 
         formData.append("_token", $('meta[name="csrf-token"]').attr("content"));
 
-        fetch("auth-user", {
-            method: "POST",
-            body: formData,
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(
-                        "Hubo un problema al procesar el formulario."
-                    );
-                }
-                return response.json();
-            })
-            .then((data) => {
-                if (data.icon === "success") {
-                    Toast.fire({
-                        icon: "success",
-                        title: data.message,
-                    });
-                    setTimeout(() => {
-                        window.location.href = "/";
-                    }, 1000);
-                } else {
-                    Toast.fire({
-                        icon: "error",
-                        title: data.message,
-                    });
-                }
-
-            })
-            .catch((error) => {
-                console.error("Error:", error.message);
+        $.ajax({
+            url: "recover-password", // URL de la ruta a la que estás haciendo la solicitud
+            method: "POST", // Método HTTP
+            data: formData, // Los datos a enviar
+            processData: false, // No procesar los datos automáticamente
+            contentType: false, // No establecer el tipo de contenido para que sea enviado como multipart/form-data
+            success: function (data) {
+                window.location.href = "/Confirmacion";
+            },
+            error: function (xhr, status, error) {
+                // Acción en caso de error
                 Toast.fire({
                     icon: "error",
-                    title: error.message,
+                    title: xhr.responseJSON
+                        ? xhr.responseJSON.message
+                        : "Ocurrió un error al procesar la solicitud",
                 });
-            })
-            .finally(() => {
+            },
+            complete: function () {
+                // Acción al finalizar la solicitud (sin importar si fue exitosa o no)
                 resetBtn();
-            });
+            },
+        });
     });
 
     function setLoadingState(btnElement) {
