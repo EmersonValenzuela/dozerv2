@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Crypt;
 class HomeController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['downloadFile']);
+    }
+
     public function list($category)
     {
         // Busca el ID de la categoría en la tabla 'certificate_types'
