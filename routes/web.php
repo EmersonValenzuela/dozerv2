@@ -46,6 +46,8 @@ Route::controller(PasswordResetController::class)->group(function ($route) {
     Route::post('/reset-password/change', 'resetPassword');
 });
 
+Route::get('/documento/{data}', [HomeController::class, 'downloadFile'])->name('home.certificate');
+
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -55,7 +57,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/Curso/{data}/students', 'students');
         Route::post('/Curso/updateName', 'updateName');
         Route::post('Curso/uploadFile', 'updateFile');
-        Route::get('/documento/{data}', 'downloadFile')->name('home.certificate');
     });
 
     Route::controller(CertificateController::class)->group(function ($route) {
